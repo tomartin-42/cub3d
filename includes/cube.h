@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.c                                           :+:      :+:    :+:   */
+/*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/27 16:21:46 by tomartin         ###   ########.fr       */
+/*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
+/*   Updated: 2021/11/27 16:19:11 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#ifndef CUBE_H
+# define CUBE_H
 
-int main(int argc, char **argv)
-{
-	int	fd_map;
-	
-	fd_map = open_map(argc, argv);
-}
+# include "mlx.h"
+# include "libft.h"
+# include <math.h>
+
+
+int	open_map(int argc, char **argv);
+
+#endif
