@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/27 18:40:23 by tomartin         ###   ########.fr       */
+/*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
+/*   Updated: 2021/11/27 18:41:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#include "cube.h"
 
-# include "mlx.h"
-# include "libft.h"
-# include "stdio.h"
-# include <math.h>
+void	print_map(char **map)
+{
+	int i;
 
-
-int		open_map(int argc, char **argv);
-char	**read_map(int fd_map);
-
-void	print_map(char **map);
-
-#endif
+	i = 0;
+	while (map[i])
+		printf("%s", map[i++]);
+}

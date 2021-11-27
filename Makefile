@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/11/27 16:05:20 by tomartin         ###   ########.fr        #
+#    Updated: 2021/11/27 18:39:02 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ OBJ_DIR = ./obj/
 MLX_DIR = ./minilibx/
 
 # Source files and object files
-SRC_FILES = cube3d.c file_actions.c
+SRC_FILES = cube3d.c file_actions.c utils.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)

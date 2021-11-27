@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/27 16:26:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:49:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,21 @@ int	open_map(int argc, char **argv)
 		exit(1);
 	}
 	return (fd);
+}
+
+char	**read_map(int fd_map)
+{
+	char	**map;
+
+	map = NULL;
+	printf("HOLA\n");
+	while (get_next_line(fd_map, map) != 0)
+		;
+	if (map == NULL)
+	{
+		ft_putstr_fd("error: cannot read file or file empy\n", 2);
+		free (map);
+		exit(1);
+	}
+	return (map);
 }
