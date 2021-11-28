@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/27 18:49:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:58:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,40 @@ int	open_map(int argc, char **argv)
 	return (fd);
 }
 
-char	**read_map(int fd_map)
+//copy the file content in a dp and return it
+static char	**save_map(char *argv, int i)
 {
 	char	**map;
+	int		fd;
+	char	*line;
 
-	map = NULL;
-	printf("HOLA\n");
-	while (get_next_line(fd_map, map) != 0)
-		;
-	if (map == NULL)
+	map = (char **) malloc(sizeof(char *) * (i + 1));
+	map[i] = NULL;
+	i = 0;
+	fd = open(argv, O_RDONLY);
+	while (get_next_line(fd, &line))
 	{
-		ft_putstr_fd("error: cannot read file or file empy\n", 2);
-		free (map);
-		exit(1);
+		map[i] = ft_strdup(line);
+		free(line);
+		i++;
 	}
+	close (fd);
+	return (map);
+}
+
+char	**read_map(int fd_map, char *argv)
+{
+	int		i;
+	char	end_line;
+	char	**map;
+
+	i = 0;
+	while (read(fd_map, &end_line, 1))
+	{
+		if (end_line == '\n')
+			i++;
+	}
+	close(fd_map);
+	map = save_map(argv, i);
 	return (map);
 }
