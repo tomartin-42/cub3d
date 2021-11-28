@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/28 17:56:56 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/28 18:56:18 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	print_map(char **map)
 	i = 0;
 	while (map[i] != NULL)
 	{
-		printf("[[%d]]\n", i);
 		printf("%s\n", map[i]);
 		i++;
 	}
