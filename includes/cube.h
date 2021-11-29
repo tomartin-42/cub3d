@@ -13,7 +13,7 @@
 #ifndef CUBE_H
 # define CUBE_H
 
-# include "mlx.h"
+# include "../minilibx/mlx.h"
 # include "libft.h"
 # include "stdio.h"
 # include <math.h>
