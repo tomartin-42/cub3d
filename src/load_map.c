@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 12:30:03 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:41:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	get_colors(char **line, t_map *mapi)
 	ft_free_dp(num);
 }
 
+//
 static void	get_texture_rutes_and_colors(char **line, t_map *mapi)
 {
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
@@ -107,10 +108,10 @@ static int	check_param_map(t_map *mapi)
 	if (mapi->have_EA == false)
 		ret = 1;
 	if (mapi->F_color[0] == EMPY || mapi->F_color[1] == EMPY
-		|| mapi->F_color[1] == EMPY)
+		|| mapi->F_color[2] == EMPY)
 		ret = 1;
 	if (mapi->C_color[0] == EMPY || mapi->C_color[1] == EMPY
-		|| mapi->C_color[1] == EMPY)
+		|| mapi->C_color[2] == EMPY)
 		ret = 1;
 	return (ret);
 }

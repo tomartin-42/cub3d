@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 11:51:07 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:44:17 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_map	*init_mapi(void)
 	aux_map->have_SO = false;
 	aux_map->have_WE = false;
 	aux_map->have_EA = false;
+	aux_map->have_F = false;
+	aux_map->have_C = false;
 	aux_map->F_color[0] = EMPY;
 	aux_map->F_color[1] = EMPY;
 	aux_map->F_color[2] = EMPY;
