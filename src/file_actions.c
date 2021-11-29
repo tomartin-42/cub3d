@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/28 17:58:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/29 10:39:49 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //check if the file have .cub extension
 static void	check_cub(char *argv)
 {
-	char *point;
+	char	*point;
 
 	point = ft_strnstr(argv, ".cub", ft_strlen(argv));
 	if (point == NULL)
@@ -23,8 +23,8 @@ static void	check_cub(char *argv)
 		ft_putstr_fd("error: incorrect extension\n", 2);
 		exit (1);
 	}
-	if (*point != '.' || *(point + 1) != 'c' || *(point + 2) != 'u' || *(point + 3) != 'b'
-		|| *(point + 4) != '\0')
+	if (*point != '.' || *(point + 1) != 'c' || *(point + 2) != 'u'
+		|| *(point + 3) != 'b' || *(point + 4) != '\0')
 	{
 		ft_putstr_fd("error: incorrect extension", 2);
 		exit (1);
