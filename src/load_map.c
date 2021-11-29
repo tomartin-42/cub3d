@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 10:46:13 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:09:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ static void	get_texture_rutes(char **line, t_map *mapi)
 			mapi->EA_rute = ft_strdup(line[1]);
 			mapi->have_EA = true;
 		}
+		else if (!ft_strcmp(line[0], "F"))
+			get_colors(line, mapi);
+		else if (!ft_strcmp(line[0], "C"))
+			get_colors(line, mapi);
 	}
-	else
-		printf("ERROR INCORRECT TEXTURE RUTE\n");
 }
 
 void	load_map(t_map *mapi, char **map)
@@ -98,7 +100,6 @@ void	load_map(t_map *mapi, char **map)
 	{
 		line = ft_split(map[i], ' ');
 		get_texture_rutes(line, mapi);
-		get_colors(line, mapi);
 		ft_free_dp(line);
 		i++;
 	}
