@@ -134,6 +134,48 @@ static int	check_param_map(t_map *mapi)
 	return (ret);
 }
 
+void	generate_map_dp(int i, int j, t_map *mapi, char **map)
+{
+	int	k;
+
+	k = 0;	
+	mapi->map = (char **) malloc(sizeof(char *) * (i - j) + 1);
+	mapi->map[i] = NULL;
+	while (j < i)
+	{
+		mapi->map[k] = ft_strdup(map[j]);
+		j++;
+		k++;
+	}
+}
+
+void	get_map(int i, t_map *mapi, char **map)
+{
+	char	*aux;
+	int	j;	
+
+	while (map[i])
+	{
+		aux = ft_strtrim(map[i], " /t");
+		if (ft_strlen(aux))
+			break ;
+		free(aux);
+		i++;
+	}
+	free(aux);
+	j = i;
+	while (map[i])
+	{
+		aux = ft_strtrim(map[i], " /t");
+		if (!ft_strlen(aux))
+			break ;
+		free(aux);
+		i++;
+	}
+	free(aux);
+	generate_map_dp(i, j, mapi, map);
+}
+
 void	load_map(t_map *mapi, char **map)
 {
 	int		i;
@@ -149,4 +191,9 @@ void	load_map(t_map *mapi, char **map)
 		if (!check_param_map(mapi))
 			break ;
 	}
+	if (!check_param_map(mapi))
+		printf("ERROR: MISS PARAM IN FILE\n");
+	else
+		get_map(i, mapi, map);
+	
 }

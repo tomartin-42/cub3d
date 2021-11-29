@@ -26,10 +26,19 @@ void	print_map(char **map)
 
 void	print_struc_mapi(t_map *mapi)
 {
+	int	i;
+
+	i = 0;
 	printf("NO rute: %s\n", mapi->NO_rute);
 	printf("SO rute: %s\n", mapi->SO_rute);
 	printf("WE rute: %s\n", mapi->WE_rute);
 	printf("EA rute: %s\n", mapi->EA_rute);
 	printf("F: %ld, %ld, %ld\n", mapi->F_color[0], mapi->F_color[1], mapi->F_color[2]);
 	printf("C: %ld, %ld, %ld\n", mapi->C_color[0], mapi->C_color[1], mapi->C_color[2]);
+	printf("==========MAP==============\n");
+	while(mapi->map[i])
+	{
+		printf("%s\n", mapi->map[i]);
+		i++;
+	}
 }
