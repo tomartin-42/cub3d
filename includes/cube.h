@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 10:57:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:28:38 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ typedef struct s_map{
 	bool		have_EA;
 
 	long int	F_color[3];
+	bool		have_F;
 	long int	C_color[3];
+	bool		have_C;
 
 	char		**map;
 
@@ -46,5 +48,6 @@ char	**read_map(int fd_map, char *argv);
 void	load_map(t_map *mapi, char **map);
 
 void	print_map(char **map);
+void	print_struc_mapi(t_map *mapi);
 
 #endif
