@@ -19,6 +19,8 @@ WHT = \033[0;37m
 ORG = \033[38;5;202m
 
 RESET = \033[0m                        
+# SO
+UNAME := $(shell uname -m)
 
 # Name of the program
 NAME = cube3d
@@ -31,7 +33,11 @@ LIBFT_DIR = ./libft/
 SRC_DIR = ./src/
 INC_DIR = ./includes/
 OBJ_DIR = ./obj/
+ifeq ($(UNAME), x86_64)
 MLX_DIR = ./minilibx-linux/
+else
+MLX_DIR = ./minilib/
+endif
 CHECK_DIR= ./src/check/
 
 # Source files and object files
