@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/11/30 11:29:40 by tomartin         ###   ########.fr        #
+#    Updated: 2021/11/30 11:46:47 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,9 @@ CHECK_FILES = checker.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
+OBJ_FILES := $(OBJ_FILES) $(CHECK_FILES:.c=.o)
+
+INC_FILES = cube.h
 
 # Paths
 LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
