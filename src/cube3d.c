@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 12:44:17 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/30 11:35:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int argc, char **argv)
 	map = read_map(fd_map, argv[1]);
 	mapi = init_mapi();
 	load_map(mapi, map);
+	main_check(mapi, map);
 	print_map(map);
 	printf("-----------------------------------------\n");
 	print_struc_mapi(mapi);

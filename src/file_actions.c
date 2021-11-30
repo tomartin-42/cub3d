@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 10:39:49 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:40:38 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ static char	**save_map(char *argv, int i)
 	char	**map;
 	int		fd;
 	char	*line;
+	int		control;
 
-	map = (char **) malloc(sizeof(char *) * (i + 1));
-	map[i] = NULL;
+	control = 1;
+	map = (char **) malloc(sizeof(char *) * (i + 2));
+	map[i + 1] = NULL;
 	i = 0;
 	fd = open(argv, O_RDONLY);
-	while (get_next_line(fd, &line))
+	while (control)
 	{
+		control = get_next_line(fd, &line);
 		map[i] = ft_strdup(line);
 		free(line);
 		i++;

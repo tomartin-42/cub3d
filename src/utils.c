@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 11:50:25 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/30 10:12:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_map(char **map)
 	int	i;
 
 	i = 0;
-	while (map[i] != NULL)
+	while (map[i])
 	{
 		printf("%s\n", map[i]);
 		i++;
@@ -36,7 +36,7 @@ void	print_struc_mapi(t_map *mapi)
 	printf("F: %ld, %ld, %ld\n", mapi->F_color[0], mapi->F_color[1], mapi->F_color[2]);
 	printf("C: %ld, %ld, %ld\n", mapi->C_color[0], mapi->C_color[1], mapi->C_color[2]);
 	printf("==========MAP==============\n");
-	while(mapi->map[i])
+	while (mapi->map[i])
 	{
 		printf("%s\n", mapi->map[i]);
 		i++;

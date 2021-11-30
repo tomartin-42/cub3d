@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/11/29 10:14:00 by tomartin         ###   ########.fr        #
+#    Updated: 2021/11/30 11:29:40 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,11 @@ SRC_DIR = ./src/
 INC_DIR = ./includes/
 OBJ_DIR = ./obj/
 MLX_DIR = ./minilibx/
+CHECK_DIR= ./src/check/
 
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c
+CHECK_FILES = checker.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
@@ -44,6 +46,7 @@ LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
 MLBX = $(addprefix $(LIBFT_DIR), libmlx.a)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+CHECK = $(addprefix $(CHECK_DIR), $(CHECK_FILES))
 
 # Libft linkers
 LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) \
@@ -57,8 +60,8 @@ obj:
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c 
 	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -o $@ -c $<
-#$(OBJ_DIR)%.o: $(ERRORS_DIR)%.c 
-#	@gcc $(FLAGS) $(F_RL) -I $(INC_DIR) -I $(LIBFT_DIR) -o $@ -c $<
+$(OBJ_DIR)%.o: $(CHECK_DIR)%.c
+	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -o $@ -c $<
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

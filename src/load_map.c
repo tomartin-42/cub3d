@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/29 12:41:22 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/11/30 09:07:59 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,12 @@ static int	check_param_map(t_map *mapi)
 void	generate_map_dp(int i, int j, t_map *mapi, char **map)
 {
 	int	k;
+	int	size;
 
-	k = 0;	
-	mapi->map = (char **) malloc(sizeof(char *) * (i - j) + 1);
-	mapi->map[i] = NULL;
+	k = 0;
+	size = i - j;
+	mapi->map = (char **) malloc(sizeof(char *) * (size + 1));
+	mapi->map[size] = NULL;
 	while (j < i)
 	{
 		mapi->map[k] = ft_strdup(map[j]);
@@ -152,7 +154,7 @@ void	generate_map_dp(int i, int j, t_map *mapi, char **map)
 void	get_map(int i, t_map *mapi, char **map)
 {
 	char	*aux;
-	int	j;	
+	int		j;	
 
 	while (map[i])
 	{
@@ -164,6 +166,7 @@ void	get_map(int i, t_map *mapi, char **map)
 	}
 	free(aux);
 	j = i;
+	printf("[[%d]]\n", i);
 	while (map[i])
 	{
 		aux = ft_strtrim(map[i], " /t");
@@ -172,7 +175,6 @@ void	get_map(int i, t_map *mapi, char **map)
 		free(aux);
 		i++;
 	}
-	free(aux);
 	generate_map_dp(i, j, mapi, map);
 }
 
@@ -191,9 +193,8 @@ void	load_map(t_map *mapi, char **map)
 		if (!check_param_map(mapi))
 			break ;
 	}
-	if (!check_param_map(mapi))
+	if (check_param_map(mapi))
 		printf("ERROR: MISS PARAM IN FILE\n");
 	else
 		get_map(i, mapi, map);
-	
 }
