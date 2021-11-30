@@ -31,7 +31,7 @@ LIBFT_DIR = ./libft/
 SRC_DIR = ./src/
 INC_DIR = ./includes/
 OBJ_DIR = ./obj/
-MLX_DIR = ./minilibx-linux/
+MLX_DIR = ./minilibx/
 CHECK_DIR= ./src/check/
 
 # Source files and object files
@@ -53,7 +53,7 @@ CHECK = $(addprefix $(CHECK_DIR), $(CHECK_FILES))
 
 # Libft linkers
 LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) \
-	   #-lmlx -framework OpenGL -framework AppKit
+	   -lmlx -framework OpenGL -framework AppKit
 
 # all rule
 all: obj $(LIBFT) $(MLBX) $(NAME) 
