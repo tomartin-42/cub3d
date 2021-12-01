@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/11/30 11:46:47 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/01 12:11:16 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ ORG = \033[38;5;202m
 
 RESET = \033[0m                        
 # SO
-UNAME := $(shell uname -m)
+UNAME := $(shell uname)
 
 # Name of the program
 NAME = cube3d
@@ -33,10 +33,10 @@ LIBFT_DIR = ./libft/
 SRC_DIR = ./src/
 INC_DIR = ./includes/
 OBJ_DIR = ./obj/
-ifeq ($(UNAME), x86_64)
-MLX_DIR = ./minilibx-linux/
+ifeq ($(UNAME), Darwin)
+MLX_DIR = ./minilibx/
 else
-MLX_DIR = ./minilib/
+MLX_DIR = ./minilibx-linux/
 endif
 CHECK_DIR= ./src/check/
 
@@ -86,6 +86,7 @@ $(NAME): $(OBJ)
 	@echo "██║     ██║   ██║██╔══██╗██╔══╝   ╚═══██╗██║  ██║"
 	@echo "╚██████╗╚██████╔╝██████╔╝███████╗██████╔╝██████╔╝"
 	@echo " ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═════╝ ╚═════╝ "
+	@echo "$(UNAME)"
 	@gcc $(OBJ) $(FLAGS) $(LNK) -lm -o $(NAME)
 	@echo "Compilation OK!!"
 	@echo "$(NAME) ready!".
