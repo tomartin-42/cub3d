@@ -60,6 +60,7 @@ static void checking_color_line(char *color_line)
 	check_chars_in_color_line(color_line);
 }
 
+
 static void parse_in_colors(char **map)
 {
 	int		i;
