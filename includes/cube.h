@@ -16,7 +16,7 @@
 # include "../minilibx/mlx.h"
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
-# include "stdio.h"
+# include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>

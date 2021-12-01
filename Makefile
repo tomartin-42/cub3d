@@ -42,13 +42,13 @@ CHECK_DIR= ./src/check/
 
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c
-CHECK_FILES = checker.c
+CHECK_FILES = checker.c errors.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(CHECK_FILES:.c=.o)
 
-INC_FILES = cube.h
+INC_FILES = cube.h check.h
 
 # Paths
 LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
