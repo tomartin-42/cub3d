@@ -39,6 +39,8 @@ typedef struct s_map{
 	long int	C_color[3];
 	bool		have_C;
 
+	char		init_point;
+	int			xy_init_point[2];
 	char		**map;
 
 }	t_map;

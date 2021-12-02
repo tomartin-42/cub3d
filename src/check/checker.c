@@ -97,7 +97,6 @@ static void	copy_old_in_new_map(char **new_map, t_map *mapi)
 				new_map[k][l] = mapi->map[i][j];
 			j++;
 			l++;
-			printf("**%s**\n", mapi->map[i]);
 		}
 		i++;
 		k++;
@@ -163,6 +162,7 @@ void	main_check(t_map *mapi, char **map)
 {
 	parse_in_colors(map);
 	parse_in_map(mapi);
+	scan_map(mapi);
 	(void)mapi;
 	(void)map;
 }

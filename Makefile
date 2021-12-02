@@ -42,7 +42,7 @@ CHECK_DIR= ./src/check/
 
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c
-CHECK_FILES = checker.c errors.c
+CHECK_FILES = checker.c errors.c scanmap.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
