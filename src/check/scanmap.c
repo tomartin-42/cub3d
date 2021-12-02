@@ -7,6 +7,34 @@ static void	set_init_point(t_map *mapi, int x, int y)
 	mapi->xy_init_point[1] = x;
 }
 
+int	check_close_map(t_map *mapi)
+{
+	int	i;
+	int j;
+	bool open_map;
+
+	open_map = false;
+	i = 0;
+	while (mapi->map[i])
+	{
+		j = 0;
+		while (mapi->map[i][j])
+		{
+			if (mapi->map[i][j] == '0')
+			{
+				if (mapi->map[i - 1][j] == 'X' || mapi->map[i + 1][j] == 'X'
+					|| mapi->map[i][j - 1] == 'X'
+					|| mapi->map[i][j + 1] == 'X')
+					open_map = true;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (open_map);
+}
+
+
 void	scan_map(t_map *mapi)
 {
 	int		i;

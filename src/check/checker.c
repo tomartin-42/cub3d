@@ -163,6 +163,6 @@ void	main_check(t_map *mapi, char **map)
 	parse_in_colors(map);
 	parse_in_map(mapi);
 	scan_map(mapi);
-	(void)mapi;
-	(void)map;
+	if (check_close_map(mapi))
+		error_open_map();
 }
