@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/30 11:35:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:49:42 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	check_chars_in_color_line(char *color_line)
 	}
 }
 
-//check if have more 3 commas in color line
-static void checking_color_line(char *color_line)
+//check if have more 2 commas in color line
+static void	checking_color_line(char *color_line)
 {
-	int commas;
-	int i;
+	int	commas;
+	int	i;
 
 	i = 0;
 	commas = 0;
@@ -55,13 +55,12 @@ static void checking_color_line(char *color_line)
 			commas++;
 		i++;
 	}
-	if (commas != 3)
+	if (commas != 2)
 		error_in_color_line();
 	check_chars_in_color_line(color_line);
 }
 
-
-static void parse_in_colors(char **map)
+static void	parse_in_colors(char **map)
 {
 	int		i;
 	char	*aux;
@@ -79,9 +78,79 @@ static void parse_in_colors(char **map)
 	}			
 }
 
+static void	copy_to_new_map(char **new_map, t_map *mapi)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(new_map[i] != NULL)
+	{
+		j = 0;
+		while(new_map[i][j])
+		{	
+			new_map[i][j] = 'X';
+			j++;
+		}
+		i++;
+		printf("**%d - %d - %s**\n", i, j, new_map[i]);
+	}
+	i = 0;
+	while (mapi->map[i])
+	{
+		j = 0;
+		while (mapi->map[i][j])
+		{
+			if (mapi->map[i][j] != ' ')
+			{
+				new_map[i + 1][j + 1] = mapi->map[i][j];
+				j++;
+			}
+			i++;
+		}
+	}
+	ft_free_dp(mapi->map);
+	mapi->map = new_map;
+}
+
+static void	redimension_map(t_map *mapi, int i, int size_line)
+{
+	char	**new_map;
+
+	i = i + 3;
+	size_line = size_line + 3;
+	new_map = (char **) malloc(sizeof(char *) * i);
+	printf("***%d***\n", i - 1);
+	new_map[i - 1] = NULL;
+	while (i > 0)
+	{
+		new_map[i - 1] = (char *) malloc(sizeof(char) * size_line);
+		new_map[i - 1][size_line - 1] = '\0';
+		i--;
+	}
+	copy_to_new_map(new_map, mapi);
+}
+
+static void	parse_in_map(t_map *mapi)
+{
+	int	size_line;
+	int	i;
+
+	i = 0;
+	size_line = 0;
+	while (mapi->map[i])
+	{
+		if (ft_strlen(mapi->map[i]) > (size_t)size_line)
+			size_line = ft_strlen(mapi->map[i]);
+		i++;
+	}
+	redimension_map(mapi, i, size_line);
+}
+
 void	main_check(t_map *mapi, char **map)
 {
 	parse_in_colors(map);
+	parse_in_map(mapi);
 	(void)mapi;
 	(void)map;
 }
