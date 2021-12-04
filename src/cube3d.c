@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 14:55:24 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:11:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_map	*init_textures(t_map *aux_map)
 	aux_map->SO_rute = ft_strdup("");
 	aux_map->WE_rute = ft_strdup("");
 	aux_map->EA_rute = ft_strdup("");
+	aux_map->map = NULL;
 	return (aux_map);
 }
 

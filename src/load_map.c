@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/30 09:07:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:25:24 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	load_color_F(char **num, t_map *mapi)
 		{
 			mapi->F_color[j] = ft_atoi(num[i]);
 			if (mapi->F_color[j] < 0 || mapi->F_color[0] > 255)
-				printf("ERROR INCORRECT COLOR\n");
+			{
+				ft_putstr_fd("Cube3D error: incorrect color\n", 2);
+				exit (42);
+			}
 			j++;
 		}
 		i++;
@@ -46,7 +49,10 @@ static void	load_color_C(char **num, t_map *mapi)
 		{
 			mapi->C_color[j] = ft_atoi(num[i]);
 			if (mapi->C_color[j] < 0 || mapi->C_color[0] > 255)
-				printf("ERROR INCORRECT COLOR\n");
+			{
+				ft_putstr_fd("Cube3D error: incorrect color\n", 2);
+				exit (42);
+			}
 			j++;
 		}
 		i++;
@@ -194,7 +200,11 @@ void	load_map(t_map *mapi, char **map)
 			break ;
 	}
 	if (check_param_map(mapi))
-		printf("ERROR: MISS PARAM IN FILE\n");
+	{
+		ft_putstr_fd("Cube3D error: miss param in file\n", 2);
+		free_mapi_and_map(mapi, map);
+		exit (42);
+	}
 	else
 		get_map(i, mapi, map);
 }
