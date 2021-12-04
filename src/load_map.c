@@ -6,13 +6,13 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 16:25:24 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:37:48 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	load_color_F(char **num, t_map *mapi)
+static void	load_color_F(char **num, t_map *mapi, char **map)
 {
 	int	i;
 	int	j;
@@ -27,6 +27,7 @@ static void	load_color_F(char **num, t_map *mapi)
 			if (mapi->F_color[j] < 0 || mapi->F_color[0] > 255)
 			{
 				ft_putstr_fd("Cube3D error: incorrect color\n", 2);
+				free_mapi_and_map(mapi, map);
 				exit (42);
 			}
 			j++;
@@ -36,7 +37,7 @@ static void	load_color_F(char **num, t_map *mapi)
 	mapi->have_F = true;
 }
 
-static void	load_color_C(char **num, t_map *mapi)
+static void	load_color_C(char **num, t_map *mapi, char **map)
 {
 	int	i;
 	int	j;
@@ -51,6 +52,7 @@ static void	load_color_C(char **num, t_map *mapi)
 			if (mapi->C_color[j] < 0 || mapi->C_color[0] > 255)
 			{
 				ft_putstr_fd("Cube3D error: incorrect color\n", 2);
+				free_mapi_and_map(mapi, map);
 				exit (42);
 			}
 			j++;
@@ -60,7 +62,7 @@ static void	load_color_C(char **num, t_map *mapi)
 	mapi->have_F = true;
 }
 
-static void	get_colors(char **line, t_map *mapi, char *c_line)
+static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	char	**num;
 	char	*aux;
@@ -77,14 +79,14 @@ static void	get_colors(char **line, t_map *mapi, char *c_line)
 		i++;
 	}
 	if (!ft_strcmp(line[0], "F"))
-		load_color_F(num, mapi);
+		load_color_F(num, mapi, map);
 	if (!ft_strcmp(line[0], "C"))
-		load_color_C(num, mapi);
+		load_color_C(num, mapi, map);
 	ft_free_dp(num);
 }
 
 //
-static void	get_texture_and_colors(char **line, t_map *mapi, char *c_line)
+static void	get_texture_and_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
@@ -109,9 +111,9 @@ static void	get_texture_and_colors(char **line, t_map *mapi, char *c_line)
 			mapi->have_EA = true;
 		}
 		else if (!ft_strcmp(line[0], "F") && mapi->have_F == false)
-			get_colors(line, mapi, c_line);
+			get_colors(line, mapi, c_line, map);
 		else if (!ft_strcmp(line[0], "C") && mapi->have_C == false)
-			get_colors(line, mapi, c_line);
+			get_colors(line, mapi, c_line, map);
 	}
 }
 
@@ -193,7 +195,7 @@ void	load_map(t_map *mapi, char **map)
 	while (map[i])
 	{
 		line = ft_split(map[i], ' ');
-		get_texture_and_colors(line, mapi, map[i]);
+		get_texture_and_colors(line, mapi, map[i], map);
 		ft_free_dp(line);
 		i++;
 		if (!check_param_map(mapi))

@@ -3,7 +3,7 @@
 
 # include "cube.h"
 
-void	error_in_color_line(void);
+void	error_in_color_line(char **map, t_map *mapi);
 void	error_miss_init_point(void);
 void	error_open_map(void);
 void	error_empy_map(void);

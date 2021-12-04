@@ -1,8 +1,11 @@
 #include "check.h"
+#include "cube.h"
 
-void	error_in_color_line(void)
+void	error_in_color_line(char **map, t_map *mapi)
 {
 	ft_putstr_fd("Cube3D error: error in color codificatión.\n", 2);
+	free_mapi_and_map(mapi, map);
+	exit (42);
 }
 
 void	error_miss_init_point(void)

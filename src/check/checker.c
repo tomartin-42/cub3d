@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/02 13:49:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:47:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "check.h"
 
 //check if have incorrect chars in color line
-static void	check_chars_in_color_line(char *color_line)
+static void	check_chars_in_color_line(char *color_line, char **map, t_map *mapi)
 {
 	int	i;
 
@@ -23,26 +23,20 @@ static void	check_chars_in_color_line(char *color_line)
 	{
 		if (color_line[0] == 'C')
 		{
-			if (!ft_strchr("0123456789,C /t", color_line[i]))
-			{		
-				error_in_color_line();
-				break ;
-			}
+			if (!ft_strchr("0123456789,C /t", color_line[i]))	
+				error_in_color_line(map, mapi);
 		}
 		else if (color_line[0] == 'F')
 		{
-			if (!ft_strchr("0123456789,F /t", color_line[i]))
-			{		
-				error_in_color_line();
-				break ;
-			}
+			if (!ft_strchr("0123456789,F /t", color_line[i]))	
+				error_in_color_line(map, mapi);
 		}
 		i++;
 	}
 }
 
 //check if have more 2 commas in color line
-static void	checking_color_line(char *color_line)
+static void	checking_color_line(char *color_line, char **map, t_map *mapi)
 {
 	int	commas;
 	int	i;
@@ -56,11 +50,11 @@ static void	checking_color_line(char *color_line)
 		i++;
 	}
 	if (commas != 2)
-		error_in_color_line();
-	check_chars_in_color_line(color_line);
+		error_in_color_line(map, mapi);
+	check_chars_in_color_line(color_line, map, mapi);
 }
 
-static void	parse_in_colors(char **map)
+static void	parse_in_colors(char **map, t_map *mapi)
 {
 	int		i;
 	char	*aux;
@@ -70,9 +64,9 @@ static void	parse_in_colors(char **map)
 	{
 		aux = ft_strtrim(map[i], " /t");
 		if (aux[0] == 'C')
-			checking_color_line(map[i]);
+			checking_color_line(map[i], map, mapi);
 		else if (aux[0] == 'F')
-			checking_color_line(map[i]);
+			checking_color_line(map[i], map, mapi);
 		free(aux);
 		i++;
 	}			
@@ -160,7 +154,7 @@ static void	parse_in_map(t_map *mapi)
 
 void	main_check(t_map *mapi, char **map)
 {
-	parse_in_colors(map);
+	parse_in_colors(map, mapi);
 	parse_in_map(mapi);
 	scan_map(mapi);
 	if (check_close_map(mapi))
