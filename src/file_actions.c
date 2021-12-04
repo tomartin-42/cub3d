@@ -6,11 +6,12 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/30 10:40:38 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 15:10:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "check.h"
 
 //check if the file have .cub extension
 static void	check_cub(char *argv)
@@ -20,13 +21,13 @@ static void	check_cub(char *argv)
 	point = ft_strnstr(argv, ".cub", ft_strlen(argv));
 	if (point == NULL)
 	{
-		ft_putstr_fd("error: incorrect extension\n", 2);
+		ft_putstr_fd("Cube3D error: incorrect extension\n", 2);
 		exit (1);
 	}
 	if (*point != '.' || *(point + 1) != 'c' || *(point + 2) != 'u'
 		|| *(point + 3) != 'b' || *(point + 4) != '\0')
 	{
-		ft_putstr_fd("error: incorrect extension", 2);
+		ft_putstr_fd("Cube3D error: incorrect extension", 2);
 		exit (1);
 	}
 }
@@ -37,14 +38,14 @@ int	open_map(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr_fd("error: bad number of arguments\n", 2);
+		ft_putstr_fd("Cube3D error: bad number of arguments\n", 2);
 		exit(1);
 	}
 	check_cub(argv[1]);
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	if (fd < 1)
 	{	
-		ft_putstr_fd("error: cannot open file map\n", 2);
+		ft_putstr_fd("Cube3D error: cannot open file map\n", 2);
 		exit(1);
 	}
 	return (fd);
@@ -87,6 +88,10 @@ char	**read_map(int fd_map, char *argv)
 			i++;
 	}
 	close(fd_map);
+	if (i == 0)
+	{
+		error_empy_map();
+	}
 	map = save_map(argv, i);
 	return (map);
 }

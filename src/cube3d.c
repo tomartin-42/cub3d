@@ -6,11 +6,20 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/30 11:35:22 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 14:55:24 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+static t_map	*init_textures(t_map *aux_map)
+{
+	aux_map->NO_rute = ft_strdup("");
+	aux_map->SO_rute = ft_strdup("");
+	aux_map->WE_rute = ft_strdup("");
+	aux_map->EA_rute = ft_strdup("");
+	return (aux_map);
+}
 
 static t_map	*init_mapi(void)
 {
@@ -29,6 +38,7 @@ static t_map	*init_mapi(void)
 	aux_map->C_color[0] = EMPY;
 	aux_map->C_color[1] = EMPY;
 	aux_map->C_color[2] = EMPY;
+	aux_map = init_textures(aux_map);
 	return (aux_map);
 }
 
@@ -46,4 +56,7 @@ int	main(int argc, char **argv)
 	print_map(map);
 	printf("-----------------------------------------\n");
 	print_struc_mapi(mapi);
+	free_mapi(mapi);
+	ft_free_dp(map);
+	//system("leaks cube3d");
 }
