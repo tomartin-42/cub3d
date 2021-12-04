@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 16:11:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:31:45 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int	main(int argc, char **argv)
 	print_struc_mapi(mapi);
 	free_mapi(mapi);
 	ft_free_dp(map);
-	//system("leaks cube3d");
+	//system("leaks cub3d");
 }

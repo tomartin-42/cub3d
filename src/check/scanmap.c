@@ -9,9 +9,9 @@ static void	set_init_point(t_map *mapi, int x, int y)
 
 int	check_close_map(t_map *mapi)
 {
-	int	i;
-	int j;
-	bool open_map;
+	int		i;
+	int		j;
+	bool	open_map;
 
 	open_map = false;
 	i = 0;
@@ -34,8 +34,7 @@ int	check_close_map(t_map *mapi)
 	return (open_map);
 }
 
-
-void	scan_map(t_map *mapi)
+void	scan_map(t_map *mapi, char **map)
 {
 	int		i;
 	int		j;
@@ -58,5 +57,5 @@ void	scan_map(t_map *mapi)
 		i++;
 	}
 	if (start_point == false)
-		error_miss_init_point();
+		error_miss_init_point(map, mapi);
 }

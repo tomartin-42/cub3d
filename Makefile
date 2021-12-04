@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/04 14:55:29 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/04 18:28:53 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RESET = \033[0m
 UNAME := $(shell uname)
 
 # Name of the program
-NAME = cube3d
+NAME = cub3D
 
 # Compiling flags
 FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
@@ -41,7 +41,8 @@ endif
 CHECK_DIR= ./src/check/
 
 # Source files and object files
-SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c
+SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
+			continue_load_map.c
 CHECK_FILES = checker.c errors.c scanmap.c
 
 # Objs
@@ -80,12 +81,12 @@ $(MLBX):
 
 # Compiling
 $(NAME): $(OBJ)
-	@echo " ██████╗██╗   ██╗██████╗ ███████╗██████╗ ██████╗ "
-	@echo "██╔════╝██║   ██║██╔══██╗██╔════╝╚════██╗██╔══██╗"
-	@echo "██║     ██║   ██║██████╔╝█████╗   █████╔╝██║  ██║"
-	@echo "██║     ██║   ██║██╔══██╗██╔══╝   ╚═══██╗██║  ██║"
-	@echo "╚██████╗╚██████╔╝██████╔╝███████╗██████╔╝██████╔╝"
-	@echo " ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═════╝ ╚═════╝ "
+	@echo " ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
+	@echo "██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗"
+	@echo "██║     ██║   ██║██████╔╝ █████╔╝██║  ██║"
+	@echo "██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║"
+	@echo "╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝"
+	@echo " ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ "
 	@gcc $(OBJ) $(FLAGS) $(LNK) -lm -o $(NAME)
 	@echo "Compilation OK!!"
 	@echo "$(NAME) ready!".

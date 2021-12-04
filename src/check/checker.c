@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 16:47:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:29:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ static void	parse_in_colors(char **map, t_map *mapi)
 
 static void	copy_old_in_new_map(char **new_map, t_map *mapi)
 {
-	int i;
-	int j;
-	int k;
-	int l;
+	int	i;
+	int	j;
+	int	k;
+	int	l;
 
 	i = 0;
 	k = 1;
@@ -105,10 +105,10 @@ static void	write_x_in_new_map(char **new_map, t_map *mapi)
 	int	j;
 
 	i = 0;
-	while(new_map[i])
+	while (new_map[i])
 	{
 		j = 0;
-		while(new_map[i][j])
+		while (new_map[i][j])
 		{	
 			new_map[i][j] = 'X';
 			j++;
@@ -156,7 +156,7 @@ void	main_check(t_map *mapi, char **map)
 {
 	parse_in_colors(map, mapi);
 	parse_in_map(mapi);
-	scan_map(mapi);
+	scan_map(mapi, map);
 	if (check_close_map(mapi))
-		error_open_map();
+		error_open_map(mapi, map);
 }

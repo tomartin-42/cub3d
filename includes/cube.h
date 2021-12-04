@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 16:28:16 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 17:59:32 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		open_map(int argc, char **argv);
 char	**read_map(int fd_map, char *argv);
 
 void	load_map(t_map *mapi, char **map);
+void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map);
+int		check_param_map(t_map *mapi);
 
 void	print_map(char **map);
 void	print_struc_mapi(t_map *mapi);
