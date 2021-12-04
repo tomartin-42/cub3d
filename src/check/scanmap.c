@@ -34,6 +34,7 @@ int	check_close_map(t_map *mapi)
 	return (open_map);
 }
 
+//Get coordinates of the starting point
 void	scan_map(t_map *mapi, char **map)
 {
 	int		i;
@@ -60,7 +61,7 @@ void	scan_map(t_map *mapi, char **map)
 		error_miss_init_point(map, mapi);
 }
 
-void check_dual_init_point(t_map *mapi, char **map)
+void	check_dual_init_point(t_map *mapi, char **map)
 {
 	int	init_p;
 	int	i;
@@ -81,4 +82,23 @@ void check_dual_init_point(t_map *mapi, char **map)
 	}
 	if (init_p != 1)
 		error_dual_init_point(mapi, map);
+}
+
+void	check_chars_in_map(t_map *mapi, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mapi->map[i])
+	{
+		j = 0;
+		while (mapi->map[i][j])
+		{
+			if (!ft_strchr(" /t10NSWE", mapi->map[i][j]))
+				error_incorrect_char_in_map(mapi, map);
+			j++;
+		}
+		i++;
+	}
 }

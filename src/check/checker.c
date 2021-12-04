@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 19:47:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:03:07 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	parse_in_colors(char **map, t_map *mapi)
 	}			
 }
 
-static void	parse_in_map(t_map *mapi)
+static void	init_redimension_map(t_map *mapi)
 {
 	int	size_line;
 	int	i;
@@ -91,7 +91,8 @@ static void	parse_in_map(t_map *mapi)
 void	main_check(t_map *mapi, char **map)
 {
 	parse_in_colors(map, mapi);
-	parse_in_map(mapi);
+	check_chars_in_map(mapi, map);
+	init_redimension_map(mapi);
 	check_dual_init_point(mapi, map);
 	scan_map(mapi, map);
 	if (check_close_map(mapi))

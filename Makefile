@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/04 19:36:50 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/04 20:03:36 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CHECK_DIR= ./src/check/
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
 			continue_load_map.c
-CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c
+CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c errors2.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
