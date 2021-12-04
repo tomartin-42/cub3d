@@ -59,3 +59,26 @@ void	scan_map(t_map *mapi, char **map)
 	if (start_point == false)
 		error_miss_init_point(map, mapi);
 }
+
+void check_dual_init_point(t_map *mapi, char **map)
+{
+	int	init_p;
+	int	i;
+	int	j;
+
+	i = 0;
+	init_p = 0;
+	while (mapi->map[i])
+	{
+		j = 0;
+		while (mapi->map[i][j])
+		{
+			if (ft_strchr("NSWE", mapi->map[i][j]))
+				init_p++;
+			j++;
+		}
+		i++;
+	}
+	if (init_p != 1)
+		error_dual_init_point(mapi, map);
+}

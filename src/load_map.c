@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:52:45 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 18:42:15 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 19:31:50 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,29 @@ void	load_map(t_map *mapi, char **map)
 	}
 	else
 		get_map(i, mapi, map);
+}
+
+// check if all the parameters have been loaded into the mapi structure
+// otherwise it continues to loop. It is necessary to
+// know when start map matrix
+int	check_param_map(t_map *mapi)
+{
+	int	ret;
+
+	ret = 0;
+	if (mapi->have_NO == false)
+		ret = 1;
+	if (mapi->have_SO == false)
+		ret = 1;
+	if (mapi->have_WE == false)
+		ret = 1;
+	if (mapi->have_EA == false)
+		ret = 1;
+	if (mapi->F_color[0] == EMPY || mapi->F_color[1] == EMPY
+		|| mapi->F_color[2] == EMPY)
+		ret = 1;
+	if (mapi->C_color[0] == EMPY || mapi->C_color[1] == EMPY
+		|| mapi->C_color[2] == EMPY)
+		ret = 1;
+	return (ret);
 }

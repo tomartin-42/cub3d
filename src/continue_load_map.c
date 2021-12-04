@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 18:31:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/04 19:31:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,59 +85,46 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	ft_free_dp(num);
 }
 
+static void	complement_get_files(char *line, t_map *mapi, int select)
+{
+	if (select == 1)
+	{
+		mapi->NO_rute = ft_strdup(line);
+		mapi->have_NO = true;
+	}
+	if (select == 2)
+	{
+		mapi->SO_rute = ft_strdup(line);
+		mapi->have_SO = true;
+	}
+	if (select == 3)
+	{
+		mapi->WE_rute = ft_strdup(line);
+		mapi->have_WE = true;
+	}
+	if (select == 4)
+	{
+		mapi->EA_rute = ft_strdup(line);
+		mapi->have_EA = true;
+	}
+}
+
 //This function get texture files and line colors and distributed
 void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
 		if (!ft_strcmp(line[0], "NO") && mapi->have_NO == false)
-		{
-			mapi->NO_rute = ft_strdup(line[1]);
-			mapi->have_NO = true;
-		}
+			complement_get_files(line[1], mapi, 1);
 		else if (!ft_strcmp(line[0], "SO") && mapi->have_SO == false)
-		{
-			mapi->SO_rute = ft_strdup(line[1]);
-			mapi->have_SO = true;
-		}
+			complement_get_files(line[1], mapi, 2);
 		else if (!ft_strcmp(line[0], "WE") && mapi->have_WE == false)
-		{
-			mapi->WE_rute = ft_strdup(line[1]);
-			mapi->have_WE = true;
-		}
+			complement_get_files(line[1], mapi, 3);
 		else if (!ft_strcmp(line[0], "EA") && mapi->have_EA == false)
-		{
-			mapi->EA_rute = ft_strdup(line[1]);
-			mapi->have_EA = true;
-		}
+			complement_get_files(line[1], mapi, 4);
 		else if (!ft_strcmp(line[0], "F") && mapi->have_F == false)
 			get_colors(line, mapi, c_line, map);
 		else if (!ft_strcmp(line[0], "C") && mapi->have_C == false)
 			get_colors(line, mapi, c_line, map);
 	}
-}
-
-// check if all the parameters have been loaded into the mapi structure
-// otherwise it continues to loop. It is necessary to
-// know when start map matrix
-int	check_param_map(t_map *mapi)
-{
-	int	ret;
-
-	ret = 0;
-	if (mapi->have_NO == false)
-		ret = 1;
-	if (mapi->have_SO == false)
-		ret = 1;
-	if (mapi->have_WE == false)
-		ret = 1;
-	if (mapi->have_EA == false)
-		ret = 1;
-	if (mapi->F_color[0] == EMPY || mapi->F_color[1] == EMPY
-		|| mapi->F_color[2] == EMPY)
-		ret = 1;
-	if (mapi->C_color[0] == EMPY || mapi->C_color[1] == EMPY
-		|| mapi->C_color[2] == EMPY)
-		ret = 1;
-	return (ret);
 }
