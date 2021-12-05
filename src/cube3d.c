@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 18:31:45 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/05 20:06:37 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv)
 	print_map(map);
 	printf("-----------------------------------------\n");
 	print_struc_mapi(mapi);
+	init_window(mapi, argv[1]);
 	free_mapi(mapi);
 	ft_free_dp(map);
 	//system("leaks cub3d");

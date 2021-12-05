@@ -6,15 +6,15 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 17:59:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/05 20:09:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 
-# include "../minilibx/mlx.h"
-# include "../minilibx-linux/mlx.h"
+# include "mlx.h"
+//# include "../minilibx-linux/mlx.h"
 # include "libft.h"
 # include <stdio.h>
 # include <math.h>
@@ -59,5 +59,7 @@ void	main_check(t_map *mapi, char **map);
 
 void	free_mapi(t_map *mapi);
 void	free_mapi_and_map(t_map *mapi, char **map);
+
+void	init_window(t_map *mapi, char *argv);
 
 #endif

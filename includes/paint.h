@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors2.c                                          :+:      :+:    :+:   */
+/*   paint.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 20:02:12 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/05 15:57:15 by tomartin         ###   ########.fr       */
+/*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
+/*   Updated: 2021/12/05 20:01:04 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "check.h"
+#ifndef PAINT_H
+# define PAINT_H
 
-void	error_incorrect_char_in_map(t_map *mapi, char **map)
-{
-	ft_putstr_fd("Cub3D error: incorrect char in map.\n", 2);
-	free_mapi_and_map(mapi, map);
-	exit (42);
-}
+# include "cube.h"
+
+typedef struct s_point{
+	float	x;
+	float	y;
+}	t_point;
+
+typedef struct s_vect{
+	t_point	o;
+	t_point	f;
+}	t_vect;
+
+typedef struct s_win{
+	void	*mlx;
+	void	*mlx_win;
+}	t_win;
+
+#endif

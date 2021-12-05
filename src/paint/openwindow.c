@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors2.c                                          :+:      :+:    :+:   */
+/*   openwindow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 20:02:12 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/05 15:57:15 by tomartin         ###   ########.fr       */
+/*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
+/*   Updated: 2021/12/05 20:06:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "check.h"
+#include "paint.h"
 
-void	error_incorrect_char_in_map(t_map *mapi, char **map)
+void	init_window(t_map *mapi, char *argv)
 {
-	ft_putstr_fd("Cub3D error: incorrect char in map.\n", 2);
-	free_mapi_and_map(mapi, map);
-	exit (42);
+	t_win	win;
+
+	win.mlx = mlx_init();
+	(void)mapi;
+	win.mlx_win = mlx_new_window(win.mlx, 1920, 1080, argv);
 }
