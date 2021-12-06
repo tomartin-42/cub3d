@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/04 20:03:36 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/06 11:04:16 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,15 +39,18 @@ else
 MLX_DIR = ./minilibx-linux/
 endif
 CHECK_DIR= ./src/check/
+PAINT_DIR= ./src/paint/
 
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
 			continue_load_map.c
 CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c errors2.c
+PAINT_FILES = openwindow.c vector_operation.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(CHECK_FILES:.c=.o)
+OBJ_FILES := $(OBJ_FILES) $(PAINT_FILES:.c=.o)
 
 INC_FILES = cube.h check.h
 
@@ -57,10 +60,11 @@ MLBX = $(addprefix $(LIBFT_DIR), libmlx.a)
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 CHECK = $(addprefix $(CHECK_DIR), $(CHECK_FILES))
+PAINT = $(addprefix $(PAINT_DIR), $(PAINT_FILES))
 
 # Libft linkers
 LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) \
-	   #-lmlx -framework OpenGL -framework AppKit
+	   -lmlx -framework OpenGL -framework AppKit
 
 # all rule
 all: obj $(LIBFT) $(MLBX) $(NAME) 
@@ -69,9 +73,11 @@ obj:
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c 
-	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -I $(MLX_DIR) -o $@ -c $<
 $(OBJ_DIR)%.o: $(CHECK_DIR)%.c
-	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -o $@ -c $<
+	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -I $(MLX_DIR) -o $@ -c $<
+$(OBJ_DIR)%.o: $(PAINT_DIR)%.c
+	@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -I $(MLX_DIR) -o $@ -c $<
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

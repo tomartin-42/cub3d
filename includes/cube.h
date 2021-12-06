@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/05 20:09:03 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:08:09 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <math.h>
 
 # define EMPY 99999999999999
 
