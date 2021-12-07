@@ -6,11 +6,12 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
-/*   Updated: 2021/11/30 10:12:30 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:26:47 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "paint.h"
 
 void	print_map(char **map)
 {
@@ -41,4 +42,11 @@ void	print_struc_mapi(t_map *mapi)
 		printf("%s\n", mapi->map[i]);
 		i++;
 	}
+}
+
+void	print_player(t_player *player)
+{
+	printf("position: %f - %f\n", player->p_player.x, player->p_player.y);
+	printf("v_dir: %f - %f\n", player->dir_player.o.x, player->dir_player.o.y);
+	printf("camara_v: %f - %f\n", player->camera.o.x, player->camera.o.y);
 }

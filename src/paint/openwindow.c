@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/06 16:49:32 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:28:08 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_player	*init_player(t_map *mapi)
 		load_values_v(&player->dir_player, 1, 0);
 	else if (mapi->init_point == 'W')
 		load_values_v(&player->dir_player, -1, 0);
-	printf ("*****%d - %d*******\n", mapi->xy_init_point[0], mapi->xy_init_point[1]);
+	load_values_v(&player->camera, 0, 0.66);
 	return (player);
 }
 
@@ -44,5 +44,6 @@ void	init_window(t_map *mapi, char *argv)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	player = init_player(mapi);
+	print_player(player);
 	mlx_loop(win.mlx);
 }
