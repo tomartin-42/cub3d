@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/06 17:26:47 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:19:09 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_struc_mapi(t_map *mapi)
 
 void	print_player(t_player *player)
 {
-	printf("position: %f - %f\n", player->p_player.x, player->p_player.y);
-	printf("v_dir: %f - %f\n", player->dir_player.o.x, player->dir_player.o.y);
+	printf("position: %f - %f\n", player->p_ply.x, player->p_ply.y);
+	printf("v_dir: %f - %f\n", player->dir_ply.o.x, player->dir_ply.o.y);
 	printf("camara_v: %f - %f\n", player->camera.o.x, player->camera.o.y);
 }

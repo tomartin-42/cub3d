@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/08 18:31:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:16:12 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@
 # define SCR_W 1920
 # define SCR_H 1080
 # define SCL 100
+# define N_W 0
+# define S_W 1
+# define E_W 2
+# define W_W 3
 
-typedef struct s_point{
+typedef struct s_d_point{
 	double	x;
 	double	y;
-}	t_point;
+}	t_d_point;
 
-typedef struct s_vect{
-	t_point	o;
+typedef struct s_i_point{
+	int		x;
+	int		y;
+}	t_i_point;
+
+typedef struct s_d_vect{
+	t_d_point	o;
 }	t_vect;
 
 typedef struct s_win{
@@ -45,16 +54,17 @@ typedef struct s_data {
 // p_player = point were is now the plyer
 // dir_player = vetor direction player
 // camera = vetor camera. Need perpendicular to dir_player vector
+typedef struct s_player {
+	t_d_point	p_ply;
+	t_vect		dir_ply;
+	t_vect		camera;
+}	t_player;
+
 // ray_scuare_x and ..._y coordinate of the square where the ray is located
 // side_D_x and ..._y distance the ray to first square x and y;
 // delta_x and ..._y are the distance the ray has to travel to go 
 //from 1 x-side to the next x-side, or from 1 y-side to the next y-side
-typedef struct s_player {
-	t_point	p_player;
-	t_vect	dir_player;
-	t_vect	camera;
-}	t_player;
-
+// step_x and step_y is direction to step in x or y direction either +1 or -1
 typedef struct s_ray
 {
 	int		ray_scuare_x;
@@ -66,6 +76,10 @@ typedef struct s_ray
 	double	delta_x;
 	double	delta_y;
 	double 	cameraX; //camera coordinate x//
+	int		step_x;
+	int		step_y;
+	bool	hit; //was there a wall hit?//
+	int		side; //was a N_W ,S_W ,E_W or a W_W wall hit?//
 }	t_ray;
 
 t_vect	sum_v(t_vect v_a, t_vect v_b);
