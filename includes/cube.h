@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/06 17:27:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:06:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_map{
 
 	char		init_point;
 	int			xy_init_point[2];
+	int			map_widh;
+	int			map_high;
 	char		**map;
 
 }	t_map;
@@ -55,7 +57,6 @@ int		check_param_map(t_map *mapi);
 
 void	print_map(char **map);
 void	print_struc_mapi(t_map *mapi);
-
 
 void	main_check(t_map *mapi, char **map);
 
