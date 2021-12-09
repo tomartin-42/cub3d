@@ -36,7 +36,7 @@ OBJ_DIR = ./obj/
 ifeq ($(UNAME), Darwin)
 MLX_DIR = ./minilibx/
 else
-MLX_DIR = ./minilibx-linux/
+MLX_DIR = ./mlx_linux/
 endif
 CHECK_DIR= ./src/check/
 PAINT_DIR= ./src/paint/
@@ -52,7 +52,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(CHECK_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(PAINT_FILES:.c=.o)
 
-INC_FILES = cube.h check.h
+INC_FILES = cube.h check.h paint.h
 
 # Paths
 LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
@@ -63,8 +63,13 @@ CHECK = $(addprefix $(CHECK_DIR), $(CHECK_FILES))
 PAINT = $(addprefix $(PAINT_DIR), $(PAINT_FILES))
 
 # Libft linkers
+ifeq ($(UNAME), Darwin)
 LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) \
 	   -lmlx -framework OpenGL -framework AppKit
+else
+LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) $(MLX_DIR)libmlx.a \
+	   $(MLX_DIR)libmlx_Linux.a $(MLX_DIR)mlx.h -lXext -lX11
+endif
 
 # all rule
 all: obj $(LIBFT) $(MLBX) $(NAME) 

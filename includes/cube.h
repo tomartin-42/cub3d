@@ -14,7 +14,9 @@
 # define CUBE_H
 
 # include "mlx.h"
-//# include "../minilibx-linux/mlx.h"
+# include "../mlx_linux/mlx.h"
+//# include "../mlx_linux/libmlx_Linux.a"
+//# include "../mlx_linux/libmlx.a"
 # include "libft.h"
 # include <stdio.h>
 # include <math.h>

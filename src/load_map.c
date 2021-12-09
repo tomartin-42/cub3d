@@ -35,6 +35,7 @@ void	get_map(int i, t_map *mapi, char **map)
 	char	*aux;
 	int		j;	
 
+	aux = NULL;
 	while (map[i])
 	{
 		aux = ft_strtrim(map[i], " /t");
