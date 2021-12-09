@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 10:44:54 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 11:27:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define S_W 1
 # define E_W 2
 # define W_W 3
+# define SIZE 100
 
 typedef struct s_d_point{
 	double	x;

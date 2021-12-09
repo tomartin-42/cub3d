@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 10:53:30 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:22:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void	print_line (t_data *data, int x, t_line *line)
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		my_mlx_pixel_put(data, x, y, 200);
+		my_mlx_pixel_put(data, x, y, 8947848);
+		//printf("[[%d - %d]]\n", x, y);
 		y++;
 	}
 }
@@ -60,11 +61,12 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 
 		//length of ray from one x or y side to next x or y side
 		if (ray[x].ray_D_x == 0)
-			ray[x].delta_x = SCR_W - 1;
+			ray[x].delta_x = (double)1 / 0.5;
 		else
 			ray[x].delta_x = (1 / ray[x].ray_D_x);
+			
 		if (ray[x].ray_D_y == 0)
-			ray[x].delta_y =  SCR_H - 1;
+			ray[x].delta_y =  (double)1 / 0.5;
 		else
 			ray[x].delta_y = (1 / ray[x].ray_D_y);
 		
@@ -91,6 +93,17 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 
 		while (ray[x].hit == 0)
 		{
+			/*printf("hit: %d\n", ray[x].hit);
+			printf("ray_d_x: %f\n", ray[x].ray_D_x);
+			printf("ray_d_y: %f\n", ray[x].ray_D_y);
+			printf("dir_ply_x: %f\n", ply->dir_ply.o.x);
+			printf("dir_ply_y: %f\n", ply->dir_ply.o.y);
+			printf("ray_square_x: %d\n", ray[x].ray_scuare_x);
+			printf("dir_square_y: %d\n", ray[x].ray_scuare_y);
+			printf("side_d_x: %f\n", ray[x].side_D_x);
+			printf("side_d_y: %f\n", ray[x].side_D_y);
+			printf("delta_d_x: %f\n", ray[x].delta_x);
+			printf("delta_d_y: %f\n", ray[x].delta_y);*/
 			//jump to next map square, either in x-direction, or in y-direction
 			if(ray[x].side_D_x < ray[x].side_D_y)
 			{
@@ -105,12 +118,7 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 				ray[x].side = 1;
 			}
 			//Check if ray has hit a wall
-			printf("hit: %d\n", ray[x].hit);
-			printf("side_d_x: %f\n", ray[x].side_D_x);
-			printf("side_d_y: %f\n", ray[x].side_D_y);
-			printf("delta_d_x: %f\n", ray[x].delta_x);
-			printf("delta_d_y: %f\n", ray[x].delta_y);
-			if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == 1)
+			if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
 				ray[x].hit = 1;
 		}
 		//Calculate distance of perpendicular ray

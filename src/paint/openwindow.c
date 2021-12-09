@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 10:43:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:21:24 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_window(t_map *mapi, char *argv)
 			&img.line_length, &img.endian);
 	ply = init_ply(mapi);
 	ray_loop(ply, mapi, &img);
+	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
 	//print_player(ply);
 	mlx_loop(win.mlx);
 }
