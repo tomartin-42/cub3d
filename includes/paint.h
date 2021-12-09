@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 11:27:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:50:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define E_W 2
 # define W_W 3
 # define SIZE 100
+# define GRAY 8947848
+# define RED 16711680
+# define GREEN 65280
+# define BLUE 255
 
 typedef struct s_d_point{
 	double	x;
