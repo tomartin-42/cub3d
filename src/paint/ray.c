@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 12:50:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:58:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	print_line (t_data *data, int x, t_line *line)
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		my_mlx_pixel_put(data, x, y, BLUE);
+		my_mlx_pixel_put(data, x, y, GREEN);
 		//printf("[[%d - %d]]\n", x, y);
 		y++;
 	}

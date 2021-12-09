@@ -6,13 +6,13 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 12:52:35 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:59:37 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
 
-static int	close(t_win *win)
+static int	clouse(t_win *win)
 {
 	mlx_destroy_window(win->mlx, win->mlx_win);
 	free_mapi(win->mapi);
@@ -50,7 +50,7 @@ void	init_window(t_map *mapi, char *argv)
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
 	mlx_key_hook(win.mlx_win, key_hook, &win);
-	mlx_hook(win.mlx_win, 17, 0, close, &win);
+	mlx_hook(win.mlx_win, 17, 0, clouse, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	ply = init_ply(mapi);
