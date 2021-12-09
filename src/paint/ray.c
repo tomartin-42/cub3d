@@ -6,18 +6,45 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/08 20:33:03 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 10:53:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
 
-void	ray_loop(t_player *ply, t_map *mapi)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x > 0 && x < 1919) && (y > 0 && y < 1079))
+	{
+		dst = data->addr + ((y) * data->line_length
+				+ (x) * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+// while to print column
+static void	print_line (t_data *data, int x, t_line *line)
+{
+	int	y;
+
+	y = line[x].line_start;
+	while(y < line[x].line_end)
+	{
+		my_mlx_pixel_put(data, x, y, 200);
+		y++;
+	}
+}
+
+void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 {
 	int		x;
 	t_ray	*ray;
+	t_line	*line;
 
 	ray = (t_ray *) malloc(sizeof(t_ray) * SCR_W);
+	line = (t_line *) malloc(sizeof(t_line) * SCR_W);
 	x = 0;
 	while (x < SCR_W - 1)
 	{
@@ -32,8 +59,14 @@ void	ray_loop(t_player *ply, t_map *mapi)
 		ray[x].ray_scuare_y = (int)ply->p_ply.y;
 
 		//length of ray from one x or y side to next x or y side
-		//ray[x].delta_x = (ray[x].ray_D_x == 0) ? 1e30 : std::abs(1 / ray[x].ray_D_x);
-		//ray[x].delta_y = (ray[x].ray_D_y == 0) ? 1e30 : std::abs(1 / ray[x].ray_D_y);
+		if (ray[x].ray_D_x == 0)
+			ray[x].delta_x = SCR_W - 1;
+		else
+			ray[x].delta_x = (1 / ray[x].ray_D_x);
+		if (ray[x].ray_D_y == 0)
+			ray[x].delta_y =  SCR_H - 1;
+		else
+			ray[x].delta_y = (1 / ray[x].ray_D_y);
 		
 		if(ray[x].ray_D_x < 0)
 		{
@@ -72,6 +105,11 @@ void	ray_loop(t_player *ply, t_map *mapi)
 				ray[x].side = 1;
 			}
 			//Check if ray has hit a wall
+			printf("hit: %d\n", ray[x].hit);
+			printf("side_d_x: %f\n", ray[x].side_D_x);
+			printf("side_d_y: %f\n", ray[x].side_D_y);
+			printf("delta_d_x: %f\n", ray[x].delta_x);
+			printf("delta_d_y: %f\n", ray[x].delta_y);
 			if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == 1)
 				ray[x].hit = 1;
 		}
@@ -80,6 +118,17 @@ void	ray_loop(t_player *ply, t_map *mapi)
 			ray[x].wall_dist = (ray[x].side_D_x - ray[x].delta_x);
 		else
 			ray[x].wall_dist = (ray[x].side_D_y - ray[x].delta_y);
+
+		//Calculate height of line to draw on screen
+		line[x].line_h = (int)(SCR_H / ray[x].wall_dist);
+
+		//calculate lowest and highest pixel to fill in current stripe
+		line[x].line_start = -line[x].line_h / 2 + SCR_H / 2;
+		if(line[x].line_start < 0) line[x].line_start = 0;
+		line[x].line_end = line[x].line_h / 2 + SCR_H / 2;
+		if(line[x].line_end >= SCR_H) line[x].line_end = SCR_H - 1;
+		print_line(data, x, line);
+
 		x++;
 	}
 }

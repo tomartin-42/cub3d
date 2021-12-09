@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/08 20:17:24 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/09 10:44:54 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ typedef struct s_player {
 	t_vect		camera;
 }	t_player;
 
+// struct need to print colum to check rays
+typedef struct	s_line{
+	int	line_h;
+	int line_start;
+	int	line_end;
+}	t_line;
+
 // ray_scuare_x and ..._y coordinate of the square where the ray is located
 // side_D_x and ..._y distance the ray to first square x and y;
 // delta_x and ..._y are the distance the ray has to travel to go 
@@ -90,10 +97,12 @@ double	mod_v(t_vect vect);
 t_vect	proc_vect(t_vect v_a, double n);
 void	load_values_v(t_vect *load, double x, double y);
 
-void	ray_loop(t_player *player, t_map *mapi);
+void	ray_loop(t_player *player, t_map *mapi, t_data *data);
 
 void	print_player(t_player *player);
 
 int		key_hook(int keycode, t_win *win);
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
