@@ -81,8 +81,8 @@ typedef struct s_ray
 {
 	int		ray_scuare_x;
 	int		ray_scuare_y;
-	double	ray_D_x;
-	double	ray_D_y;
+	double	ray_D_x; //ray dirextion v_x
+	double	ray_D_y; //ray direction v_y
 	double	side_D_x;
 	double	side_D_y;
 	double	delta_x;

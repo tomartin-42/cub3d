@@ -51,7 +51,7 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 	{
 		ray[x].hit = false;
 		//calculate ray position and direction//
-		ray[x].cameraX =(double) 2 * x / SCR_W - 1; //x-coordinate in camera space//
+		ray[x].cameraX = 2 * x / (double)SCR_W - 1; //x-coordinate in camera space//
 		ray[x].ray_D_x = ply->dir_ply.o.x + ply->camera.o.x * ray[x].cameraX;
 		ray[x].ray_D_y = ply->dir_ply.o.y + ply->camera.o.y * ray[x].cameraX;
 
@@ -63,12 +63,17 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		if (ray[x].ray_D_x == 0)
 			;	//ray[x].delta_x = (double)1 / 0.5;
 		else
-			ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
+			ray[x].delta_x = sqrt(1 + (ray[x].ray_D_y * ray[x].ray_D_y)
+				/ (ray[x].ray_D_x * ray[x].ray_D_x));
+			//ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
 			
 		if (ray[x].ray_D_y == 0)
 			;	//ray[x].delta_y =  (double)1 / 0.5;
 		else
-			ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
+			ray[x].delta_y = sqrt(1 + (ray[x].ray_D_y * ray[x].ray_D_x)
+				/ (ray[x].ray_D_y * ray[x].ray_D_y));
+			//ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
+			//ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
 		
 		if(ray[x].ray_D_x < 0)
 		{
@@ -122,7 +127,7 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 			{
 				printf("x-->%d--\n", ray[x].ray_scuare_x);
 				printf("y-->%d--\n", ray[x].ray_scuare_y);
-				ray[x].hit = 1;
+				ray[x].hit = true;
 			}
 		}
 		//Calculate distance of perpendicular ray
