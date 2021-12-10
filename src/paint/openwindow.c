@@ -28,14 +28,25 @@ static t_player	*init_ply(t_map *mapi)
 	ply->p_ply.x = (mapi->xy_init_point[0]);
 	ply->p_ply.y = (mapi->xy_init_point[1]);
 	if (mapi->init_point == 'N')
+	{
 		load_values_v(&ply->dir_ply, 0, -1);
+		load_values_v(&ply->camera, 0.06, 0);
+	}
 	else if (mapi->init_point == 'S')
+	{
 		load_values_v(&ply->dir_ply, 0, 1);
+		load_values_v(&ply->camera, -0.06, 0);
+	}
 	else if (mapi->init_point == 'E')
+	{
 		load_values_v(&ply->dir_ply, 1, 0);
+		load_values_v(&ply->camera, 0, -0.06);
+	}
 	else if (mapi->init_point == 'W')
-		load_values_v(&ply->dir_ply, -1, 0);
-	load_values_v(&ply->camera, 0, 0.66);
+	{
+		load_values_v(&ply->dir_ply, 1, 0);
+		load_values_v(&ply->camera, 0, 0.06);
+	}
 	return (ply);
 }
 

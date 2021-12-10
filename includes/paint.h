@@ -15,8 +15,8 @@
 
 # include "cube.h"
 
-# define SCR_W 1920
-# define SCR_H 1080
+# define SCR_W 1280
+# define SCR_H 720
 # define SCL 100
 # define N_W 0
 # define S_W 1

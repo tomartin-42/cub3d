@@ -51,7 +51,7 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 	{
 		ray[x].hit = false;
 		//calculate ray position and direction//
-		ray[x].cameraX = (double)(2 * x) / (SCR_W - 1); //x-coordinate in camera space//
+		ray[x].cameraX =(double) 2 * x / SCR_W - 1; //x-coordinate in camera space//
 		ray[x].ray_D_x = ply->dir_ply.o.x + ply->camera.o.x * ray[x].cameraX;
 		ray[x].ray_D_y = ply->dir_ply.o.y + ply->camera.o.y * ray[x].cameraX;
 
@@ -61,14 +61,14 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 
 		//length of ray from one x or y side to next x or y side
 		if (ray[x].ray_D_x == 0)
-			ray[x].delta_x = (double)1 / 0.5;
+			;	//ray[x].delta_x = (double)1 / 0.5;
 		else
-			ray[x].delta_x = (1 / ray[x].ray_D_x);
+			ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
 			
 		if (ray[x].ray_D_y == 0)
-			ray[x].delta_y =  (double)1 / 0.5;
+			;	//ray[x].delta_y =  (double)1 / 0.5;
 		else
-			ray[x].delta_y = (1 / ray[x].ray_D_y);
+			ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
 		
 		if(ray[x].ray_D_x < 0)
 		{
@@ -78,9 +78,9 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		else
 		{
 			ray[x].step_x = 1;
-			ray[x].side_D_x = (ray[x].ray_scuare_x + 1.0 - (int)ply->p_ply.x) * ray[x].delta_x;
+			ray[x].side_D_x = (ray[x].ray_scuare_x + 1.0 - ply->p_ply.x) * ray[x].delta_x;
 		}
-		if(ray[x].ray_D_x < 0)
+		if(ray[x].ray_D_y < 0)
 		{
 			ray[x].step_y = -1;
 			ray[x].side_D_y = ((int)ply->p_ply.y - ray[x].ray_scuare_y) * ray[x].delta_y;
@@ -88,7 +88,7 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		else
 		{
 			ray[x].step_y = 1;
-			ray[x].side_D_y = (ray[x].ray_scuare_y + 1.0 - (int)ply->p_ply.y) * ray[x].delta_y;
+			ray[x].side_D_y = (ray[x].ray_scuare_y + 1.0 - ply->p_ply.y) * ray[x].delta_y;
 		}
 
 		while (ray[x].hit == 0)
@@ -119,22 +119,30 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 			}
 			//Check if ray has hit a wall
 			if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
+			{
+				printf("x-->%d--\n", ray[x].ray_scuare_x);
+				printf("y-->%d--\n", ray[x].ray_scuare_y);
 				ray[x].hit = 1;
+			}
 		}
 		//Calculate distance of perpendicular ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (ray[x].side_D_x - ray[x].delta_x);
 		else
 			ray[x].wall_dist = (ray[x].side_D_y - ray[x].delta_y);
-
+		/*printf("[[%f]]\n",ray[x].wall_dist);
+		printf("[[x %f]]\n",ray[x].delta_x);
+		printf("[[y %f]]\n",ray[x].delta_y);*/
 		//Calculate height of line to draw on screen
-		line[x].line_h = (int)(SCR_H / ray[x].wall_dist);
+		line[x].line_h = (SCR_H / ray[x].wall_dist);
 
 		//calculate lowest and highest pixel to fill in current stripe
 		line[x].line_start = -line[x].line_h / 2 + SCR_H / 2;
-		if(line[x].line_start < 0) line[x].line_start = 0;
+		if(line[x].line_start < 0)
+			line[x].line_start = 0;
 		line[x].line_end = line[x].line_h / 2 + SCR_H / 2;
-		if(line[x].line_end >= SCR_H) line[x].line_end = SCR_H - 1;
+		if(line[x].line_end >= SCR_H) 
+			line[x].line_end = SCR_H - 1;
 		print_line(data, x, line);
 
 		x++;
