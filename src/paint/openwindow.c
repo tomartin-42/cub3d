@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 12:59:37 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:43:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ static t_player	*init_ply(t_map *mapi)
 	else if (mapi->init_point == 'E')
 	{
 		load_values_v(&ply->dir_ply, 1, 0);
-		load_values_v(&ply->camera, 0, -0.66);
+		load_values_v(&ply->camera, 0, 0.66);
 	}
 	else if (mapi->init_point == 'W')
 	{
-		load_values_v(&ply->dir_ply, 1, 0);
-		load_values_v(&ply->camera, 0, 0.66);
+		load_values_v(&ply->dir_ply, -1, 0);
+		load_values_v(&ply->camera, 0, -0.66);
 	}
 	return (ply);
 }

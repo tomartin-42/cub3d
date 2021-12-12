@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/09 12:50:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/12 15:39:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+
+// struct need to print colum to check rays
+typedef struct	s_line{
+	int	line_h;
+	int line_start;
+	int	line_end;
+}	t_line;
+
 // p_player = point were is now the plyer
 // dir_player = vetor direction player
 // camera = vetor camera. Need perpendicular to dir_player vector
@@ -65,15 +73,8 @@ typedef struct s_player {
 	t_vect		camera;
 }	t_player;
 
-// struct need to print colum to check rays
-typedef struct	s_line{
-	int	line_h;
-	int line_start;
-	int	line_end;
-}	t_line;
-
 // ray_scuare_x and ..._y coordinate of the square where the ray is located
-// side_D_x and ..._y distance the ray to first square x and y;
+// side_x and ..._y distance the ray to first square x and y;
 // delta_x and ..._y are the distance the ray has to travel to go 
 //from 1 x-side to the next x-side, or from 1 y-side to the next y-side
 // step_x and step_y is direction to step in x or y direction either +1 or -1
@@ -83,8 +84,8 @@ typedef struct s_ray
 	int		ray_scuare_y;
 	double	ray_D_x; //ray dirextion v_x
 	double	ray_D_y; //ray direction v_y
-	double	side_D_x;
-	double	side_D_y;
+	double	side_x;
+	double	side_y;
 	double	delta_x;
 	double	delta_y;
 	double 	cameraX; //camera coordinate x//
