@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/13 11:30:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/13 13:05:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		//	ray[x].delta_x = sqrt((ray[x].ray_D_y * ray[x].ray_D_y)
 		//		/ (ray[x].ray_D_x * ray[x].ray_D_x));
 			ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
-			printf("x = %d\n", x);
+			printf("%d - %d\n", ray[x].ray_scuare_x, ray[x].ray_scuare_y); 
+			/*printf("x = %d\n", x);
 			printf("camaraX = %f\n", ray[x].cameraX);
 			printf("Dir_x: %f\n", ray[x].ray_D_x);
 			printf("Dir_y: %f\n", ray[x].ray_D_y);
 			printf("delta_x : %f\n", ray[x].delta_x);
-			printf("delta_y : %f\n", ray[x].delta_y);
+			printf("delta_y : %f\n", ray[x].delta_y);*/
 		if(ray[x].ray_D_x < 0)
 		{
 			ray[x].step_x = -1;
@@ -99,8 +100,8 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 			ray[x].step_y = 1;
 			ray[x].side_y = (ray[x].ray_scuare_y + 1.0 - ply->p_ply.y) * ray[x].delta_y;
 		}
-			printf("side_d_x: %f\n", ray[x].side_x);
-			printf("side_d_y: %f\n", ray[x].side_y);
+			//printf("side_d_x: %f\n", ray[x].side_x);
+			//printf("side_d_y: %f\n", ray[x].side_y);
 			printf("--------------------------\n");
 		while (ray[x].hit == 0)
 		{
@@ -135,9 +136,11 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		}
 		//Calculate distance of perpendicular ray
 		if(ray[x].side == 0) 
-			ray[x].wall_dist = (ray[x].ray_scuare_x - ply->p_ply.x + (1 - ray[x].step_x) / 2) / ray[x].ray_D_x;
+		//	ray[x].wall_dist = (ray[x].ray_scuare_x - ply->p_ply.x + (1 - ray[x].step_x) / 2) / ray[x].ray_D_x;
+			ray[x].wall_dist = ray[x].side_x - ray[x].delta_x;
 		else
-			ray[x].wall_dist = (ray[x].ray_scuare_y - ply->p_ply.y + (1 - ray[x].step_y) / 2) / ray[x].ray_D_y;
+		//	ray[x].wall_dist = (ray[x].ray_scuare_y - ply->p_ply.y + (1 - ray[x].step_y) / 2) / ray[x].ray_D_y;
+			ray[x].wall_dist = ray[x].side_y - ray[x].delta_y;
 		/*printf("[[%f]]\n",ray[x].wall_dist);
 		printf("[[x %f]]\n",ray[x].delta_x);
 		printf("[[y %f]]\n",ray[x].delta_y);*/
