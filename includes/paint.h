@@ -68,7 +68,7 @@ typedef struct	s_line{
 // dir_player = vetor direction player
 // camera = vetor camera. Need perpendicular to dir_player vector
 typedef struct s_player {
-	t_d_point	p_ply;
+	t_vect		p_ply;
 	t_vect		dir_ply;
 	t_vect		camera;
 }	t_player;
