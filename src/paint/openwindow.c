@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/12 20:43:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/13 12:10:26 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static t_player	*init_ply(t_map *mapi)
 	t_player	*ply;
 
 	ply = malloc (sizeof(t_player));
-	ply->p_ply.x = (mapi->xy_init_point[0]);
-	ply->p_ply.y = (mapi->xy_init_point[1]);
+	ply->p_ply.x = (mapi->xy_init_point[0]) + 0.5;
+	ply->p_ply.y = (mapi->xy_init_point[1]) + 0.5;
 	if (mapi->init_point == 'N')
 	{
 		load_values_v(&ply->dir_ply, 0, -1);
@@ -34,7 +34,7 @@ static t_player	*init_ply(t_map *mapi)
 	}
 	else if (mapi->init_point == 'S')
 	{
-		load_values_v(&ply->dir_ply, 0, 1);
+		load_values_v(&ply->dir_ply, 0, -1);
 		load_values_v(&ply->camera, -0.66, 0);
 	}
 	else if (mapi->init_point == 'E')
