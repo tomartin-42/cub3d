@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/12 15:39:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/14 08:38:02 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_line{
 	int	line_h;
 	int line_start;
 	int	line_end;
+	int line_color;
 }	t_line;
 
 // p_player = point were is now the plyer
