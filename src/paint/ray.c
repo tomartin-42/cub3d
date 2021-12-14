@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 08:42:12 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:30:12 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x > 0 && x < 1919) && (y > 0 && y < 1079))
+	if ((x > 0 && x < SCR_W - 1) && (y > 0 && y < SCR_H - 1))
 	{
 		dst = data->addr + ((y) * data->line_length
 				+ (x) * (data->bits_per_pixel / 8));
@@ -38,6 +38,85 @@ static void	print_line (t_data *data, int x, t_line *line)
 	}
 }
 
+//calculate ray position and direction//
+//scuare init ray
+//length of ray from one x or y side to next x or y side
+static void	init_values_ray(t_player *ply, t_ray *ray, int x)
+{
+	ray[x].cameraX = 2 * x / (double)SCR_W - 1; 
+	ray[x].ray_D_x = ply->dir_ply.o.x + ply->camera.o.x * ray[x].cameraX;
+	ray[x].ray_D_y = ply->dir_ply.o.y + ply->camera.o.y * ray[x].cameraX;
+	ray[x].ray_scuare_x = (int)ply->p_ply.o.x;
+	ray[x].ray_scuare_y = (int)ply->p_ply.o.y;
+	ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
+	ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
+}
+
+static void	calculate_step_and_side(t_player *ply, t_ray *ray, int x)
+{
+	if(ray[x].ray_D_x < 0)
+	{
+		ray[x].step_x = -1;
+		ray[x].side_x = (double)(ply->p_ply.o.x - ray[x].ray_scuare_x) 
+			* ray[x].delta_x;
+	}
+	else
+	{
+		ray[x].step_x = 1;
+		ray[x].side_x = (double)(ray[x].ray_scuare_x + 1.0 - ply->p_ply.o.x) 
+			* ray[x].delta_x;
+	}
+	if(ray[x].ray_D_y < 0)
+	{
+		ray[x].step_y = -1;
+		ray[x].side_y = (double)(ply->p_ply.o.y - ray[x].ray_scuare_y) 
+			* ray[x].delta_y;
+	}
+	else
+	{
+		ray[x].step_y = 1;
+		ray[x].side_y = (double)(ray[x].ray_scuare_y + 1.0 - ply->p_ply.o.y) 
+			* ray[x].delta_y;
+	}
+}
+
+// DDA loop
+//jump to next map square, either in x-direction, or in y-direction
+//Check if ray has hit a wall
+static void	dda_loop(t_ray *ray, t_map *mapi, int x)
+{
+	while (ray[x].hit == 0)
+	{
+		if(ray[x].side_x < ray[x].side_y)
+		{
+			ray[x].side_x += ray[x].delta_x;
+			ray[x].ray_scuare_x += ray[x].step_x;
+			ray[x].side = 0;
+		}
+		else
+		{
+			ray[x].side_y += ray[x].delta_y;
+			ray[x].ray_scuare_y += ray[x].step_y;
+			ray[x].side = 1;
+		}
+		if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
+			ray[x].hit = true;
+	}
+}
+
+//Calculate wall color
+static void calculate_color(t_ray *ray, t_line *line, int x)
+{
+	if (ray[x].side == 0 && ray[x].ray_D_x < 0)
+		line[x].line_color = GRAY;
+	if (ray[x].side == 0 && ray[x].ray_D_x >= 0)
+		line[x].line_color = RED; 
+	if (ray[x].side == 1 && ray[x].ray_D_y < 0)
+		line[x].line_color = GREEN; 
+	if (ray[x].side == 1 && ray[x].ray_D_y >= 0)
+		line[x].line_color = BLUE; 
+}
+
 void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 {
 	int		x;
@@ -49,110 +128,16 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 	x = 0;
 	while (x < SCR_W - 1)
 	{
+		init_values_ray(ply, ray, x);
+		calculate_step_and_side(ply, ray, x);
 		ray[x].hit = false;
-		//calculate ray position and direction//
-		ray[x].cameraX = 2 * x / (double)SCR_W - 1; //x-coordinate in camera space//
-		ray[x].ray_D_x = ply->dir_ply.o.x + ply->camera.o.x * ray[x].cameraX;
-		ray[x].ray_D_y = ply->dir_ply.o.y + ply->camera.o.y * ray[x].cameraX;
-
-		//scuare init ray
-		ray[x].ray_scuare_x = (int)ply->p_ply.o.x;
-		ray[x].ray_scuare_y = (int)ply->p_ply.o.y;
-
-		//length of ray from one x or y side to next x or y side
-		//if (ray[x].ray_D_x == 0)
-		//	;	//ray[x].delta_x = (double)1 / 0.5;
-		//else
-		//	ray[x].delta_y = sqrt((ray[x].ray_D_x * ray[x].ray_D_x)
-		//		/ (ray[x].ray_D_y * ray[x].ray_D_y));
-			ray[x].delta_x = fabs(1 / ray[x].ray_D_x);
-			
-		//if (ray[x].ray_D_y == 0)
-		//	;	//ray[x].delta_y =  (double)1 / 0.5;
-		//else
-		//	ray[x].delta_x = sqrt((ray[x].ray_D_y * ray[x].ray_D_y)
-		//		/ (ray[x].ray_D_x * ray[x].ray_D_x));
-			ray[x].delta_y = fabs(1 / ray[x].ray_D_y);
-			//printf("%d - %d\n", ray[x].ray_scuare_x, ray[x].ray_scuare_y); 
-			/*printf("x = %d\n", x);
-			printf("camaraX = %f\n", ray[x].cameraX);
-			printf("Dir_x: %f\n", ray[x].ray_D_x);
-			printf("Dir_y: %f\n", ray[x].ray_D_y);
-			printf("delta_x : %f\n", ray[x].delta_x);
-			printf("delta_y : %f\n", ray[x].delta_y);*/
-		if(ray[x].ray_D_x < 0)
-		{
-			ray[x].step_x = -1;
-			ray[x].side_x = (double)(ply->p_ply.o.x - ray[x].ray_scuare_x) * ray[x].delta_x;
-		}
-		else
-		{
-			ray[x].step_x = 1;
-			ray[x].side_x = (double)(ray[x].ray_scuare_x + 1.0 - ply->p_ply.o.x) * ray[x].delta_x;
-		}
-		if(ray[x].ray_D_y < 0)
-		{
-			ray[x].step_y = -1;
-			ray[x].side_y = (double)(ply->p_ply.o.y - ray[x].ray_scuare_y) * ray[x].delta_y;
-		}
-		else
-		{
-			ray[x].step_y = 1;
-			ray[x].side_y = (double)(ray[x].ray_scuare_y + 1.0 - ply->p_ply.o.y) * ray[x].delta_y;
-		}
-			//printf("side_d_x: %f\n", ray[x].side_x);
-			//printf("side_d_y: %f\n", ray[x].side_y);
-		while (ray[x].hit == 0)
-		{
-			//printf("hit: %d\n", ray[x].hit);
-			//printf("ray_d_x: %f\n", ray[x].ray_D_x);
-			//printf("ray_d_y: %f\n", ray[x].ray_D_y);
-			//printf("dir_ply_x: %f\n", ply->dir_ply.o.x);
-			//printf("dir_ply_y: %f\n", ply->dir_ply.o.y);
-			//printf("ray_square_x: %d\n", ray[x].ray_scuare_x);
-			//printf("dir_square_y: %d\n", ray[x].ray_scuare_y);
-			//printf("delta_d_x: %f\n", ray[x].delta_x);
-			//printf("delta_d_y: %f\n", ray[x].delta_y);
-			//jump to next map square, either in x-direction, or in y-direction
-			if(ray[x].side_x < ray[x].side_y)
-			{
-				ray[x].side_x += ray[x].delta_x;
-				ray[x].ray_scuare_x += ray[x].step_x;
-				ray[x].side = 0;
-			}
-			else
-			{
-				ray[x].side_y += ray[x].delta_y;
-				ray[x].ray_scuare_y += ray[x].step_y;
-				ray[x].side = 1;
-			}
-			//Check if ray has hit a wall
-			if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
-			{
-			//	printf("%d - %d\n", ray[x].ray_scuare_x, ray[x].ray_scuare_y);
-				ray[x].hit = true;
-			}
-		}
-		//Calculate wall color
-		if (ray[x].side == 0 && ray[x].ray_D_x < 0)
-			line[x].line_color = GRAY;
-		if (ray[x].side == 0 && ray[x].ray_D_x >= 0)
-			line[x].line_color = RED; 
-		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
-			line[x].line_color = GREEN; 
-		if (ray[x].side == 1 && ray[x].ray_D_y >= 0)
-			line[x].line_color = BLUE; 
-		
-		//Calculate distance of perpendicular ray
+		dda_loop(ray, mapi, x);
+		calculate_color(ray, line, x);
+		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x - ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
-		//	ray[x].wall_dist = ray[x].side_x - ray[x].delta_x;
 		else
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_y - ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
-		//	ray[x].wall_dist = ray[x].side_y - ray[x].delta_y;
-		/*printf("[[%f]]\n",ray[x].wall_dist);
-		printf("[[x %f]]\n",ray[x].delta_x);
-		printf("[[y %f]]\n",ray[x].delta_y);*/
 		//Calculate height of line to draw on screen
 		line[x].line_h = (SCR_H / ray[x].wall_dist);
 
@@ -167,4 +152,6 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 
 		x++;
 	}
+	free(ray);
+	free(line);
 }
