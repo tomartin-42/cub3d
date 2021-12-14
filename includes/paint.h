@@ -29,6 +29,10 @@
 # define BLUE 255
 # define YELOW 16776960
 # define CYAN 65535
+# define FORWARD	119
+# define BACK		115
+# define RIGHT		100
+# define LEFT		97
 
 typedef struct s_d_point{
 	double	x;
@@ -44,11 +48,6 @@ typedef struct s_d_vect{
 	t_d_point	o;
 }	t_vect;
 
-typedef struct s_win{
-	void	*mlx;
-	void	*mlx_win;
-	t_map	*mapi;
-}	t_win;
 
 typedef struct s_data {
 	void	*img;
@@ -100,12 +99,21 @@ typedef struct s_ray
 
 }	t_ray;
 
+typedef struct s_win{
+	void		*mlx;
+	void		*mlx_win;
+	t_map		*mapi;
+	t_data		*img;
+	t_player	*ply;
+}	t_win;
+
 t_vect	sum_v(t_vect v_a, t_vect v_b);
 t_vect	subtr_v(t_vect v_a, t_vect v_b);
 double	mod_v(t_vect vect);
 t_vect	proc_vect(t_vect v_a, double n);
 void	load_values_v(t_vect *load, double x, double y);
 
+void	paint_background(t_map *mapi, t_data *img);
 void	ray_loop(t_player *player, t_map *mapi, t_data *data);
 
 void	print_player(t_player *player);

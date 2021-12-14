@@ -50,7 +50,7 @@ static t_player	*init_ply(t_map *mapi)
 	return (ply);
 }
 
-static void	paint_background(t_map *mapi, t_data *img)
+void	paint_background(t_map *mapi, t_data *img)
 {
 	int	color_F;
 	int	color_C;
@@ -81,6 +81,10 @@ void	init_window(t_map *mapi, char *argv)
 	t_data		img;
 	t_player	*ply;
 
+	ply = init_ply(mapi);
+	win.mapi = mapi;
+	win.img = &img;
+	win.ply = ply;
 	win.mlx = mlx_init();
 	win.mapi = mapi;
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
@@ -89,7 +93,6 @@ void	init_window(t_map *mapi, char *argv)
 	mlx_hook(win.mlx_win, 17, 0, cluose, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	ply = init_ply(mapi);
 	paint_background(mapi, &img); 
 	ray_loop(ply, mapi, &img);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
