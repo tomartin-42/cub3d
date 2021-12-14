@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/08 15:06:52 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/14 11:22:58 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "mlx.h"
 # include "../mlx_linux/mlx.h"
-//# include "../mlx_linux/libmlx_Linux.a"
-//# include "../mlx_linux/libmlx.a"
 # include "libft.h"
 # include <stdio.h>
 # include <math.h>

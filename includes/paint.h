@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 08:38:02 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/14 11:18:19 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define RED 16711680
 # define GREEN 65280
 # define BLUE 255
+# define YELOW 16776960
 
 typedef struct s_d_point{
 	double	x;
@@ -111,5 +112,7 @@ void	print_player(t_player *player);
 int		key_hook(int keycode, t_win *win);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+int		transform_color(long int color[3]);
 
 #endif
