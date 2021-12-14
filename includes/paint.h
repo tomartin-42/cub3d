@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 11:18:19 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/14 12:20:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define GREEN 65280
 # define BLUE 255
 # define YELOW 16776960
+# define CYAN 65535
 
 typedef struct s_d_point{
 	double	x;
