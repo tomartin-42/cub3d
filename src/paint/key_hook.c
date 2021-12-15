@@ -36,9 +36,6 @@ static void rotate_r(t_win *win)
 		y1 = (sin(-ALFA) * win->ply->camera.o.x) 
 			+ (cos(-ALFA) * win->ply->camera.o.y);
 		load_values_v(&win->ply->camera, x1, y1);
-		//paint_background(win->mapi, win->img);
-		//ray_loop(win->ply, win->mapi, win->img);
-		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
 }
 
 static void	rotate_l(t_win *win)
@@ -56,9 +53,26 @@ static void	rotate_l(t_win *win)
 		y1 = (sin(ALFA) * win->ply->camera.o.x) 
 			+ (cos(ALFA) * win->ply->camera.o.y);
 		load_values_v(&win->ply->camera, x1, y1);
-		//paint_background(win->mapi, win->img);
-		//ray_loop(win->ply, win->mapi, win->img);
-		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+}
+
+static void	move_f(t_win *win)
+{	
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+		+ win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+		win->ply->p_ply.o.x += win->ply->dir_ply.o.x * STEP;
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+		[(int)(win->ply->p_ply.o.y + win->ply->dir_ply.o.y * STEP)] != '1') 
+		win->ply->p_ply.o.y += win->ply->dir_ply.o.y * STEP;
+}
+
+static void move_b(t_win *win)
+{
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+		- win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+		win->ply->p_ply.o.x -= win->ply->dir_ply.o.x * STEP;
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+		[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.y * STEP)] != '1') 
+		win->ply->p_ply.o.y -= win->ply->dir_ply.o.y * STEP;
 }
 
 int	key_hook(int keycode, t_win *win)
@@ -66,34 +80,28 @@ int	key_hook(int keycode, t_win *win)
 	if (keycode == 53)
 		scape_key(win);
 	else if (keycode == FORWARD)
-	{
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
-			+ win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] == '0') 
-			win->ply->p_ply.o.x += win->ply->dir_ply.o.x * STEP;
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
-			[(int)(win->ply->p_ply.o.y + win->ply->dir_ply.o.y * STEP)] == '0') 
-			win->ply->p_ply.o.y += win->ply->dir_ply.o.y * STEP;
-	}
+		move_f(win);
 	else if (keycode == BACK)
-	{
-		win->ply->p_ply.o.y -= 0.2;
-		paint_background(win->mapi, win->img);
-		ray_loop(win->ply, win->mapi, win->img);
-		mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
-	}
+		move_b(win);
 	else if (keycode == RIGHT)
 	{
-		win->ply->p_ply.o.x += 0.2;
-		paint_background(win->mapi, win->img);
-		ray_loop(win->ply, win->mapi, win->img);
-		mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+			- win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+			win->ply->p_ply.o.x -= win->ply->dir_ply.o.x * STEP;
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+			[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.y * STEP)] != '1') 
+			win->ply->p_ply.o.y -= win->ply->dir_ply.o.y * STEP;
+		//win->ply->p_ply.o.x += 0.2;
+		//paint_background(win->mapi, win->img);
+		//ray_loop(win->ply, win->mapi, win->img);
+		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
 	}
 	else if (keycode == LEFT)
 	{
-		win->ply->p_ply.o.x -= 0.2;
-		paint_background(win->mapi, win->img);
-		ray_loop(win->ply, win->mapi, win->img);
-		mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+		//win->ply->p_ply.o.x -= 0.2;
+		//paint_background(win->mapi, win->img);
+		//ray_loop(win->ply, win->mapi, win->img);
+		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
 	}
 	else if (keycode == ROTATE_R)
 		rotate_r(win);
