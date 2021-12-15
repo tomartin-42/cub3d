@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/14 11:16:51 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/15 09:37:41 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(CHECK_FILES:.c=.o)
 OBJ_FILES := $(OBJ_FILES) $(PAINT_FILES:.c=.o)
 
-INC_FILES = cube.h check.h paint.h
+INC_FILES = cube.h check.h paint.h keys.h
 
 # Paths
 LIBFT = $(addprefix $(LIBFT_DIR), libft.a)

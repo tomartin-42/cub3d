@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 12:20:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/15 10:24:51 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 # define SCR_H 720
 # define SCL 100
 # define STEP 0.2
-# define ALFA 0.5
-# define ROTATE_L	65361
-# define ROTATE_R	65363
+# define ALFA 0.2
 # define N_W 0
 # define S_W 1
 # define E_W 2
@@ -33,10 +31,6 @@
 # define BLUE 255
 # define YELOW 16776960
 # define CYAN 65535
-# define FORWARD	119
-# define BACK		115
-# define RIGHT		100
-# define LEFT		97
 
 typedef struct s_d_point{
 	double	x;
