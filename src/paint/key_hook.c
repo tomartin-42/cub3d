@@ -67,10 +67,12 @@ int	key_hook(int keycode, t_win *win)
 		scape_key(win);
 	else if (keycode == FORWARD)
 	{
-		win->ply->p_ply.o.y += 0.2;
-		paint_background(win->mapi, win->img);
-		ray_loop(win->ply, win->mapi, win->img);
-		mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+			+ win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] == '0') 
+			win->ply->p_ply.o.x += win->ply->dir_ply.o.x * STEP;
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+			[(int)(win->ply->p_ply.o.y + win->ply->dir_ply.o.y * STEP)] == '0') 
+			win->ply->p_ply.o.y += win->ply->dir_ply.o.y * STEP;
 	}
 	else if (keycode == BACK)
 	{
