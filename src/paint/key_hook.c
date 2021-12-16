@@ -97,7 +97,6 @@ static void move_l(t_win *win)
 
 int	key_hook(int keycode, t_win *win)
 {
-	mlx_do_key_autorepeaton(win->mlx);
 	if (keycode == 53)
 		scape_key(win);
 	else if (keycode == FORWARD)
