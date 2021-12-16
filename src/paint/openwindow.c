@@ -75,6 +75,15 @@ void	paint_background(t_map *mapi, t_data *img)
 	}
 }
 
+static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
+{
+	win->mapi = mapi;
+	win->img = img;
+	win->ply = ply;
+	win->mapi = mapi;
+	win->mlx = mlx_init();
+}
+
 void	init_window(t_map *mapi, char *argv)
 {
 	t_win		win;
@@ -82,11 +91,7 @@ void	init_window(t_map *mapi, char *argv)
 	t_player	*ply;
 
 	ply = init_ply(mapi);
-	win.mapi = mapi;
-	win.img = &img;
-	win.ply = ply;
-	win.mlx = mlx_init();
-	win.mapi = mapi;
+	init_p_win(mapi, ply, &img, &win);
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
 	mlx_key_hook(win.mlx_win, key_hook, &win);
