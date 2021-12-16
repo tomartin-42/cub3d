@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:52:31 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/15 10:55:25 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:56:19 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,20 @@ int	key_hook(int keycode, t_win *win)
 	else if (keycode == RIGHT)
 	{
 		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
-			- win->ply->dir_ply.o.x * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
-			win->ply->p_ply.o.x -= win->ply->dir_ply.o.x * STEP;
+			+ win->ply->dir_ply.o.y * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+			win->ply->p_ply.o.x += win->ply->dir_ply.o.y * STEP;
 		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
-			[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.y * STEP)] != '1') 
-			win->ply->p_ply.o.y -= win->ply->dir_ply.o.y * STEP;
-		//win->ply->p_ply.o.x += 0.2;
-		//paint_background(win->mapi, win->img);
-		//ray_loop(win->ply, win->mapi, win->img);
-		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+			[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.x * STEP)] != '1') 
+			win->ply->p_ply.o.y -= win->ply->dir_ply.o.x * STEP;
 	}
 	else if (keycode == LEFT)
 	{
-		//win->ply->p_ply.o.x -= 0.2;
-		//paint_background(win->mapi, win->img);
-		//ray_loop(win->ply, win->mapi, win->img);
-		//mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+			- win->ply->camera.o.x * STEP)][(int)(win->ply->camera.o.y)] != '1') 
+			win->ply->p_ply.o.x -= win->ply->camera.o.x * STEP;
+		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+			[(int)(win->ply->p_ply.o.y - win->ply->camera.o.y * STEP)] != '1') 
+			win->ply->p_ply.o.y -= win->ply->camera.o.y * STEP;
 	}
 	else if (keycode == ROTATE_R)
 		rotate_r(win);
