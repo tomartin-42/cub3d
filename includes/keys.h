@@ -23,8 +23,8 @@
 # elif defined __unix__
 # define FORWARD	119
 # define BACK		115
-# define RIGHT		97
-# define LEFT		100
+# define RIGHT		100
+# define LEFT		97
 # define ROTATE_L	65361
 # define ROTATE_R	65363
 # endif

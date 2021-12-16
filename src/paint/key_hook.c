@@ -75,8 +75,29 @@ static void move_b(t_win *win)
 		win->ply->p_ply.o.y -= win->ply->dir_ply.o.y * STEP;
 }
 
+static void	move_r(t_win *win)
+{
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+		+ win->ply->dir_ply.o.y * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+		win->ply->p_ply.o.x += win->ply->dir_ply.o.y * STEP;
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+		[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.x * STEP)] != '1') 
+		win->ply->p_ply.o.y -= win->ply->dir_ply.o.x * STEP;
+}
+
+static void move_l(t_win *win)
+{
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x 
+		- win->ply->dir_ply.o.y * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
+		win->ply->p_ply.o.x -= win->ply->dir_ply.o.y * STEP;
+	if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
+		[(int)(win->ply->p_ply.o.y + win->ply->dir_ply.o.x * STEP)] != '1') 
+		win->ply->p_ply.o.y += win->ply->dir_ply.o.x * STEP;
+}
+
 int	key_hook(int keycode, t_win *win)
 {
+	mlx_do_key_autorepeaton(win->mlx);
 	if (keycode == 53)
 		scape_key(win);
 	else if (keycode == FORWARD)
@@ -84,23 +105,9 @@ int	key_hook(int keycode, t_win *win)
 	else if (keycode == BACK)
 		move_b(win);
 	else if (keycode == RIGHT)
-	{
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
-			+ win->ply->dir_ply.o.y * STEP)][(int)(win->ply->p_ply.o.y)] != '1') 
-			win->ply->p_ply.o.x += win->ply->dir_ply.o.y * STEP;
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
-			[(int)(win->ply->p_ply.o.y - win->ply->dir_ply.o.x * STEP)] != '1') 
-			win->ply->p_ply.o.y -= win->ply->dir_ply.o.x * STEP;
-	}
+		move_r(win);
 	else if (keycode == LEFT)
-	{
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
-			- win->ply->camera.o.x * STEP)][(int)(win->ply->camera.o.y)] != '1') 
-			win->ply->p_ply.o.x -= win->ply->camera.o.x * STEP;
-		if(win->mapi->map[(int)(win->ply->p_ply.o.x)]
-			[(int)(win->ply->p_ply.o.y - win->ply->camera.o.y * STEP)] != '1') 
-			win->ply->p_ply.o.y -= win->ply->camera.o.y * STEP;
-	}
+		move_l(win);
 	else if (keycode == ROTATE_R)
 		rotate_r(win);
 	else if (keycode == ROTATE_L)
