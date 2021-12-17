@@ -90,6 +90,14 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->keys->r_l = false;
 }
 
+static void ft_moves(t_win *win)
+{
+	move_f_b(win);
+	move_r_l(win);
+	rotate_r(win);
+	rotate_l(win);
+}
+
 void	init_window(t_map *mapi, char *argv)
 {
 	t_win		win;
@@ -108,10 +116,7 @@ void	init_window(t_map *mapi, char *argv)
 	//ray_loop(&win);
 	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
 	mlx_loop_hook(win.mlx, ray_loop, &win);
-	move_f_b(&win);
-	move_r_l(&win);
-	rotate_r(&win);
-	rotate_l(&win);
+	ft_moves(&win);
 	mlx_hook(win.mlx_win, 3, 1L << 1, ft_key_release, &win);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
 	//print_player(ply);
