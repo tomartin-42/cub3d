@@ -135,9 +135,11 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		calculate_color(ray, line, x);
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
-			ray[x].wall_dist = (double)(ray[x].ray_scuare_x - ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
+			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
+				- ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
 		else
-			ray[x].wall_dist = (double)(ray[x].ray_scuare_y - ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
+			ray[x].wall_dist = (double)(ray[x].ray_scuare_y 
+				- ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
 		//Calculate height of line to draw on screen
 		line[x].line_h = (SCR_H / ray[x].wall_dist);
 

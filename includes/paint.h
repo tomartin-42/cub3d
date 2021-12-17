@@ -55,6 +55,22 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+//struct to save the press or relase key
+//need to continues move when press and not relase the key
+//m_f = move forward
+//m_d = move back
+//m_r = move right
+//m_l = move left;
+//r_r = rotate right
+//r_l = rotate left
+typedef struct s_key {
+	bool	m_f;
+	bool	m_b;
+	bool	m_r;
+	bool	m_l;
+	bool	r_r;
+	bool	r_l;
+} t_key;
 
 // struct need to print colum to check rays
 typedef struct	s_line{
@@ -103,6 +119,7 @@ typedef struct s_win{
 	t_map		*mapi;
 	t_data		*img;
 	t_player	*ply;
+	t_key		*keys;
 }	t_win;
 
 t_vect	sum_v(t_vect v_a, t_vect v_b);
@@ -116,7 +133,12 @@ void	ray_loop(t_player *player, t_map *mapi, t_data *data);
 
 void	print_player(t_player *player);
 
-int		key_hook(int keycode, t_win *win);
+int		ft_key_press(int keycode, t_win *win);
+int		ft_key_release(int keycode, t_win *win);
+void	move_f_b(t_win *win);
+void	move_r_l(t_win *win);
+void	rotate_r(t_win *win);
+void	rotate_l(t_win *win);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 

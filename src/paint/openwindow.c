@@ -12,7 +12,7 @@
 
 #include "paint.h"
 
-static int	cluose(t_win *win)
+static int	ft_close(t_win *win)
 {
 	mlx_destroy_window(win->mlx, win->mlx_win);
 	free_mapi(win->mapi);
@@ -82,6 +82,12 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->ply = ply;
 	win->mapi = mapi;
 	win->mlx = mlx_init();
+	win->keys->m_f = false;
+	win->keys->m_b = false;
+	win->keys->m_r = false;
+	win->keys->m_l = false;
+	win->keys->r_r = false;
+	win->keys->r_l = false;
 }
 
 void	init_window(t_map *mapi, char *argv)
@@ -94,13 +100,19 @@ void	init_window(t_map *mapi, char *argv)
 	init_p_win(mapi, ply, &img, &win);
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
-	mlx_key_hook(win.mlx_win, key_hook, &win);
-	mlx_hook(win.mlx_win, 17, 0, cluose, &win);
+//	mlx_key_hook(win.mlx_win, key_hook, &win);
+	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
+	mlx_hook(win.mlx_win, 17, 0, ft_close, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	paint_background(mapi, &img); 
 	ray_loop(ply, mapi, &img);
+	move_f_b(&win);
+	move_r_l(&win);
+	rotate_r(&win);
+	rotate_l(&win);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
+	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_release, &win);
 	//print_player(ply);
 	mlx_loop(win.mlx);
 }
