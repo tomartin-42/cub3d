@@ -33,6 +33,7 @@ static void	print_line (t_data *data, int x, t_line *line)
 	while(y < line[x].line_end)
 	{
 		my_mlx_pixel_put(data, x, y, line[x].line_color);
+		//printf("[[%d - %d]]\n", x, y);
 		y++;
 	}
 }
@@ -142,6 +143,7 @@ int	ray_loop(t_win *win)
 				- win->ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
 		//Calculate height of line to draw on screen
 		line[x].line_h = (SCR_H / ray[x].wall_dist);
+
 		//calculate lowest and highest pixel to fill in current stripe
 		line[x].line_start = -line[x].line_h / 2 + SCR_H / 2;
 		if(line[x].line_start < 0)
@@ -150,8 +152,14 @@ int	ray_loop(t_win *win)
 		if(line[x].line_end >= SCR_H || line[x].line_end < 0) 
 			line[x].line_end = SCR_H - 1;
 		print_line(win->img, x, line);
+
 		x++;
 	}
+	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+	move_f_b(win);
+	move_r_l(win);
+	rotate_r(win);
+	rotate_l(win);
 	free(ray);
 	free(line);
 	return (0);
