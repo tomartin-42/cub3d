@@ -98,6 +98,7 @@ static void ft_moves(t_win *win)
 	rotate_l(win);
 }
 
+//init window and control ray_loop, moves and events
 void	init_window(t_map *mapi, char *argv)
 {
 	t_win		win;
