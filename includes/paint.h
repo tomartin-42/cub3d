@@ -18,8 +18,8 @@
 # define SCR_W 1280
 # define SCR_H 720
 # define SCL 100
-# define STEP 0.2
-# define ALFA 0.2
+# define STEP 0.02
+# define ALFA 0.02
 # define N_W 0
 # define S_W 1
 # define E_W 2
@@ -129,7 +129,7 @@ t_vect	proc_vect(t_vect v_a, double n);
 void	load_values_v(t_vect *load, double x, double y);
 
 void	paint_background(t_map *mapi, t_data *img);
-void	ray_loop(t_player *player, t_map *mapi, t_data *data);
+int		ray_loop(t_win *win);
 
 void	print_player(t_player *player);
 

@@ -117,7 +117,7 @@ static void calculate_color(t_ray *ray, t_line *line, int x)
 		line[x].line_color = BLUE; 
 }
 
-void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
+int	ray_loop(t_win *win)
 {
 	int		x;
 	t_ray	*ray;
@@ -126,20 +126,21 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 	ray = (t_ray *) malloc(sizeof(t_ray) * SCR_W);
 	line = (t_line *) malloc(sizeof(t_line) * SCR_W);
 	x = 0;
+	paint_background(win->mapi, win->img);
 	while (x < SCR_W - 1)
 	{
-		init_values_ray(ply, ray, x);
-		calculate_step_and_side(ply, ray, x);
+		init_values_ray(win->ply, ray, x);
+		calculate_step_and_side(win->ply, ray, x);
 		ray[x].hit = false;
-		dda_loop(ray, mapi, x);
+		dda_loop(ray, win->mapi, x);
 		calculate_color(ray, line, x);
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
-				- ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
+				- win->ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
 		else
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_y 
-				- ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
+				- win->ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
 		//Calculate height of line to draw on screen
 		line[x].line_h = (SCR_H / ray[x].wall_dist);
 
@@ -150,10 +151,16 @@ void	ray_loop(t_player *ply, t_map *mapi, t_data *data)
 		line[x].line_end = line[x].line_h / 2 + SCR_H / 2;
 		if(line[x].line_end >= SCR_H || line[x].line_end < 0) 
 			line[x].line_end = SCR_H - 1;
-		print_line(data, x, line);
+		print_line(win->img, x, line);
 
 		x++;
 	}
+	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
+	move_f_b(win);
+	move_r_l(win);
+	rotate_r(win);
+	rotate_l(win);
 	free(ray);
 	free(line);
+	return (0);
 }

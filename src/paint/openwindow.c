@@ -101,18 +101,19 @@ void	init_window(t_map *mapi, char *argv)
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
 //	mlx_key_hook(win.mlx_win, key_hook, &win);
-	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
 	mlx_hook(win.mlx_win, 17, 0, ft_close, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	paint_background(mapi, &img); 
-	ray_loop(ply, mapi, &img);
+	//paint_background(mapi, &img); 
+	//ray_loop(&win);
+	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
+	mlx_loop_hook(win.mlx, ray_loop, &win);
 	move_f_b(&win);
 	move_r_l(&win);
 	rotate_r(&win);
 	rotate_l(&win);
+	mlx_hook(win.mlx_win, 3, 1L << 1, ft_key_release, &win);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
-	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_release, &win);
 	//print_player(ply);
 	mlx_loop(win.mlx);
 }

@@ -61,6 +61,7 @@ void	rotate_l(t_win *win)
 
 void	move_f_b(t_win *win)
 {	
+	printf("[[%d]]\n", win->keys->m_r);
 	if (win->keys->m_f == true)
 	{	
 		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
@@ -119,13 +120,11 @@ int	ft_key_press(int keycode, t_win *win)
 		win->keys->r_r = true;
 	else if (keycode == ROTATE_L)
 		win->keys->r_l = true;
-	ray_loop(win->ply, win->mapi, win->img);
 	return (0);
 }
 
 int	ft_key_release(int keycode, t_win *win)
 {
-	printf("[[%d]]\n", keycode);
 	if (keycode == 53)
 		scape_key(win);
 	else if (keycode == FORWARD)

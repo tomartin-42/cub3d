@@ -14,7 +14,7 @@
 # define CUBE_H
 
 # include "mlx.h"
-# include "../mlx_linux/mlx.h"
+//# include "../mlx_linux/mlx.h"
 # include "libft.h"
 # include <stdio.h>
 # include <math.h>
