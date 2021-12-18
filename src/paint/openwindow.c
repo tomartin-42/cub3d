@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:28:28 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:44:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	paint_background(t_map *mapi, t_data *img)
 	color_C = transform_color(mapi->C_color);
 	color_F = transform_color(mapi->F_color);
 	i = 0;
-	while (i < SCR_W -1)
+	while (i < SCR_W - 1)
 	{
 		j = 0;
 		while (j < SCR_H - 1)
