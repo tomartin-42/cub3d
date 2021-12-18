@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/15 10:24:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:13:26 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ typedef struct s_key {
 	bool	r_l;
 } t_key;
 
+//struxt need to load and use textures
+typedef struct s_texture {
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	int		*addr;
+	int		width;
+	int		height;
+} t_texture;
+
 // struct need to print colum to check rays
 typedef struct	s_line{
 	int	line_h;
@@ -113,9 +123,12 @@ typedef struct s_ray
 
 }	t_ray;
 
+//text[0] = NO texture - text[1] = ES texture 
+//text[2] = SO texture - text[3] = WE texture
 typedef struct s_win{
 	void		*mlx;
 	void		*mlx_win;
+	t_texture	text[4];
 	t_map		*mapi;
 	t_data		*img;
 	t_player	*ply;

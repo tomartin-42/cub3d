@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:44:40 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:23:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,14 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->keys->m_l = false;
 	win->keys->r_r = false;
 	win->keys->r_l = false;
+	/*win->text[0].img = mlx_xpm_file_to_image(win->text[0].mlx, mapi->NO_rute,
+		&win->text[0].width, &win->text[0].height);
+	win->text[1].img = mlx_xpm_file_to_image(win->text[1].mlx, mapi->EA_rute,
+		&win->text[1].width, &win->text[1].height);
+	win->text[2].img = mlx_xpm_file_to_image(win->text[2].mlx, mapi->SO_rute,
+		&win->text[2].width, &win->text[2].height);
+	win->text[3].img = mlx_xpm_file_to_image(win->text[3].mlx, mapi->WE_rute,
+		&win->text[3].width, &win->text[3].height);*/
 }
 
 void	init_window(t_map *mapi, char *argv)

@@ -6,11 +6,23 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:49:02 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:28:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x > 0 && x < SCR_W - 1) && (y > 0 && y < SCR_H - 1))
+	{
+		dst = data->addr + ((y) * data->line_length
+				+ (x) * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
+}
 
 // while to print column
 static void	print_line(t_data *data, int x, t_line *line)
