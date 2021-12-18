@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/15 09:37:41 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/18 13:34:45 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
 			continue_load_map.c
 CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c errors2.c
 PAINT_FILES = openwindow.c vector_operation.c key_hook.c ray.c paint_utils.c \
+			  moves.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)

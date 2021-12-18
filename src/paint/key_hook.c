@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:52:31 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/16 11:56:19 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:34:03 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	scape_key(t_win *win)
 	exit (0);
 }
 
-void rotate_r(t_win *win)
+/*void rotate_r(t_win *win)
 {
 		double	x1;
 		double	y1;
@@ -61,7 +61,6 @@ void	rotate_l(t_win *win)
 
 void	move_f_b(t_win *win)
 {	
-	printf("[[%d]]\n", win->keys->m_r);
 	if (win->keys->m_f == true)
 	{	
 		if(win->mapi->map[(int)(win->ply->p_ply.o.x 
@@ -102,7 +101,7 @@ void	move_r_l(t_win *win)
 			[(int)(win->ply->p_ply.o.y + win->ply->dir_ply.o.x * STEP)] != '1') 
 			win->ply->p_ply.o.y += win->ply->dir_ply.o.x * STEP;
 	}
-}
+}*/
 
 int	ft_key_press(int keycode, t_win *win)
 {

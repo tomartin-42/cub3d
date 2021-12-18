@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 10:30:12 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 13:30:59 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,14 @@ int	ray_loop(t_win *win)
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
-				- win->ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) / ray[x].ray_D_x;
+				- win->ply->p_ply.o.x + (1 - (double)ray[x].step_x) / 2) 
+				/ ray[x].ray_D_x;
 		else
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_y 
-				- win->ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) / ray[x].ray_D_y;
+				- win->ply->p_ply.o.y + (1 - (double)ray[x].step_y) / 2) 
+				/ ray[x].ray_D_y;
 		//Calculate height of line to draw on screen
 		line[x].line_h = (SCR_H / ray[x].wall_dist);
-
 		//calculate lowest and highest pixel to fill in current stripe
 		line[x].line_start = -line[x].line_h / 2 + SCR_H / 2;
 		if(line[x].line_start < 0)
@@ -152,7 +153,6 @@ int	ray_loop(t_win *win)
 		if(line[x].line_end >= SCR_H || line[x].line_end < 0) 
 			line[x].line_end = SCR_H - 1;
 		print_line(win->img, x, line);
-
 		x++;
 	}
 	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);
