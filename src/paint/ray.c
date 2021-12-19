@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:30:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:28:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 
 // while to print column
-static void	print_line (t_data *data, int x, t_line *line)
+static void	print_line(t_data *data, int x, t_line *line)
 {
 	int	y;
 
 	y = line[x].line_start;
-	while(y < line[x].line_end)
+	while (y < line[x].line_end)
 	{
 		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		//printf("[[%d - %d]]\n", x, y);
@@ -54,28 +54,28 @@ static void	init_values_ray(t_player *ply, t_ray *ray, int x)
 
 static void	calculate_step_and_side(t_player *ply, t_ray *ray, int x)
 {
-	if(ray[x].ray_D_x < 0)
+	if (ray[x].ray_D_x < 0)
 	{
 		ray[x].step_x = -1;
-		ray[x].side_x = (double)(ply->p_ply.o.x - ray[x].ray_scuare_x) 
+		ray[x].side_x = (double)(ply->p_ply.o.x - ray[x].ray_scuare_x)
 			* ray[x].delta_x;
 	}
 	else
 	{
 		ray[x].step_x = 1;
-		ray[x].side_x = (double)(ray[x].ray_scuare_x + 1.0 - ply->p_ply.o.x) 
+		ray[x].side_x = (double)(ray[x].ray_scuare_x + 1.0 - ply->p_ply.o.x)
 			* ray[x].delta_x;
 	}
-	if(ray[x].ray_D_y < 0)
+	if (ray[x].ray_D_y < 0)
 	{
 		ray[x].step_y = -1;
-		ray[x].side_y = (double)(ply->p_ply.o.y - ray[x].ray_scuare_y) 
+		ray[x].side_y = (double)(ply->p_ply.o.y - ray[x].ray_scuare_y)
 			* ray[x].delta_y;
 	}
 	else
 	{
 		ray[x].step_y = 1;
-		ray[x].side_y = (double)(ray[x].ray_scuare_y + 1.0 - ply->p_ply.o.y) 
+		ray[x].side_y = (double)(ray[x].ray_scuare_y + 1.0 - ply->p_ply.o.y)
 			* ray[x].delta_y;
 	}
 }
@@ -87,7 +87,7 @@ static void	dda_loop(t_ray *ray, t_map *mapi, int x)
 {
 	while (ray[x].hit == 0)
 	{
-		if(ray[x].side_x < ray[x].side_y)
+		if (ray[x].side_x < ray[x].side_y)
 		{
 			ray[x].side_x += ray[x].delta_x;
 			ray[x].ray_scuare_x += ray[x].step_x;
@@ -99,13 +99,13 @@ static void	dda_loop(t_ray *ray, t_map *mapi, int x)
 			ray[x].ray_scuare_y += ray[x].step_y;
 			ray[x].side = 1;
 		}
-		if(mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
+		if (mapi->map[ray[x].ray_scuare_x][ray[x].ray_scuare_y] == '1')
 			ray[x].hit = true;
 	}
 }
 
 //Calculate wall color
-static void calculate_color(t_ray *ray, t_line *line, int x)
+static void	calculate_color(t_ray *ray, t_line *line, int x)
 {
 	if (ray[x].side == 0 && ray[x].ray_D_x < 0)
 		line[x].line_color = GRAY;
