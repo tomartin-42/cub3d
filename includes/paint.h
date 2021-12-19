@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/15 10:24:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:57:53 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+
+typedef struct t_texture {
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_texture;
 //struct to save the press or relase key
 //need to continues move when press and not relase the key
 //m_f = move forward
@@ -120,6 +130,7 @@ typedef struct s_win{
 	t_data		*img;
 	t_player	*ply;
 	t_key		*keys;
+	t_texture	text[4];
 }	t_win;
 
 t_vect	sum_v(t_vect v_a, t_vect v_b);
