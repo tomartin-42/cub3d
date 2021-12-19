@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/19 15:58:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:47:14 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,38 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->keys->r_l = false;
 }
 
+static void	get_texture_addr(t_data *text)
+{
+	text[0].addr = mlx_get_data_addr(text[0].img, &text[0].bits_per_pixel,
+			&text[0].line_length, &text[0].endian);
+	text[1].addr = mlx_get_data_addr(text[1].img, &text[1].bits_per_pixel,
+			&text[1].line_length, &text[1].endian);
+	text[2].addr = mlx_get_data_addr(text[2].img, &text[2].bits_per_pixel,
+			&text[2].line_length, &text[2].endian);
+	text[3].addr = mlx_get_data_addr(text[3].img, &text[3].bits_per_pixel,
+			&text[3].line_length, &text[3].endian);
+}
+
+static void	get_texture(t_win *win, t_map *mapi)
+{
+	t_data	text[4];
+
+	text[0].img = mlx_xpm_file_to_image(win->mlx, mapi->NO_rute,
+			&text[0].width, &text[0].height);
+	text[1].img = mlx_xpm_file_to_image(win->mlx, mapi->EA_rute,
+			&text[1].width, &text[1].height);
+	text[2].img = mlx_xpm_file_to_image(win->mlx, mapi->SO_rute,
+			&text[2].width, &text[2].height);
+	text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
+			&text[3].width, &text[3].height);
+	get_texture_addr(text);
+}
+
 void	init_window(t_map *mapi, char *argv)
 {
 	t_win		win;
 	t_data		img;
+//	t_data		text[4];
 	t_player	*ply;
 
 	ply = init_ply(mapi);
@@ -101,6 +129,7 @@ void	init_window(t_map *mapi, char *argv)
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
 //	mlx_key_hook(win.mlx_win, key_hook, &win);
+	get_texture(&win, mapi);
 	mlx_hook(win.mlx_win, 17, 0, ft_close, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
