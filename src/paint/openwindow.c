@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/19 17:47:14 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:47:34 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static void	get_texture(t_win *win, t_map *mapi)
 	text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
 			&text[3].width, &text[3].height);
 	get_texture_addr(text);
+	win->text = text;
 }
 
 void	init_window(t_map *mapi, char *argv)
