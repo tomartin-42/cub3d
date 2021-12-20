@@ -25,18 +25,20 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 
 // while to print column
-static void	print_line (t_data *data, int x, t_line *line)
+static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 {
 	int	y;
+	int color;
 
+	//win = win;
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
 		line[x].text_y = (int)line[x].text_pos & (TEXT_H - 1);
 		line[x].text_pos += line[x].step;
-		color = win->text[3].addr[(int)line[x].text_pos];
+		color = win->text[1].addr[line[x].text_y];
 		my_mlx_pixel_put(data, x, y, color);
-	//	my_mlx_pixel_put(data, x, y, line[x].line_color);
+//		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
 }
@@ -158,7 +160,7 @@ int	ray_loop(t_win *win)
 		//===============================================================
 		//calculate value of wall_x
 		double	wall_x;
-		if (ray[x].side == 0)
+		if (ray[x].side != 0)
 			wall_x = ray[x].ray_scuare_y + ray[x].wall_dist * ray[x].ray_D_y;
 		else
 			wall_x = ray[x].ray_scuare_x + ray[x].wall_dist * ray[x].ray_D_x;
@@ -174,7 +176,7 @@ int	ray_loop(t_win *win)
 				+ line[x].line_h / 2) * line[x].step; 
 		//===============================================================
 
-		print_line(win->img, x, line);
+		print_line(win->img, x, line, win);
 		x++;
 	}
 	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);

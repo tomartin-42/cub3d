@@ -18,6 +18,8 @@
 # define SCR_W 1280
 # define SCR_H 720
 # define SCL 100
+# define TEXT_W 64
+# define TEXT_H 64
 # define STEP 0.02
 # define ALFA 0.02
 # define N_W 0
@@ -80,6 +82,10 @@ typedef struct	s_line{
 	int line_start;
 	int	line_end;
 	int line_color;
+	int		text_x;
+	int		text_y;
+	double	text_pos;
+	double	step;
 }	t_line;
 
 // p_player = point were is now the plyer
