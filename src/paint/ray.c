@@ -32,8 +32,11 @@ static void	print_line (t_data *data, int x, t_line *line)
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		my_mlx_pixel_put(data, x, y, line[x].line_color);
-		//printf("[[%d - %d]]\n", x, y);
+		line[x].text_y = (int)line[x].text_pos & (TEXT_H - 1);
+		line[x].text_pos += line[x].step;
+		color = win->text[3].addr[(int)line[x].text_pos];
+		my_mlx_pixel_put(data, x, y, color);
+	//	my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
 }
@@ -152,6 +155,25 @@ int	ray_loop(t_win *win)
 		line[x].line_end = line[x].line_h / 2 + SCR_H / 2;
 		if(line[x].line_end >= SCR_H || line[x].line_end < 0) 
 			line[x].line_end = SCR_H - 1;
+		//===============================================================
+		//calculate value of wall_x
+		double	wall_x;
+		if (ray[x].side == 0)
+			wall_x = ray[x].ray_scuare_y + ray[x].wall_dist * ray[x].ray_D_y;
+		else
+			wall_x = ray[x].ray_scuare_x + ray[x].wall_dist * ray[x].ray_D_x;
+		//x coordinate on the texture
+		line[x].text_x = (wall_x * (TEXT_W));
+		if (ray[x].side == 0 && ray[x].ray_D_x > 0)
+			line[x].text_x = TEXT_W - line[x].text_x - 1;
+		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
+			line[x].text_x = TEXT_W - line[x].text_x - 1;
+		// How much to increase the texture coordinate per screen pixel
+		line[x].step = 1.0 * TEXT_H / line[x].line_h;
+		line[x].text_pos = (line[x].line_start - SCR_H - 1 / 2
+				+ line[x].line_h / 2) * line[x].step; 
+		//===============================================================
+
 		print_line(win->img, x, line);
 		x++;
 	}
