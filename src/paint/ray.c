@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 19:28:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:48:52 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,25 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		dst = data->addr + ((y) * data->line_length
 				+ (x) * (data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
+	//	printf("[[%d]]\n",data->bits_per_pixel);
+	//	printf("[[%d]]\n",data->line_length);
 	}
 }
 
 // while to print column
-static void	print_line(t_data *data, int x, t_line *line)
+static void	print_line(t_data *data, int x, t_line *line, t_win *win)
 {
 	int	y;
+	int	color;
 
 	y = line[x].line_start;
 	while (y < line[x].line_end)
 	{
-		my_mlx_pixel_put(data, x, y, line[x].line_color);
-		//printf("[[%d - %d]]\n", x, y);
+		line[x].text_y = (int)line[x].text_pos & (TEXT_H - 1);
+		line[x].text_pos += line[x].step;
+		color = win->text[3].addr[(int)line[x].text_pos];
+		my_mlx_pixel_put(data, x, y, color);
+	//	my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
 }
@@ -105,7 +111,7 @@ static void	dda_loop(t_ray *ray, t_map *mapi, int x)
 }
 
 //Calculate wall color
-static void	calculate_color(t_ray *ray, t_line *line, int x)
+static void	calculate_texture(t_ray *ray, t_line *line, int x)
 {
 	if (ray[x].side == 0 && ray[x].ray_D_x < 0)
 		line[x].line_color = GRAY;
@@ -133,7 +139,7 @@ int	ray_loop(t_win *win)
 		calculate_step_and_side(win->ply, ray, x);
 		ray[x].hit = false;
 		dda_loop(ray, win->mapi, x);
-		calculate_color(ray, line, x);
+		calculate_texture(ray, line, x);
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
@@ -152,7 +158,26 @@ int	ray_loop(t_win *win)
 		line[x].line_end = line[x].line_h / 2 + SCR_H / 2;
 		if(line[x].line_end >= SCR_H || line[x].line_end < 0) 
 			line[x].line_end = SCR_H - 1;
-		print_line(win->img, x, line);
+		//===============================================================
+		//calculate value of wall_x
+		double	wall_x;
+		if (ray[x].side == 0)
+			wall_x = ray[x].ray_scuare_y + ray[x].wall_dist * ray[x].ray_D_y;
+		else
+			wall_x = ray[x].ray_scuare_x + ray[x].wall_dist * ray[x].ray_D_x;
+		//x coordinate on the texture
+		line[x].text_x = (wall_x * (TEXT_W));
+		if (ray[x].side == 0 && ray[x].ray_D_x > 0)
+			line[x].text_x = TEXT_W - line[x].text_x - 1;
+		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
+			line[x].text_x = TEXT_W - line[x].text_x - 1;
+		// How much to increase the texture coordinate per screen pixel
+		line[x].step = 1.0 * TEXT_H / line[x].line_h;
+		line[x].text_pos = (line[x].line_start - SCR_H - 1 / 2
+				+ line[x].line_h / 2) * line[x].step; 
+		//===============================================================
+
+		print_line(win->img, x, line, win);
 		x++;
 	}
 	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img->img, 0, 0);

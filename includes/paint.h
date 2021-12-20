@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/19 21:07:10 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/20 12:48:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 # define SCR_W 1280
 # define SCR_H 720
-# define TEXT_W 62
-# define TEXT_H 62
+# define TEXT_W 64
+# define TEXT_H 64
 # define SCL 100
-# define STEP 0.02
-# define ALFA 0.02
+# define STEP 0.07
+# define ALFA 0.04
 # define N_W 0
 # define S_W 1
 # define E_W 2
@@ -88,10 +88,14 @@ typedef struct s_texture {
 
 // struct need to print colum to check rays
 typedef struct	s_line{
-	int	line_h;
-	int line_start;
-	int	line_end;
-	int line_color;
+	int		line_h;
+	int		line_start;
+	int		line_end;
+	int		line_color;
+	int		text_x;
+	int		text_y;
+	double	text_pos;
+	double	step;
 }	t_line;
 
 // p_player = point were is now the plyer
