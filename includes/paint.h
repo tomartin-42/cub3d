@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/20 12:48:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/15 10:24:51 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 
 # define SCR_W 1280
 # define SCR_H 720
-# define TEXT_W 64
-# define TEXT_H 64
 # define SCL 100
-# define STEP 0.07
-# define ALFA 0.04
+# define STEP 0.02
+# define ALFA 0.02
 # define N_W 0
 # define S_W 1
 # define E_W 2
@@ -76,26 +74,12 @@ typedef struct s_key {
 	bool	r_l;
 } t_key;
 
-//struxt need to load and use textures
-typedef struct s_texture {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	int		*addr;
-	int		width;
-	int		height;
-} t_texture;
-
 // struct need to print colum to check rays
 typedef struct	s_line{
-	int		line_h;
-	int		line_start;
-	int		line_end;
-	int		line_color;
-	int		text_x;
-	int		text_y;
-	double	text_pos;
-	double	step;
+	int	line_h;
+	int line_start;
+	int	line_end;
+	int line_color;
 }	t_line;
 
 // p_player = point were is now the plyer
@@ -131,16 +115,20 @@ typedef struct s_ray
 
 }	t_ray;
 
-//text[0] = NO texture - text[1] = ES texture 
-//text[2] = SO texture - text[3] = WE texture
 typedef struct s_win{
 	void		*mlx;
 	void		*mlx_win;
 	t_map		*mapi;
 	t_data		*img;
 	t_player	*ply;
-	t_key		*keys;
-	t_data		*text;
+//	t_key		*keys;
+	bool		k_f;
+	bool		k_b;
+	bool		k_r;
+	bool		k_l;
+	bool		r_r;
+	bool		r_l;
+	t_data		text[4];
 }	t_win;
 
 t_vect	sum_v(t_vect v_a, t_vect v_b);
