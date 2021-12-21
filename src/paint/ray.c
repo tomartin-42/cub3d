@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/18 13:30:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:44:46 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,18 +161,20 @@ int	ray_loop(t_win *win)
 		//calculate value of wall_x
 		double	wall_x;
 		if (ray[x].side == 0)
-			wall_x = ray[x].ray_scuare_y + ray[x].wall_dist * ray[x].ray_D_y;
+			wall_x = win->ply->p_ply.o.y + ray[x].wall_dist * ray[x].ray_D_y;
 		else
-			wall_x = ray[x].ray_scuare_x + ray[x].wall_dist * ray[x].ray_D_x;
+			wall_x = win->ply->p_ply.o.x + ray[x].wall_dist * ray[x].ray_D_x;
+		wall_x = floor((wall_x));
 		//x coordinate on the texture
-		line[x].text_x = (wall_x * (TEXT_W));
+		line[x].text_x =(int)(wall_x * (double)(TEXT_W));
 		if (ray[x].side == 0 && ray[x].ray_D_x > 0)
 			line[x].text_x = TEXT_W - line[x].text_x - 1;
 		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
 			line[x].text_x = TEXT_W - line[x].text_x - 1;
 		// How much to increase the texture coordinate per screen pixel
 		line[x].step = 1.0 * TEXT_H / line[x].line_h;
-		line[x].text_pos = (line[x].line_start - SCR_H - 1 / 2
+		// Starting texture coordinate
+		line[x].text_pos = (line[x].line_start - SCR_H / 2
 				+ line[x].line_h / 2) * line[x].step; 
 		//===============================================================
 
