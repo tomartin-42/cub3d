@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/21 08:44:46 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/21 12:31:55 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 {
 	int	y;
-	int color;
+	uint32_t color;
 
-	//win = win;
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
 		line[x].text_y = (int)line[x].text_pos & (TEXT_H - 1);
 		line[x].text_pos += line[x].step;
-		color = win->text[1].addr[line[x].text_y];
+		color = win->text[1].addr[TEXT_H * line[x].text_x + line[x].text_y];
+		if(win->ray[x]->side == 1) 
+			color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(data, x, y, color);
 //		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;

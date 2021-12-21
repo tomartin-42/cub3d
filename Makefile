@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/21 08:48:09 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/21 09:19:15 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,8 +65,8 @@ PAINT = $(addprefix $(PAINT_DIR), $(PAINT_FILES))
 
 # Libft linkers
 ifeq ($(UNAME), Darwin)
-LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) $(MLX_DIR)libmlx.a\
-	   -lmlx -framework OpenGL -framework AppKit
+LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) -lmlx \
+	   -framework OpenGL -framework AppKit
 else
 LNK  = -L $(LIBFT_DIR) -lft -L $(MLX_DIR) $(MLX_DIR)libmlx.a \
 	   $(MLX_DIR)libmlx_Linux.a $(MLX_DIR)mlx.h -lXext -lX11
