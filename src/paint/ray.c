@@ -160,7 +160,7 @@ int	ray_loop(t_win *win)
 		//===============================================================
 		//calculate value of wall_x
 		double	wall_x;
-		if (ray[x].side != 0)
+		if (ray[x].side == 0)
 			wall_x = ray[x].ray_scuare_y + ray[x].wall_dist * ray[x].ray_D_y;
 		else
 			wall_x = ray[x].ray_scuare_x + ray[x].wall_dist * ray[x].ray_D_x;
