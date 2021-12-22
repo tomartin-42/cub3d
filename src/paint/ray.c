@@ -12,6 +12,11 @@
 
 #include "paint.h"
 
+static int	create_trgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -29,6 +34,7 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 {
 	int			y;
 	int			color;
+	int			trgb[3];
 	int			resp;
 	int			ty;
 
@@ -39,8 +45,10 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 		win->text[ty].text_y = (int)win->text[ty].text_pos & (win->text[ty].height - 1);
 		win->text[ty].text_pos += win->text[ty].step;
 		color = ((win->text[ty].text_y * win->text[ty].line_length) + win->text[ty].text_x * (win->text[ty].bits_per_pixel / 8));
-		resp = win->text[ty].addr[color];
-		//printf("[%c]\n", resp);
+		trgb[0] = win->text[ty].addr[color];
+		trgb[1] = win->text[ty].addr[color + 1];
+		trgb[2] = win->text[ty].addr[color + 2];
+		resp = create_trgb(trgb[2],trgb[1],trgb[0]);
 		my_mlx_pixel_put(data, x, y, resp);
 //		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
