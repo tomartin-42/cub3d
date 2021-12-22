@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/21 12:31:55 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:28:25 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		line[x].text_y = (int)line[x].text_pos & (TEXT_H - 1);
-		line[x].text_pos += line[x].step;
-		color = win->text[1].addr[TEXT_H * line[x].text_x + line[x].text_y];
-		if(win->ray[x]->side == 1) 
-			color = (color >> 1) & 8355711;
+		win->text[1].text_y = (int)win->text[1].text_pos & (win->text[1].height - 1);
+		win->text[1].text_pos += win->text[1].step;
+		color = win->text[1].addr[win->text[1].height * win->text[1].text_x
+			+ win->text[1].text_y];
 		my_mlx_pixel_put(data, x, y, color);
 //		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
@@ -165,18 +164,18 @@ int	ray_loop(t_win *win)
 			wall_x = win->ply->p_ply.o.y + ray[x].wall_dist * ray[x].ray_D_y;
 		else
 			wall_x = win->ply->p_ply.o.x + ray[x].wall_dist * ray[x].ray_D_x;
-		wall_x = floor((wall_x));
+		wall_x -= floor((wall_x));
 		//x coordinate on the texture
-		line[x].text_x =(int)(wall_x * (double)(TEXT_W));
+		win->text[1].text_x =(int)(wall_x * (double)(win->text[1].width));
 		if (ray[x].side == 0 && ray[x].ray_D_x > 0)
-			line[x].text_x = TEXT_W - line[x].text_x - 1;
+			win->text[1].text_x = win->text[1].width - win->text[1].text_x - 1;
 		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
-			line[x].text_x = TEXT_W - line[x].text_x - 1;
+			win->text[1].text_x = win->text[1].width - win->text[1].text_x - 1;
 		// How much to increase the texture coordinate per screen pixel
-		line[x].step = 1.0 * TEXT_H / line[x].line_h;
+		win->text[1].step = 1.0 * win->text[1].height / line[x].line_h;
 		// Starting texture coordinate
-		line[x].text_pos = (line[x].line_start - SCR_H / 2
-				+ line[x].line_h / 2) * line[x].step; 
+		win->text[1].text_pos = (line[x].line_start - SCR_H / 2
+				+ line[x].line_h / 2) * win->text[1].step; 
 		//===============================================================
 
 		print_line(win->img, x, line, win);
