@@ -29,18 +29,19 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 {
 	int			y;
 	int			color;
+	int			resp;
+	int			ty;
 
+	ty = line[x].line_color;
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		win->text[1].text_y = (int)win->text[1].text_pos & (win->text[1].height - 1);
-		win->text[1].text_pos += win->text[1].step;
-		//color = (u_int32_t)(win->text[1].img[win->text[1].height * win->text[1].text_x
-		//	+ win->text[1].text_y]);
-		color = ((win->text[1].text_y * win->text[1].line_length) + win->text[1].text_x * (win->text[1].bits_per_pixel / 8));
-		my_mlx_pixel_put(data, x, y, win->text[1].addr[color]);
-	//	printf("[%c]\n", win->text[1].addr[win->text[1].height * win->text[1].text_x
-	//		+ win->text[1].text_y]);
+		win->text[ty].text_y = (int)win->text[ty].text_pos & (win->text[ty].height - 1);
+		win->text[ty].text_pos += win->text[ty].step;
+		color = ((win->text[ty].text_y * win->text[ty].line_length) + win->text[ty].text_x * (win->text[ty].bits_per_pixel / 8));
+		resp = win->text[ty].addr[color];
+		//printf("[%c]\n", resp);
+		my_mlx_pixel_put(data, x, y, resp);
 //		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
@@ -113,16 +114,19 @@ static void	dda_loop(t_ray *ray, t_map *mapi, int x)
 }
 
 //Calculate wall color
-static void calculate_color(t_ray *ray, t_line *line, int x)
+static int calculate_color(t_ray *ray, int x)
 {
+	int	text_type;
+
 	if (ray[x].side == 0 && ray[x].ray_D_x < 0)
-		line[x].line_color = GRAY;
+		text_type = N_W;
 	if (ray[x].side == 0 && ray[x].ray_D_x >= 0)
-		line[x].line_color = RED; 
+		text_type = E_W; 
 	if (ray[x].side == 1 && ray[x].ray_D_y < 0)
-		line[x].line_color = GREEN; 
+		text_type = S_W; 
 	if (ray[x].side == 1 && ray[x].ray_D_y >= 0)
-		line[x].line_color = BLUE; 
+		text_type = W_W; 
+	return (text_type);
 }
 
 int	ray_loop(t_win *win)
@@ -130,6 +134,7 @@ int	ray_loop(t_win *win)
 	int		x;
 	t_ray	*ray;
 	t_line	*line;
+	int		ty;
 
 	ray = (t_ray *) malloc(sizeof(t_ray) * SCR_W);
 	line = (t_line *) malloc(sizeof(t_line) * SCR_W);
@@ -141,7 +146,7 @@ int	ray_loop(t_win *win)
 		calculate_step_and_side(win->ply, ray, x);
 		ray[x].hit = false;
 		dda_loop(ray, win->mapi, x);
-		calculate_color(ray, line, x);
+		ty = calculate_color(ray, x);
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
@@ -169,18 +174,18 @@ int	ray_loop(t_win *win)
 			wall_x = win->ply->p_ply.o.x + ray[x].wall_dist * ray[x].ray_D_x;
 		wall_x -= floor((wall_x));
 		//x coordinate on the texture
-		win->text[1].text_x =(int)(wall_x * (double)(win->text[1].width));
+		win->text[ty].text_x =(int)(wall_x * (double)(win->text[ty].width));
 		if (ray[x].side == 0 && ray[x].ray_D_x > 0)
-			win->text[1].text_x = win->text[1].width - win->text[1].text_x - 1;
+			win->text[ty].text_x = win->text[ty].width - win->text[ty].text_x - 1;
 		if (ray[x].side == 1 && ray[x].ray_D_y < 0)
-			win->text[1].text_x = win->text[1].width - win->text[1].text_x - 1;
+			win->text[ty].text_x = win->text[ty].width - win->text[ty].text_x - 1;
 		// How much to increase the texture coordinate per screen pixel
-		win->text[1].step = 1.0 * win->text[1].height / line[x].line_h;
+		win->text[ty].step = 1.0 * win->text[ty].height / line[x].line_h;
 		// Starting texture coordinate
-		win->text[1].text_pos = (line[x].line_start - SCR_H / 2
-				+ line[x].line_h / 2) * win->text[1].step; 
+		win->text[ty].text_pos = (line[x].line_start - SCR_H / 2
+				+ line[x].line_h / 2) * win->text[ty].step; 
 		//===============================================================
-
+		line[x].line_color = ty;
 		print_line(win->img, x, line, win);
 		x++;
 	}
