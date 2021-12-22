@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/15 10:24:51 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/22 08:42:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,21 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+}	t_data;
+
+typedef struct s_text {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	int		width;
 	int		height;
-}	t_data;
+	int		text_x;
+	int		text_y;
+	double	text_pos;
+	double	step;
+}	t_text;
 
 //struct to save the press or relase key
 //need to continues move when press and not relase the key
@@ -82,10 +94,6 @@ typedef struct	s_line{
 	int line_start;
 	int	line_end;
 	int line_color;
-	int		text_x;
-	int		text_y;
-	double	text_pos;
-	double	step;
 }	t_line;
 
 // p_player = point were is now the plyer
@@ -134,7 +142,7 @@ typedef struct s_win{
 	bool		k_l;
 	bool		r_r;
 	bool		r_l;
-	t_data		text[4];
+	t_text		text[4];
 }	t_win;
 
 t_vect	sum_v(t_vect v_a, t_vect v_b);
