@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 18:32:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/23 10:45:20 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	**read_map(int fd_map, char *argv)
 		if (end_line == '\n')
 			i++;
 	}
+	printf("numero lineas mapa %i\n", i);
 	close(fd_map);
 	if (i == 0)
 		error_empy_map();

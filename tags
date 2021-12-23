@@ -1,0 +1,68 @@
+Mcube3d	src/cube3d.c	/^int	main(int argc, char **argv)$/
+calculate_color	src/paint/ray.c	/^static int calculate_color(t_ray *ray, int x)$/
+calculate_step_and_side	src/paint/ray.c	/^static void	calculate_step_and_side(t_player *ply,/
+check_chars_in_color_line	src/check/checker.c	/^static void	check_chars_in_color_line(char *color_/
+check_chars_in_map	src/check/scanmap.c	/^void	check_chars_in_map(t_map *mapi, char **map)$/
+check_close_map	src/check/scanmap.c	/^int	check_close_map(t_map *mapi)$/
+check_cub	src/file_actions.c	/^static void	check_cub(char *argv)$/
+check_dual_init_point	src/check/scanmap.c	/^void	check_dual_init_point(t_map *mapi, char **map/
+check_param_map	src/load_map.c	/^int	check_param_map(t_map *mapi)$/
+checking_color_line	src/check/checker.c	/^static void	checking_color_line(char *color_line, /
+complement_get_files	src/continue_load_map.c	/^static void	complement_get_files(char *line, t_map/
+copy_old_in_new_map	src/check/redimension_map.c	/^static void	copy_old_in_new_map(char **new_map, t_/
+create_trgb	src/paint/ray.c	/^int	create_trgb(int t, int r, int g, int b)$/
+dda_loop	src/paint/ray.c	/^static void	dda_loop(t_ray *ray, t_map *mapi, int /
+error_dual_init_point	src/check/errors.c	/^void	error_dual_init_point(t_map *mapi, char **map/
+error_empy_map	src/check/errors.c	/^void	error_empy_map(void)$/
+error_in_color_line	src/check/errors.c	/^void	error_in_color_line(char **map, t_map *mapi)$/
+error_incorrect_char_in_map	src/check/errors2.c	/^void	error_incorrect_char_in_map(t_map *mapi, char/
+error_miss_init_point	src/check/errors.c	/^void	error_miss_init_point(char **map, t_map *mapi/
+error_open_map	src/check/errors.c	/^void	error_open_map(t_map *mapi, char **map)$/
+free_mapi	src/free_resources.c	/^void	free_mapi(t_map *mapi)$/
+free_mapi_and_map	src/free_resources.c	/^void	free_mapi_and_map(t_map *mapi, char **map)$/
+ft_close	src/paint/openwindow.c	/^static int	ft_close(t_win *win)$/
+ft_key_press	src/paint/key_hook.c	/^int	ft_key_press(int keycode, t_win *win)$/
+ft_key_release	src/paint/key_hook.c	/^int	ft_key_release(int keycode, t_win *win)$/
+generate_map_dp	src/load_map.c	/^void	generate_map_dp(int i, int j, t_map *mapi, ch/
+get_colors	src/continue_load_map.c	/^static void	get_colors(char **line, t_map *mapi, c/
+get_files_colors	src/continue_load_map.c	/^void	get_files_colors(char **line, t_map *mapi, ch/
+get_map	src/load_map.c	/^void	get_map(int i, t_map *mapi, char **map)$/
+get_texture_addr	src/paint/openwindow.c	/^static void get_texture_addr(t_win *win)$/
+get_textures	src/paint/openwindow.c	/^static void	get_textures(t_win *win, t_map *mapi)$/
+init_mapi	src/cube3d.c	/^static t_map	*init_mapi(void)$/
+init_p_win	src/paint/openwindow.c	/^static void	init_p_win(t_map *mapi, t_player *ply,/
+init_ply	src/paint/openwindow.c	/^static t_player	*init_ply(t_map *mapi)$/
+init_redimension_map	src/check/checker.c	/^static void	init_redimension_map(t_map *mapi)$/
+init_textures	src/cube3d.c	/^static t_map	*init_textures(t_map *aux_map)$/
+init_values_ray	src/paint/ray.c	/^static void	init_values_ray(t_player *ply, t_ray */
+init_window	src/paint/openwindow.c	/^void	init_window(t_map *mapi, char *argv)$/
+load_color_C	src/continue_load_map.c	/^static void	load_color_C(char **num, t_map *mapi, /
+load_color_F	src/continue_load_map.c	/^static void	load_color_F(char **num, t_map *mapi, /
+load_map	src/load_map.c	/^void	load_map(t_map *mapi, char **map)$/
+load_values_v	src/paint/vector_operation.c	/^void	load_values_v(t_vect *load, double x, double /
+main_check	src/check/checker.c	/^void	main_check(t_map *mapi, char **map)$/
+mod_v	src/paint/vector_operation.c	/^double	mod_v(t_vect vect)$/
+move_f_b	src/paint/moves.c	/^void	move_f_b(t_win *win)$/
+move_r_l	src/paint/moves.c	/^void	move_r_l(t_win *win)$/
+my_mlx_pixel_put	src/paint/ray.c	/^void	my_mlx_pixel_put(t_data *data, int x, int y, /
+open_map	src/file_actions.c	/^int	open_map(int argc, char **argv)$/
+paint_background	src/paint/openwindow.c	/^void	paint_background(t_map *mapi, t_data *img)$/
+parse_in_colors	src/check/checker.c	/^static void	parse_in_colors(char **map, t_map *map/
+print_line	src/paint/ray.c	/^static void	print_line (t_data *data, int x, t_lin/
+print_map	src/utils.c	/^void	print_map(char **map)$/
+print_player	src/utils.c	/^void	print_player(t_player *player)$/
+print_struc_mapi	src/utils.c	/^void	print_struc_mapi(t_map *mapi)$/
+proc_vect	src/paint/vector_operation.c	/^t_vect	proc_vect(t_vect v_a, double n)$/
+ray_loop	src/paint/ray.c	/^int	ray_loop(t_win *win)$/
+read_map	src/file_actions.c	/^char	**read_map(int fd_map, char *argv)$/
+redimension_map	src/check/redimension_map.c	/^void	redimension_map(t_map *mapi, int i, int size_/
+rotate_l	src/paint/moves.c	/^void	rotate_l(t_win *win)$/
+rotate_r	src/paint/moves.c	/^void rotate_r(t_win *win)$/
+save_map	src/file_actions.c	/^static char	**save_map(char *argv, int i)$/
+scan_map	src/check/scanmap.c	/^void	scan_map(t_map *mapi, char **map)$/
+scape_key	src/paint/key_hook.c	/^static void	scape_key(t_win *win)$/
+set_init_point	src/check/scanmap.c	/^static void	set_init_point(t_map *mapi, int x, int/
+subtr_v	src/paint/vector_operation.c	/^t_vect	subtr_v(t_vect v_a, t_vect v_b)$/
+sum_v	src/paint/vector_operation.c	/^t_vect	sum_v(t_vect v_a, t_vect v_b)$/
+transform_color	src/paint/colors.c	/^int	transform_color(long int color[3])$/
+write_x_in_new_map	src/check/redimension_map.c	/^static void	write_x_in_new_map(char **new_map, t_m/

@@ -6,15 +6,27 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/22 11:28:25 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:56:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
 
-static int	create_trgb(int r, int g, int b)
+unsigned int	create_trgb(int t, int r, int g, int b)
 {
-	return (r << 16 | g << 8 | b);
+	return ((t << 24) + (r << 16) + (g << 8) + b);
+}
+
+static inline void	my_mlx_pixel_put1(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x > 0 && x < SCR_W - 1) && (y > 0 && y < SCR_H - 1))
+	{
+		dst = data->addr + ((y) * data->line_length
+				+ (x) * (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -34,10 +46,8 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 {
 	int			y;
 	int			color;
-	int			trgb[3];
 	int			resp;
 	int			ty;
-
 	ty = line[x].line_color;
 	y = line[x].line_start;
 	while(y < line[x].line_end)
@@ -45,11 +55,9 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 		win->text[ty].text_y = (int)win->text[ty].text_pos & (win->text[ty].height - 1);
 		win->text[ty].text_pos += win->text[ty].step;
 		color = ((win->text[ty].text_y * win->text[ty].line_length) + win->text[ty].text_x * (win->text[ty].bits_per_pixel / 8));
-		trgb[0] = win->text[ty].addr[color];
-		trgb[1] = win->text[ty].addr[color + 1];
-		trgb[2] = win->text[ty].addr[color + 2];
-		resp = create_trgb(trgb[2],trgb[1],trgb[0]);
-		my_mlx_pixel_put(data, x, y, resp);
+		resp = *(int *)(win->text[ty].addr + (int)color);
+//		resp = create_trgb(trgb[3], trgb[2], trgb[1], trgb[0]);
+		my_mlx_pixel_put1(data, x, y, resp);
 //		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
@@ -194,6 +202,7 @@ int	ray_loop(t_win *win)
 				+ line[x].line_h / 2) * win->text[ty].step; 
 		//===============================================================
 		line[x].line_color = ty;
+	//	printf("x = %i\n", x);
 		print_line(win->img, x, line, win);
 		x++;
 	}
