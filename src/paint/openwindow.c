@@ -6,27 +6,14 @@
 /*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 18:46:11 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/25 20:05:14 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
 
-static int	ft_close(t_win *win)
+static void	init_position_and_camera_vetor(t_map *mapi, t_player *ply)
 {
-	mlx_destroy_window(win->mlx, win->mlx_win);
-	free_mapi(win->mapi);
-	exit (0);
-	return (0);
-}
-
-static t_player	*init_ply(t_map *mapi)
-{
-	t_player	*ply;
-
-	ply = malloc (sizeof(t_player));
-	ply->p_ply.o.x = (double)(mapi->xy_init_point[1] + 0.5);
-	ply->p_ply.o.y = (double)(mapi->xy_init_point[0] + 0.5);
 	if (mapi->init_point == 'W')
 	{
 		load_values_v(&ply->dir_ply, 0, -1);
@@ -47,18 +34,28 @@ static t_player	*init_ply(t_map *mapi)
 		load_values_v(&ply->dir_ply, -1, 0);
 		load_values_v(&ply->camera, 0, 0.66);
 	}
+}
+
+static t_player	*init_ply(t_map *mapi)
+{
+	t_player	*ply;
+
+	ply = malloc (sizeof(t_player));
+	ply->p_ply.o.x = (double)(mapi->xy_init_point[1] + 0.5);
+	ply->p_ply.o.y = (double)(mapi->xy_init_point[0] + 0.5);
+	init_position_and_camera_vetor(mapi, ply);
 	return (ply);
 }
 
 void	paint_background(t_map *mapi, t_data *img)
 {
-	int	color_F;
-	int	color_C;
+	int	color_f;
+	int	color_c;
 	int	i;
 	int	j;
 
-	color_C = transform_color(mapi->C_color);
-	color_F = transform_color(mapi->F_color);
+	color_c = transform_color(mapi->c_color);
+	color_f = transform_color(mapi->f_color);
 	i = 0;
 	while (i < SCR_W -1)
 	{
@@ -66,9 +63,9 @@ void	paint_background(t_map *mapi, t_data *img)
 		while (j < SCR_H - 1)
 		{
 			if (j < (SCR_H / 2))
-				my_mlx_pixel_put(img, i, j, color_C);
+				my_mlx_pixel_put(img, i, j, color_c);
 			else
-				my_mlx_pixel_put(img, i, j, color_F);
+				my_mlx_pixel_put(img, i, j, color_f);
 			j++;
 		}
 		i++;
@@ -90,37 +87,6 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->mlx = mlx_init();
 }
 
-static void get_texture_addr(t_win *win)
-{
-	win->text[0].addr = mlx_get_data_addr(win->text[0].img,
-			&win->text[0].bits_per_pixel, &win->text[0].line_length,
-			&win->text[0].endian);
-	win->text[1].addr = mlx_get_data_addr(win->text[1].img,
-			&win->text[1].bits_per_pixel, &win->text[1].line_length,
-			&win->text[1].endian);
-	win->text[2].addr = mlx_get_data_addr(win->text[2].img,
-			&win->text[2].bits_per_pixel, &win->text[2].line_length,
-			&win->text[2].endian);
-	win->text[3].addr = mlx_get_data_addr(win->text[3].img,
-			&win->text[3].bits_per_pixel, &win->text[3].line_length,
-			&win->text[3].endian);
-}
-
-
-static void	get_textures(t_win *win, t_map *mapi)
-{
-	win->text[0].img = mlx_xpm_file_to_image(win->mlx, mapi->NO_rute,
-			&(win->text[0].width), &(win->text[0].height));
-	win->text[1].img = mlx_xpm_file_to_image(win->mlx, mapi->EA_rute,
-			&(win->text[1].width), &(win->text[1].height));
-	win->text[2].img = mlx_xpm_file_to_image(win->mlx, mapi->SO_rute,
-			&(win->text[2].width), &(win->text[2].height));
-	win->text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
-			&(win->text[3].width), &(win->text[3].height));
-	get_texture_addr(win);
-}
-
-
 void	init_window(t_map *mapi, char *argv)
 {
 	t_win		win;
@@ -132,16 +98,12 @@ void	init_window(t_map *mapi, char *argv)
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
 	get_textures(&win, mapi);
-//	mlx_key_hook(win.mlx_win, key_hook, &win);
 	mlx_hook(win.mlx_win, 17, 0, ft_close, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	//paint_background(mapi, &img); 
-	//ray_loop(&win);
 	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
 	mlx_loop_hook(win.mlx, ray_loop, &win);
 	mlx_hook(win.mlx_win, 3, 1L << 1, ft_key_release, &win);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
-	//print_player(ply);
 	mlx_loop(win.mlx);
 }

@@ -6,12 +6,20 @@
 /*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:52:31 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 18:46:55 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/25 20:01:31 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
 #include "keys.h"
+
+int	ft_close(t_win *win)
+{
+	mlx_destroy_window(win->mlx, win->mlx_win);
+	free_mapi(win->mapi);
+	exit (0);
+	return (0);
+}
 
 static void	scape_key(t_win *win)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/23 10:22:53 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/25 20:00:06 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,10 +154,14 @@ void	load_values_v(t_vect *load, double x, double y);
 void	paint_background(t_map *mapi, t_data *img);
 int		ray_loop(t_win *win);
 
+void	get_texture_addr(t_win *win);
+void	get_textures(t_win *win, t_map *mapi);
+
 void	print_player(t_player *player);
 
 int		ft_key_press(int keycode, t_win *win);
 int		ft_key_release(int keycode, t_win *win);
+int		ft_close(t_win *win);
 void	move_f_b(t_win *win);
 void	move_r_l(t_win *win);
 void	rotate_r(t_win *win);

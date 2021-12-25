@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/14 11:22:58 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/25 19:42:59 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct s_map{
 	char		*EA_rute;
 	bool		have_EA;
 
-	long int	F_color[3];
+	long int	f_color[3];
 	bool		have_F;
-	long int	C_color[3];
+	long int	c_color[3];
 	bool		have_C;
 
 	char		init_point;

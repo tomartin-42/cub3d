@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
+#    By: tommy <tommy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/23 11:25:55 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/25 19:50:15 by tommy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
 			continue_load_map.c
 CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c errors2.c
 PAINT_FILES = openwindow.c vector_operation.c key_hook.c ray.c paint_utils.c \
-			  moves.c
+			  moves.c textures.c
 
 # Objs
 OBJ_FILES = $(SRC_FILES:.c=.o)
