@@ -2,8 +2,4 @@
 	"files.associations": {
 		"algorithm": "c"
 	}
-	{
-	"editor.bracketPairColorization.enabled": true,
-	"editor.guides.bracketPairs":"active"
-	}
 }

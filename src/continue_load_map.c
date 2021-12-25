@@ -6,13 +6,13 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/04 19:31:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/25 19:07:34 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	load_color_F(char **num, t_map *mapi, char **map)
+static void	load_color_f(char **num, t_map *mapi, char **map)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ static void	load_color_F(char **num, t_map *mapi, char **map)
 	mapi->have_F = true;
 }
 
-static void	load_color_C(char **num, t_map *mapi, char **map)
+static void	load_color_c(char **num, t_map *mapi, char **map)
 {
 	int	i;
 	int	j;
@@ -79,9 +79,9 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 		i++;
 	}
 	if (!ft_strcmp(line[0], "F"))
-		load_color_F(num, mapi, map);
+		load_color_f(num, mapi, map);
 	if (!ft_strcmp(line[0], "C"))
-		load_color_C(num, mapi, map);
+		load_color_c(num, mapi, map);
 	ft_free_dp(num);
 }
 

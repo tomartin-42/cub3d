@@ -60,5 +60,4 @@ int	main(int argc, char **argv)
 	init_window(mapi, argv[1]);
 	free_mapi(mapi);
 	ft_free_dp(map);
-	//system("leaks cub3d");
 }

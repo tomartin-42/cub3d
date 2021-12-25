@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openwindow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/22 09:14:06 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/25 18:46:11 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,29 +118,6 @@ static void	get_textures(t_win *win, t_map *mapi)
 	win->text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
 			&(win->text[3].width), &(win->text[3].height));
 	get_texture_addr(win);
-	printf("[0 text_w = %d]\n",win->text[0].width);
-	printf("[0 text_h = %d]\n",win->text[0].height);
-	printf("[0 text_bpp = %d]\n",win->text[0].bits_per_pixel);
-	printf("[0 text_ll = %d]\n",win->text[0].line_length);
-	printf("[0 text_end = %d]\n",win->text[0].endian);
-	printf("=======================================\n");
-	printf("[1 text_w = %d]\n",win->text[1].width);
-	printf("[1 text_h = %d]\n",win->text[1].height);
-	printf("[1 text_bpp = %d]\n",win->text[1].bits_per_pixel);
-	printf("[1 text_ll = %d]\n",win->text[1].line_length);
-	printf("[1 text_end = %d]\n",win->text[1].endian);
-	printf("=======================================\n");
-	printf("[2 text_w = %d]\n",win->text[2].width);
-	printf("[2 text_h = %d]\n",win->text[2].height);
-	printf("[2 text_bpp = %d]\n",win->text[2].bits_per_pixel);
-	printf("[2 text_ll = %d]\n",win->text[2].line_length);
-	printf("[2 text_end = %d]\n",win->text[2].endian);
-	printf("=======================================\n");
-	printf("[3 text_w = %d]\n",win->text[3].width);
-	printf("[3 text_h = %d]\n",win->text[3].height);
-	printf("[3 text_bpp = %d]\n",win->text[3].bits_per_pixel);
-	printf("[3 text_ll = %d]\n",win->text[3].line_length);
-	printf("[3 text_end = %d]\n",win->text[3].endian);
 }
 
 
