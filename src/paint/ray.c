@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:34:23 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/23 11:56:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/25 18:37:46 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "paint.h"
-
-unsigned int	create_trgb(int t, int r, int g, int b)
-{
-	return ((t << 24) + (r << 16) + (g << 8) + b);
-}
 
 static inline void	my_mlx_pixel_put1(t_data *data, int x, int y, int color)
 {
@@ -48,17 +43,18 @@ static void	print_line (t_data *data, int x, t_line *line, t_win *win)
 	int			color;
 	int			resp;
 	int			ty;
+
 	ty = line[x].line_color;
 	y = line[x].line_start;
 	while(y < line[x].line_end)
 	{
-		win->text[ty].text_y = (int)win->text[ty].text_pos & (win->text[ty].height - 1);
+		win->text[ty].text_y = (int)win->text[ty].text_pos
+			& (win->text[ty].height - 1);
 		win->text[ty].text_pos += win->text[ty].step;
-		color = ((win->text[ty].text_y * win->text[ty].line_length) + win->text[ty].text_x * (win->text[ty].bits_per_pixel / 8));
+		color = ((win->text[ty].text_y * win->text[ty].line_length) 
+			+ win->text[ty].text_x * (win->text[ty].bits_per_pixel / 8));
 		resp = *(int *)(win->text[ty].addr + (int)color);
-//		resp = create_trgb(trgb[3], trgb[2], trgb[1], trgb[0]);
 		my_mlx_pixel_put1(data, x, y, resp);
-//		my_mlx_pixel_put(data, x, y, line[x].line_color);
 		y++;
 	}
 }
@@ -129,8 +125,8 @@ static void	dda_loop(t_ray *ray, t_map *mapi, int x)
 	}
 }
 
-//Calculate wall color
-static int calculate_color(t_ray *ray, int x)
+//Calculate texture wall
+static int calculate_wall_texture(t_ray *ray, int x)
 {
 	int	text_type;
 
@@ -151,6 +147,7 @@ int	ray_loop(t_win *win)
 	t_ray	*ray;
 	t_line	*line;
 	int		ty;
+	double	wall_x;
 
 	ray = (t_ray *) malloc(sizeof(t_ray) * SCR_W);
 	line = (t_line *) malloc(sizeof(t_line) * SCR_W);
@@ -162,7 +159,7 @@ int	ray_loop(t_win *win)
 		calculate_step_and_side(win->ply, ray, x);
 		ray[x].hit = false;
 		dda_loop(ray, win->mapi, x);
-		ty = calculate_color(ray, x);
+		ty = calculate_wall_texture(ray, x);
 		//Calculate distance of perpendicular to ray
 		if(ray[x].side == 0) 
 			ray[x].wall_dist = (double)(ray[x].ray_scuare_x 
@@ -183,7 +180,6 @@ int	ray_loop(t_win *win)
 			line[x].line_end = SCR_H - 1;
 		//===============================================================
 		//calculate value of wall_x
-		double	wall_x;
 		if (ray[x].side == 0)
 			wall_x = win->ply->p_ply.o.y + ray[x].wall_dist * ray[x].ray_D_y;
 		else
