@@ -33,12 +33,12 @@ static t_map	*init_mapi(void)
 	aux_map->have_EA = false;
 	aux_map->have_F = false;
 	aux_map->have_C = false;
-	aux_map->F_color[0] = EMPY;
-	aux_map->F_color[1] = EMPY;
-	aux_map->F_color[2] = EMPY;
-	aux_map->C_color[0] = EMPY;
-	aux_map->C_color[1] = EMPY;
-	aux_map->C_color[2] = EMPY;
+	aux_map->f_color[0] = EMPY;
+	aux_map->f_color[1] = EMPY;
+	aux_map->f_color[2] = EMPY;
+	aux_map->c_color[0] = EMPY;
+	aux_map->c_color[1] = EMPY;
+	aux_map->c_color[2] = EMPY;
 	aux_map = init_textures(aux_map);
 	return (aux_map);
 }

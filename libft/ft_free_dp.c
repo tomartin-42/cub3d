@@ -17,13 +17,10 @@ void	ft_free_dp(char **dp)
 	int	i;
 
 	i = 0;
-	if (dp != NULL)
+	if (dp)
 	{
-		while (dp[i] != NULL)
-		{
-			free(dp[i]);
-			i++;
-		}
+		while (dp[i])
+			free(dp[i++]);
 		free(dp);
 	}
 }

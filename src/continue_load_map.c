@@ -23,8 +23,8 @@ static void	load_color_f(char **num, t_map *mapi, char **map)
 	{
 		if (ft_strlen(num[i]))
 		{
-			mapi->F_color[j] = ft_atoi(num[i]);
-			if (mapi->F_color[j] < 0 || mapi->F_color[0] > 255)
+			mapi->f_color[j] = ft_atoi(num[i]);
+			if (mapi->f_color[j] < 0 || mapi->f_color[0] > 255)
 			{
 				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
 				free_mapi_and_map(mapi, map);
@@ -48,8 +48,8 @@ static void	load_color_c(char **num, t_map *mapi, char **map)
 	{
 		if (ft_strlen(num[i]))
 		{
-			mapi->C_color[j] = ft_atoi(num[i]);
-			if (mapi->C_color[j] < 0 || mapi->C_color[0] > 255)
+			mapi->c_color[j] = ft_atoi(num[i]);
+			if (mapi->c_color[j] < 0 || mapi->c_color[0] > 255)
 			{
 				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
 				free_mapi_and_map(mapi, map);

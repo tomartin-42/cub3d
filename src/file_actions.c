@@ -13,23 +13,32 @@
 #include "cube.h"
 #include "check.h"
 
-//check if the file have .cub extension
+static void print_incorrent_extension_error(void)
+{
+	ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
+	exit(1);
+}
+
+/* Checks wether the file has a .cub extension. */
 static void	check_cub(char *argv)
 {
 	char	*point;
+	char	*last;
 
+	last = NULL;
 	point = ft_strnstr(argv, ".cub", ft_strlen(argv));
-	if (point == NULL)
+	if (!point)
+		print_incorrect_extension_error();
+	else
 	{
-		ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
-		exit (1);
+		while (point)
+		{
+			last = point;
+			point = ft_strnstr(argv, ".cub", ft_strlen(argv));
+		}
 	}
-	if (*point != '.' || *(point + 1) != 'c' || *(point + 2) != 'u'
-		|| *(point + 3) != 'b' || *(point + 4) != '\0')
-	{
-		ft_putstr_fd("Cub3D error: incorrect extension", 2);
-		exit (1);
-	}
+	if (*(last + 4) != '\0')
+		print_incorrent_extension_error();
 }
 
 int	open_map(int argc, char **argv)
