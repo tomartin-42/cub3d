@@ -19,10 +19,7 @@ void	print_map(char **map)
 
 	i = 0;
 	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
+		printf("%s\n", map[i++]);
 }
 
 void	print_struc_mapi(t_map *mapi)

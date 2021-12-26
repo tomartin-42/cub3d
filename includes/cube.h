@@ -22,7 +22,7 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define EMPY 99999999999999
+# define EMPTY 99999999999999
 
 struct	s_ray;
 struct	s_line;

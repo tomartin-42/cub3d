@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 15:30:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/26 19:38:40 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static t_map	*init_mapi(void)
 	aux_map->have_EA = false;
 	aux_map->have_F = false;
 	aux_map->have_C = false;
-	aux_map->f_color[0] = EMPY;
-	aux_map->f_color[1] = EMPY;
-	aux_map->f_color[2] = EMPY;
-	aux_map->c_color[0] = EMPY;
-	aux_map->c_color[1] = EMPY;
-	aux_map->c_color[2] = EMPY;
+	aux_map->f_color[0] = EMPTY;
+	aux_map->f_color[1] = EMPTY;
+	aux_map->f_color[2] = EMPTY;
+	aux_map->c_color[0] = EMPTY;
+	aux_map->c_color[1] = EMPTY;
+	aux_map->c_color[2] = EMPTY;
 	aux_map = init_textures(aux_map);
 	return (aux_map);
 }

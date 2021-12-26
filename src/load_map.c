@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:52:45 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 18:57:59 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/26 19:39:01 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ int	check_param_map(t_map *mapi)
 		ret = 1;
 	if (mapi->have_EA == false)
 		ret = 1;
-	if (mapi->f_color[0] == EMPY || mapi->f_color[1] == EMPY
-		|| mapi->f_color[2] == EMPY)
+	if (mapi->f_color[0] == EMPTY || mapi->f_color[1] == EMPTY
+		|| mapi->f_color[2] == EMPTY)
 		ret = 1;
-	if (mapi->c_color[0] == EMPY || mapi->c_color[1] == EMPY
-		|| mapi->c_color[2] == EMPY)
+	if (mapi->c_color[0] == EMPTY || mapi->c_color[1] == EMPTY
+		|| mapi->c_color[2] == EMPTY)
 		ret = 1;
 	return (ret);
 }

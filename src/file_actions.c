@@ -13,23 +13,32 @@
 #include "cube.h"
 #include "check.h"
 
-//check if the file have .cub extension
+static void print_incorrect_extension_error(void)
+{
+	ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
+	exit(1);
+}
+
+/* Checks wether the file has a .cub extension. */
 static void	check_cub(char *argv)
 {
 	char	*point;
+	char	*last;
 
+	last = NULL;
 	point = ft_strnstr(argv, ".cub", ft_strlen(argv));
-	if (point == NULL)
+	if (!point)
+		print_incorrect_extension_error();
+	else
 	{
-		ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
-		exit (1);
+		while (point)
+		{
+			last = point;
+			point = ft_strnstr(point + 4, ".cub", ft_strlen(point + 4));
+		}
 	}
-	if (*point != '.' || *(point + 1) != 'c' || *(point + 2) != 'u'
-		|| *(point + 3) != 'b' || *(point + 4) != '\0')
-	{
-		ft_putstr_fd("Cub3D error: incorrect extension", 2);
-		exit (1);
-	}
+	if (*(last + 4) != '\0')
+		print_incorrect_extension_error();
 }
 
 int	open_map(int argc, char **argv)
@@ -51,46 +60,50 @@ int	open_map(int argc, char **argv)
 	return (fd);
 }
 
-//copy the file content in a dp and return it
-static char	**save_map(char *argv, int i)
+/* Returns an allocated pointer containing the map in 
+ * an array of char * . */
+static char	**save_map(char *argv, int line_number)
 {
 	char	**map;
 	int		fd;
 	char	*line;
-	int		control;
 
-	control = 1;
-	map = (char **) malloc(sizeof(char *) * (i + 2));
-	map[i + 1] = NULL;
-	i = 0;
+	map = (char **) malloc(sizeof(char *) * (line_number + 1));
+	map[line_number] = NULL;
+	line_number = 0;
 	fd = open(argv, O_RDONLY);
-	while (control)
+	while (get_next_line(fd, &line))
 	{
-		control = get_next_line(fd, &line);
-		map[i] = ft_strdup(line);
+		map[line_number] = ft_strdup(line);
 		free(line);
-		i++;
+		++line_number;
 	}
+    map[line_number] = ft_strdup(line);
+    free(line);
 	close (fd);
 	return (map);
 }
 
 char	**read_map(int fd_map, char *argv)
 {
-	int		i;
-	char	end_line;
+	int		line_counter;
+	char	*line;
 	char	**map;
 
-	i = 0;
-	while (read(fd_map, &end_line, 1))
-	{
-		if (end_line == '\n')
-			i++;
-	}
-	printf("numero lineas mapa %i\n", i);
+    line_counter = 0;
+    line = NULL;
+    while (get_next_line(fd_map, &line) != 0)
+    {
+        free(line);
+        line = NULL;
+        ++line_counter;
+    }
+    free(line);
+    ++line_counter;
+	printf("numero lineas mapa %i\n", line_counter);
 	close(fd_map);
-	if (i == 0)
-		error_empy_map();
-	map = save_map(argv, i);
+	if (line_counter == 0)
+		error_empty_map();
+	map = save_map(argv, line_counter);
 	return (map);
 }

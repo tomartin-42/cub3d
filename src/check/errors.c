@@ -34,9 +34,9 @@ void	error_open_map(t_map *mapi, char **map)
 	exit (42);
 }
 
-void	error_empy_map(void)
+void	error_empty_map(void)
 {
-	ft_putstr_fd("Cub3D error: empy map.\n", 2);
+	ft_putstr_fd("Cub3D error: empty map.\n", 2);
 	exit (42);
 }
 
