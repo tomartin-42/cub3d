@@ -86,20 +86,27 @@ static char	**save_map(char *argv, int i)
 
 char	**read_map(int fd_map, char *argv)
 {
-	int		i;
-	char	end_line;
+	int		line_counter;
+	char	*line;
 	char	**map;
 
-	i = 0;
-	while (read(fd_map, &end_line, 1))
-	{
-		if (end_line == '\n')
-			i++;
-	}
-	printf("numero lineas mapa %i\n", i);
+    line_counter = 0;
+    line = NULL;
+    while (get_next_line(fd_map, &line) != -1)
+    {
+        if (line)
+        {
+            free(line);
+            line = NULL;
+            ++line_counter;
+        }
+        else
+            break;
+    }
+	printf("numero lineas mapa %i\n", line_counter);
 	close(fd_map);
-	if (i == 0)
+	if (line_counter == 0)
 		error_empty_map();
-	map = save_map(argv, i);
+	map = save_map(argv, line_counter);
 	return (map);
 }
