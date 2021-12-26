@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openwindow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 20:05:14 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/26 15:51:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	paint_background(t_map *mapi, t_data *img)
 	color_c = transform_color(mapi->c_color);
 	color_f = transform_color(mapi->f_color);
 	i = 0;
-	while (i < SCR_W -1)
+	while (i < SCR_W - 1)
 	{
 		j = 0;
 		while (j < SCR_H - 1)
