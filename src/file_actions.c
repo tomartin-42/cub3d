@@ -60,26 +60,26 @@ int	open_map(int argc, char **argv)
 	return (fd);
 }
 
-//copy the file content in a dp and return it
-static char	**save_map(char *argv, int i)
+/* Returns an allocated pointer containing the map in 
+ * an array of char * . */
+static char	**save_map(char *argv, int line_number)
 {
 	char	**map;
 	int		fd;
 	char	*line;
-	int		control;
 
-	control = 1;
-	map = (char **) malloc(sizeof(char *) * (i + 2));
-	map[i + 1] = NULL;
-	i = 0;
+	map = (char **) malloc(sizeof(char *) * (line_number + 1));
+	map[line_number] = NULL;
+	line_number = 0;
 	fd = open(argv, O_RDONLY);
-	while (control)
+	while (get_next_line(fd, &line))
 	{
-		control = get_next_line(fd, &line);
-		map[i] = ft_strdup(line);
+		map[line_number] = ft_strdup(line);
 		free(line);
-		i++;
+		++line_number;
 	}
+    map[line_number] = ft_strdup(line);
+    free(line);
 	close (fd);
 	return (map);
 }
