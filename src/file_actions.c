@@ -34,7 +34,7 @@ static void	check_cub(char *argv)
 		while (point)
 		{
 			last = point;
-			point = ft_strnstr(argv, ".cub", ft_strlen(argv));
+			point = ft_strnstr(point + 4, ".cub", ft_strlen(point + 4));
 		}
 	}
 	if (*(last + 4) != '\0')
