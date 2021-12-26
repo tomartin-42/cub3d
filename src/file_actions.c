@@ -92,17 +92,14 @@ char	**read_map(int fd_map, char *argv)
 
     line_counter = 0;
     line = NULL;
-    while (get_next_line(fd_map, &line) != -1)
+    while (get_next_line(fd_map, &line) != 0)
     {
-        if (line)
-        {
-            free(line);
-            line = NULL;
-            ++line_counter;
-        }
-        else
-            break;
+        free(line);
+        line = NULL;
+        ++line_counter;
     }
+    free(line);
+    ++line_counter;
 	printf("numero lineas mapa %i\n", line_counter);
 	close(fd_map);
 	if (line_counter == 0)
