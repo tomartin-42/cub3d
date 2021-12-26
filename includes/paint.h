@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 17:12:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/26 18:18:33 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ typedef struct s_key {
 // struct need to print colum to check rays
 typedef struct s_line{
 	int	line_h;
-	int line_start;
+	int	line_start;
 	int	line_end;
-	int line_color;
+	int	line_color;
 }	t_line;
 
 // p_player = point were is now the plyer
@@ -113,17 +113,17 @@ typedef struct s_ray
 {
 	int		ray_scuare_x;
 	int		ray_scuare_y;
-	double	ray_D_x; //ray dirextion v_x
-	double	ray_D_y; //ray direction v_y
+	double	ray_d_x;
+	double	ray_d_y;
 	double	side_x;
 	double	side_y;
 	double	delta_x;
 	double	delta_y;
-	double 	cameraX; //camera coordinate x//
+	double	camera_x;
 	int		step_x;
 	int		step_y;
-	bool	hit; //was there a wall hit?//
-	int		side; //was a N_W ,S_W ,E_W or a W_W wall hit?//
+	bool	hit;
+	int		side;
 	double	wall_dist;
 	double	wall_x;
 }	t_ray;
@@ -157,6 +157,12 @@ void	get_textures(t_win *win, t_map *mapi);
 
 void	print_player(t_player *player);
 
+int		calculate_wall_texture(t_ray *ray, int x);
+void	init_values_ray(t_player *ply, t_ray *ray, int x);
+void	dda_loop(t_ray *ray, t_map *mapi, int x);
+void	calculate_step_and_side(t_player *ply, t_ray *ray, int x);
+void	calc_text_increase(t_win *win, t_line *line, int x, int ty);
+
 int		ft_key_press(int keycode, t_win *win);
 int		ft_key_release(int keycode, t_win *win);
 int		ft_close(t_win *win);
@@ -169,5 +175,7 @@ void	main_moves(t_win *win);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int		transform_color(long int color[3]);
+
+void	free_ray_and_line(t_ray *ray, t_line *line);
 
 #endif

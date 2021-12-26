@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 19:48:57 by tommy             #+#    #+#             */
-/*   Updated: 2021/12/25 20:07:48 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/26 18:03:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,20 @@ void	get_textures(t_win *win, t_map *mapi)
 	win->text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
 			&(win->text[3].width), &(win->text[3].height));
 	get_texture_addr(win);
+}
+
+//Calculate texture wall
+int	calculate_wall_texture(t_ray *ray, int x)
+{
+	int	text_type;
+
+	if (ray[x].side == 0 && ray[x].ray_d_x < 0)
+		text_type = N_W;
+	if (ray[x].side == 0 && ray[x].ray_d_x >= 0)
+		text_type = E_W;
+	if (ray[x].side == 1 && ray[x].ray_d_y < 0)
+		text_type = S_W;
+	if (ray[x].side == 1 && ray[x].ray_d_y >= 0)
+		text_type = W_W;
+	return (text_type);
 }

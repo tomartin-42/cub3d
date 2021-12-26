@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 19:42:59 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/26 18:22:31 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUBE_H
 
 # include "mlx.h"
-//# include "../mlx_linux/mlx.h"
 # include "libft.h"
 # include <stdio.h>
 # include <math.h>
@@ -24,6 +23,9 @@
 # include <math.h>
 
 # define EMPY 99999999999999
+
+struct	s_ray;
+struct	s_line;
 
 typedef struct s_map{
 	char		*NO_rute;
@@ -45,7 +47,6 @@ typedef struct s_map{
 	int			map_widh;
 	int			map_high;
 	char		**map;
-
 }	t_map;
 
 int		open_map(int argc, char **argv);
