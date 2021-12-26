@@ -23,7 +23,7 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define EMPY 99999999999999
+# define EMPTY 99999999999999
 
 typedef struct s_map{
 	char		*NO_rute;

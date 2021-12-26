@@ -13,7 +13,7 @@
 #include "cube.h"
 #include "check.h"
 
-static void print_incorrent_extension_error(void)
+static void print_incorrect_extension_error(void)
 {
 	ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
 	exit(1);
@@ -38,7 +38,7 @@ static void	check_cub(char *argv)
 		}
 	}
 	if (*(last + 4) != '\0')
-		print_incorrent_extension_error();
+		print_incorrect_extension_error();
 }
 
 int	open_map(int argc, char **argv)
@@ -99,7 +99,7 @@ char	**read_map(int fd_map, char *argv)
 	printf("numero lineas mapa %i\n", i);
 	close(fd_map);
 	if (i == 0)
-		error_empy_map();
+		error_empty_map();
 	map = save_map(argv, i);
 	return (map);
 }
