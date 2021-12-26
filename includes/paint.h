@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 20:00:06 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/26 17:12:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_d_vect{
 	t_d_point	o;
 }	t_vect;
 
-
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -86,10 +85,10 @@ typedef struct s_key {
 	bool	m_l;
 	bool	r_r;
 	bool	r_l;
-} t_key;
+}	t_key;
 
 // struct need to print colum to check rays
-typedef struct	s_line{
+typedef struct s_line{
 	int	line_h;
 	int line_start;
 	int	line_end;
@@ -126,7 +125,7 @@ typedef struct s_ray
 	bool	hit; //was there a wall hit?//
 	int		side; //was a N_W ,S_W ,E_W or a W_W wall hit?//
 	double	wall_dist;
-
+	double	wall_x;
 }	t_ray;
 
 typedef struct s_win{
@@ -135,7 +134,6 @@ typedef struct s_win{
 	t_map		*mapi;
 	t_data		*img;
 	t_player	*ply;
-//	t_key		*keys;
 	bool		k_f;
 	bool		k_b;
 	bool		k_r;
@@ -166,6 +164,7 @@ void	move_f_b(t_win *win);
 void	move_r_l(t_win *win);
 void	rotate_r(t_win *win);
 void	rotate_l(t_win *win);
+void	main_moves(t_win *win);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 

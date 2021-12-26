@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 13:31:52 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 15:50:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/26 16:18:32 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,12 @@ void	move_r_l(t_win *win)
 			!= '1')
 			win->ply->p_ply.o.y += win->ply->dir_ply.o.x * STEP;
 	}
+}
+
+void	main_moves(t_win *win)
+{
+	move_f_b(win);
+	move_r_l(win);
+	rotate_r(win);
+	rotate_l(win);
 }
