@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/23 11:03:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/27 19:14:45 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	check_chars_in_color_line(char *color_line, char **map, t_map *mapi)
 	{
 		if (color_line[0] == 'C')
 		{
-			if (!ft_strchr("0123456789,C /t", color_line[i]))
+			if (!ft_strchr("0123456789,C \t", color_line[i]))
 				error_in_color_line(map, mapi);
 		}
 		else if (color_line[0] == 'F')
 		{
-			if (!ft_strchr("0123456789,F /t", color_line[i]))
+			if (!ft_strchr("0123456789,F \t", color_line[i]))
 				error_in_color_line(map, mapi);
 		}
 		i++;
@@ -49,7 +49,7 @@ static void	checking_color_line(char *color_line, char **map, t_map *mapi)
 			commas++;
 		i++;
 	}
-	if (commas != 2)
+	if (commas != 2)	
 		error_in_color_line(map, mapi);
 	check_chars_in_color_line(color_line, map, mapi);
 }

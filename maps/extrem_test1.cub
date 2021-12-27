@@ -1,15 +1,10 @@
-	NO ./textures/north.xpm
-           SO ./textures/south.xpm      
-WE ./textures/west.xpm
-EA 	./textures/east.xpm
+			NO ./textures/eagle.xpm
+SO ./textures/mossy.xpm      
+WE					./textures/wood.xpm
+EA   	./textures/bluestone.xpm       
 
-
-		F	 220,100,0 		
-   C 			  			225,30,0		
-  
-		
-
- 
+F 220, 100, 1
+C 225, 30, 1
 
 1  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1  0 0 0 0 0 0 0 0 0  1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
@@ -29,3 +24,4 @@ EA 	./textures/east.xpm
 1 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 1 0 0 0 1
 1 0 0 0 0 0 0 0 0 0 0    0 0	 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+

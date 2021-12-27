@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 15:17:53 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/27 19:16:58 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	load_color_f(char **num, t_map *mapi, char **map)
 		if (ft_strlen(num[i]))
 		{
 			mapi->f_color[j] = ft_atoi(num[i]);
-			if (mapi->f_color[j] < 0 || mapi->f_color[0] > 255)
+			if (mapi->f_color[j] < 0 || mapi->f_color[j] > 255)
 			{
 				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
 				free_mapi_and_map(mapi, map);
@@ -49,7 +49,7 @@ static void	load_color_c(char **num, t_map *mapi, char **map)
 		if (ft_strlen(num[i]))
 		{
 			mapi->c_color[j] = ft_atoi(num[i]);
-			if (mapi->c_color[j] < 0 || mapi->c_color[0] > 255)
+			if (mapi->c_color[j] < 0 || mapi->c_color[j] > 255)
 			{
 				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
 				free_mapi_and_map(mapi, map);
@@ -72,7 +72,7 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	num = ft_split(c_line, ',');
 	while (num[i])
 	{
-		aux = ft_strtrim(num[i], " ,CF");
+		aux = ft_strtrim(num[i], " ,CF\t");
 		free(num[i]);
 		num[i] = ft_strdup(aux);
 		free(aux);
@@ -90,25 +90,25 @@ static void	complement_get_files(char *line, t_map *mapi, int select)
 	if (select == 1)
 	{
 		free(mapi->NO_rute);
-		mapi->NO_rute = ft_strdup(line);
+		mapi->NO_rute = ft_strtrim(line, " \t");
 		mapi->have_NO = true;
 	}
 	if (select == 2)
 	{
 		free(mapi->SO_rute);
-		mapi->SO_rute = ft_strdup(line);
+		mapi->SO_rute = ft_strtrim(line, " \t");
 		mapi->have_SO = true;
 	}
 	if (select == 3)
 	{
 		free(mapi->WE_rute);
-		mapi->WE_rute = ft_strdup(line);
+		mapi->WE_rute = ft_strtrim(line, " \t");
 		mapi->have_WE = true;
 	}
 	if (select == 4)
 	{
 		free(mapi->EA_rute);
-		mapi->EA_rute = ft_strdup(line);
+		mapi->EA_rute = ft_strtrim(line, " \t");
 		mapi->have_EA = true;
 	}
 }
