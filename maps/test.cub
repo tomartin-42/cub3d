@@ -1,8 +1,12 @@
 NO ./textures/colorstone.xpm
 SO ./textures/bluestone.xpm
 WE ./textures/greystone.xpm
-EA ./textures/wood.xpm
+EA ./textures/fuhrer.xpm
 
 F 255,248,220
 C 135,206,250
 
+1111
+1S01
+1001
+1111
