@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:52:45 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 19:39:01 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:06:09 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,23 @@ void	get_map(int i, t_map *mapi, char **map)
 	{
 		aux = ft_strtrim(map[i], " /t");
 		if (ft_strlen(aux))
+		{
+			free(aux);
 			break ;
+		}
 		free(aux);
 		i++;
 	}
-	if (!ft_strlen(aux))
-		free(aux);
+	//free(aux);
 	j = i;
 	while (map[i])
 	{
 		aux = ft_strtrim(map[i], " /t");
 		if (!ft_strlen(aux))
+		{
+			free(aux);
 			break ;
+		}
 		free(aux);
 		i++;
 	}

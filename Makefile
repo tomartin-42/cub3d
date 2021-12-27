@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/27 08:25:37 by tomartin         ###   ########.fr        #
+#    Updated: 2021/12/27 14:54:35 by tommy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ UNAME := $(shell uname)
 NAME = cub3D
 
 # Compiling flags
-FLAGS = -Wall -Wextra -Werror -O3 #-g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -O3 -g3 -fsanitize=address
 
 # Folders
 LIBFT_DIR = ./libft/
