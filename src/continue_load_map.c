@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 15:32:59 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:17:53 by tommy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,25 @@ static void	complement_get_files(char *line, t_map *mapi, int select)
 {
 	if (select == 1)
 	{
+		free(mapi->NO_rute);
 		mapi->NO_rute = ft_strdup(line);
 		mapi->have_NO = true;
 	}
 	if (select == 2)
 	{
+		free(mapi->SO_rute);
 		mapi->SO_rute = ft_strdup(line);
 		mapi->have_SO = true;
 	}
 	if (select == 3)
 	{
+		free(mapi->WE_rute);
 		mapi->WE_rute = ft_strdup(line);
 		mapi->have_WE = true;
 	}
 	if (select == 4)
 	{
+		free(mapi->EA_rute);
 		mapi->EA_rute = ft_strdup(line);
 		mapi->have_EA = true;
 	}
