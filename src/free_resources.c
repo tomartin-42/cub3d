@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 14:45:09 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 18:23:00 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/27 08:18:00 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_mapi(t_map *mapi)
 	free(mapi->WE_rute);
 	free(mapi->EA_rute);
 	ft_free_dp(mapi->map);
+	free(mapi);
 }
 
 void	free_mapi_and_map(t_map *mapi, char **map)

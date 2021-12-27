@@ -6,7 +6,7 @@
 /*   By: tommy <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 19:02:43 by tommy             #+#    #+#             */
-/*   Updated: 2021/12/26 19:01:34 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/27 08:12:30 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	error_empty_map(void)
 
 void	error_dual_init_point(t_map *mapi, char **map)
 {
-	ft_putstr_fd("Cub3D error: not init point or ", 2); 
+	ft_putstr_fd("Cub3D error: not init point or ", 2);
 	ft_putstr_fd("more than one init point.\n", 2);
 	free_mapi_and_map(mapi, map);
 	exit (42);

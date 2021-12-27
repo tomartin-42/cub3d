@@ -6,14 +6,14 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/23 10:45:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/27 08:11:48 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "check.h"
 
-static void print_incorrect_extension_error(void)
+static void	print_incorrect_extension_error(void)
 {
 	ft_putstr_fd("Cub3D error: incorrect extension\n", 2);
 	exit(1);
@@ -78,8 +78,8 @@ static char	**save_map(char *argv, int line_number)
 		free(line);
 		++line_number;
 	}
-    map[line_number] = ft_strdup(line);
-    free(line);
+	map[line_number] = ft_strdup(line);
+	free(line);
 	close (fd);
 	return (map);
 }
@@ -90,16 +90,16 @@ char	**read_map(int fd_map, char *argv)
 	char	*line;
 	char	**map;
 
-    line_counter = 0;
-    line = NULL;
-    while (get_next_line(fd_map, &line) != 0)
-    {
-        free(line);
-        line = NULL;
-        ++line_counter;
-    }
-    free(line);
-    ++line_counter;
+	line_counter = 0;
+	line = NULL;
+	while (get_next_line(fd_map, &line) != 0)
+	{
+		free(line);
+		line = NULL;
+		++line_counter;
+	}
+	free(line);
+	++line_counter;
 	printf("numero lineas mapa %i\n", line_counter);
 	close(fd_map);
 	if (line_counter == 0)
