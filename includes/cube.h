@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 18:22:31 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:22:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	main_check(t_map *mapi, char **map);
 void	free_mapi(t_map *mapi);
 void	free_mapi_and_map(t_map *mapi, char **map);
 
-void	init_window(t_map *mapi, char *argv);
+void	init_window(t_map *mapi, char *argv, char **map);
 
 #endif

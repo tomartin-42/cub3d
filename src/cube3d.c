@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 08:26:26 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:20:57 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	print_map(map);
 	printf("-----------------------------------------\n");
 	print_struc_mapi(mapi);
-	init_window(mapi, argv[1]);
+	init_window(mapi, argv[1], map);
 	free_mapi(mapi);
 	ft_free_dp(map);
 }

@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 08:27:20 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:21:18 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	init_p_win(t_map *mapi, t_player *ply, t_data *img, t_win *win)
 	win->mlx = mlx_init();
 }
 
-void	init_window(t_map *mapi, char *argv)
+void	init_window(t_map *mapi, char *argv, char **map)
 {
 	t_win		win;
 	t_data		img;
@@ -97,7 +97,7 @@ void	init_window(t_map *mapi, char *argv)
 	init_p_win(mapi, ply, &img, &win);
 	win.mlx_win = mlx_new_window(win.mlx, SCR_W, SCR_H, argv);
 	img.img = mlx_new_image(win.mlx, SCR_W, SCR_H);
-	get_textures(&win, mapi);
+	get_textures(&win, mapi, map);
 	mlx_hook(win.mlx_win, 17, 0, ft_close, &win);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);

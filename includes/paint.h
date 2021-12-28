@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 18:18:33 by tomartin         ###   ########.fr       */
+/*   Updated: 2021/12/28 10:22:09 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void	paint_background(t_map *mapi, t_data *img);
 int		ray_loop(t_win *win);
 
 void	get_texture_addr(t_win *win);
-void	get_textures(t_win *win, t_map *mapi);
+void	get_textures(t_win *win, t_map *mapi, char **map);
 
 void	print_player(t_player *player);
 
