@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 19:16:58 by tommy            ###   ########.fr       */
+/*   Updated: 2021/12/28 09:44:42 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 
 static void	complement_get_files(char *line, t_map *mapi, int select)
 {
+	printf("*%s*\n", line);
 	if (select == 1)
 	{
 		free(mapi->NO_rute);
@@ -116,19 +117,23 @@ static void	complement_get_files(char *line, t_map *mapi, int select)
 //This function get texture files and line colors and distributed
 void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
+	char	*aux;
+
+	aux = ft_strtrim(line[0], " \t");
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
-		if (!ft_strcmp(line[0], "NO") && mapi->have_NO == false)
+		if (!ft_strcmp(aux, "NO") && mapi->have_NO == false)
 			complement_get_files(line[1], mapi, 1);
-		else if (!ft_strcmp(line[0], "SO") && mapi->have_SO == false)
+		else if (!ft_strcmp(aux, "SO") && mapi->have_SO == false)
 			complement_get_files(line[1], mapi, 2);
-		else if (!ft_strcmp(line[0], "WE") && mapi->have_WE == false)
+		else if (!ft_strcmp(aux, "WE") && mapi->have_WE == false)
 			complement_get_files(line[1], mapi, 3);
-		else if (!ft_strcmp(line[0], "EA") && mapi->have_EA == false)
+		else if (!ft_strcmp(aux, "EA") && mapi->have_EA == false)
 			complement_get_files(line[1], mapi, 4);
-		else if (!ft_strcmp(line[0], "F") && mapi->have_F == false)
+		else if (!ft_strcmp(aux, "F") && mapi->have_F == false)
 			get_colors(line, mapi, c_line, map);
-		else if (!ft_strcmp(line[0], "C") && mapi->have_C == false)
+		else if (!ft_strcmp(aux, "C") && mapi->have_C == false)
 			get_colors(line, mapi, c_line, map);
 	}
+	free(aux);
 }

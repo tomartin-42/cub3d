@@ -1,6 +1,6 @@
-NO ./textures/colorstone.xpm	
-SO ./textures/bluestone.xpm			
-WE ./textures/greystone.xpm     
+NO ./textures/colorstone.xpm		
+SO	 ./textures/bluestone.xpm			
+	WE ./textures/greystone.xpm     
 EA ./textures/wood.xpm
 
 F 255,248,220     
