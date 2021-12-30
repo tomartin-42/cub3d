@@ -27,12 +27,12 @@ static t_map	*init_mapi(void)
 	t_map	*aux_map;
 
 	aux_map = (t_map *) malloc(sizeof(t_map));
-	aux_map->have_NO = false;
-	aux_map->have_SO = false;
-	aux_map->have_WE = false;
-	aux_map->have_EA = false;
-	aux_map->have_F = false;
-	aux_map->have_C = false;
+	aux_map->has_NO = false;
+	aux_map->has_SO = false;
+	aux_map->has_WE = false;
+	aux_map->has_EA = false;
+	aux_map->has_F = false;
+	aux_map->has_C = false;
 	aux_map->f_color[0] = EMPTY;
 	aux_map->f_color[1] = EMPTY;
 	aux_map->f_color[2] = EMPTY;

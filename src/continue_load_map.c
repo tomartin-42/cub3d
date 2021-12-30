@@ -34,7 +34,7 @@ static void	load_color_f(char **num, t_map *mapi, char **map)
 		}
 		i++;
 	}
-	mapi->have_F = true;
+	mapi->has_F = true;
 }
 
 static void	load_color_c(char **num, t_map *mapi, char **map)
@@ -59,7 +59,7 @@ static void	load_color_c(char **num, t_map *mapi, char **map)
 		}
 		i++;
 	}
-	mapi->have_F = true;
+	mapi->has_F = true;
 }
 
 static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
@@ -91,26 +91,26 @@ static void	complement_get_files(char *line, t_map *mapi, int select)
 	if (select == 1)
 	{
 		free(mapi->NO_rute);
-		mapi->NO_rute = ft_strtrim(line, " \t");
-		mapi->have_NO = true;
+		mapi->NO_rute = ft_strdup(line);
+		mapi->has_NO = true;
 	}
 	if (select == 2)
 	{
 		free(mapi->SO_rute);
-		mapi->SO_rute = ft_strtrim(line, " \t");
-		mapi->have_SO = true;
+		mapi->SO_rute = ft_strdup(line);
+		mapi->has_SO = true;
 	}
 	if (select == 3)
 	{
 		free(mapi->WE_rute);
-		mapi->WE_rute = ft_strtrim(line, " \t");
-		mapi->have_WE = true;
+		mapi->WE_rute = ft_strdup(line);
+		mapi->has_WE = true;
 	}
 	if (select == 4)
 	{
 		free(mapi->EA_rute);
-		mapi->EA_rute = ft_strtrim(line, " \t");
-		mapi->have_EA = true;
+		mapi->EA_rute = ft_strdup(line);
+		mapi->has_EA = true;
 	}
 }
 
@@ -122,17 +122,17 @@ void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
     aux = ft_strdup(line[0]);
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
-		if (!ft_strcmp(aux, "NO") && mapi->have_NO == false)
+		if (!ft_strcmp(aux, "NO") && mapi->has_NO == false)
 			complement_get_files(line[1], mapi, 1);
-		else if (!ft_strcmp(aux, "SO") && mapi->have_SO == false)
+		else if (!ft_strcmp(aux, "SO") && mapi->has_SO == false)
 			complement_get_files(line[1], mapi, 2);
-		else if (!ft_strcmp(aux, "WE") && mapi->have_WE == false)
+		else if (!ft_strcmp(aux, "WE") && mapi->has_WE == false)
 			complement_get_files(line[1], mapi, 3);
-		else if (!ft_strcmp(aux, "EA") && mapi->have_EA == false)
+		else if (!ft_strcmp(aux, "EA") && mapi->has_EA == false)
 			complement_get_files(line[1], mapi, 4);
-		else if (!ft_strcmp(aux, "F") && mapi->have_F == false)
+		else if (!ft_strcmp(aux, "F") && mapi->has_F == false)
 			get_colors(line, mapi, c_line, map);
-		else if (!ft_strcmp(aux, "C") && mapi->have_C == false)
+		else if (!ft_strcmp(aux, "C") && mapi->has_C == false)
 			get_colors(line, mapi, c_line, map);
 	}
 	free(aux);

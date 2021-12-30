@@ -21,7 +21,7 @@ void	error_incorrect_char_in_map(t_map *mapi, char **map)
 
 void	error_read_texture(t_map *mapi, char **map)
 {
-	ft_putstr_fd("Cub3D error: errorn when read texture.\n", 2);
+	ft_putstr_fd("Cub3D error: incorrect texture file or texture path.\n", 2);
 	free_mapi_and_map(mapi, map);
 	exit (42);
 }

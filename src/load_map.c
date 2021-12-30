@@ -88,7 +88,7 @@ void	load_map(t_map *mapi, char **map)
 		get_map(i, mapi, map);
 }
 
-// check if all the parameters have been loaded into the mapi structure
+// check if all the parameters has been loaded into the mapi structure
 // otherwise it continues to loop. It is necessary to
 // know when start map matrix
 int	check_param_map(t_map *mapi)
@@ -96,13 +96,13 @@ int	check_param_map(t_map *mapi)
 	int	ret;
 
 	ret = 0;
-	if (mapi->have_NO == false)
+	if (mapi->has_NO == false)
 		ret = 1;
-	if (mapi->have_SO == false)
+	if (mapi->has_SO == false)
 		ret = 1;
-	if (mapi->have_WE == false)
+	if (mapi->has_WE == false)
 		ret = 1;
-	if (mapi->have_EA == false)
+	if (mapi->has_EA == false)
 		ret = 1;
 	if (mapi->f_color[0] == EMPTY || mapi->f_color[1] == EMPTY
 		|| mapi->f_color[2] == EMPTY)

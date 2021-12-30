@@ -29,18 +29,18 @@ struct	s_line;
 
 typedef struct s_map{
 	char		*NO_rute;
-	bool		have_NO;
+	bool		has_NO;
 	char		*SO_rute;
-	bool		have_SO;
+	bool		has_SO;
 	char		*WE_rute;
-	bool		have_WE;
+	bool		has_WE;
 	char		*EA_rute;
-	bool		have_EA;
+	bool		has_EA;
 
 	long int	f_color[3];
-	bool		have_F;
+	bool		has_F;
 	long int	c_color[3];
-	bool		have_C;
+	bool		has_C;
 
 	char		init_point;
 	int			xy_init_point[2];

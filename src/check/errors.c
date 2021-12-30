@@ -15,7 +15,7 @@
 
 void	error_in_color_line(char **map, t_map *mapi)
 {
-	ft_putstr_fd("Cub3D error: error in color codificatión.\n", 2);
+	ft_putstr_fd("Cub3D error: error in color format.\n", 2);
 	free_mapi_and_map(mapi, map);
 	exit (42);
 }
