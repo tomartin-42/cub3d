@@ -66,4 +66,6 @@ void	free_mapi_and_map(t_map *mapi, char **map);
 
 void	init_window(t_map *mapi, char *argv, char **map);
 
+
+
 #endif

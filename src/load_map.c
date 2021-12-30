@@ -71,7 +71,7 @@ void	load_map(t_map *mapi, char **map)
 	i = 0;
 	while (map[i])
 	{
-		line = ft_split(map[i], ' ');
+		line = split_line(map[i]);
 		get_files_colors(line, mapi, map[i], map);
 		ft_free_dp(line);
 		i++;

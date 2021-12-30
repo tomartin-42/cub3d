@@ -28,4 +28,6 @@ void	redimension_map(t_map *mapi, int i, int size_line);
 void	check_dual_init_point(t_map *mapi, char **map);
 void	check_chars_in_map(t_map *mapi, char **map);
 
+char	**split_line(char const *s);
+
 #endif

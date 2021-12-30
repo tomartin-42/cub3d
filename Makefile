@@ -43,7 +43,7 @@ PAINT_DIR= ./src/paint/
 
 # Source files and object files
 SRC_FILES = cube3d.c file_actions.c utils.c load_map.c free_resources.c \
-			continue_load_map.c
+			continue_load_map.c split_line.c
 CHECK_FILES = checker.c errors.c scanmap.c redimension_map.c errors2.c
 PAINT_FILES = openwindow.c vector_operation.c key_hook.c ray.c paint_utils.c \
 			  moves.c textures.c ray_support.c

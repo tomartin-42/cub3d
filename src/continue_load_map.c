@@ -119,7 +119,7 @@ void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	char	*aux;
 
-	aux = ft_strtrim(line[0], " \t");
+    aux = ft_strdup(line[0]);
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
 		if (!ft_strcmp(aux, "NO") && mapi->have_NO == false)
