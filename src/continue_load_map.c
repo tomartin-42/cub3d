@@ -11,55 +11,38 @@
 /* ************************************************************************** */
 
 #include "cube.h"
+#include "check.h"
 
-static void	load_color_f(char **num, t_map *mapi, char **map)
+static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (num[i])
+	while (num[++i])
 	{
 		if (ft_strlen(num[i]))
 		{
-			mapi->f_color[j] = ft_atoi(num[i]);
-			if (mapi->f_color[j] < 0 || mapi->f_color[j] > 255)
-			{
-				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
-				free_mapi_and_map(mapi, map);
-				exit (42);
-			}
+			(*col)[j] = ft_atoi(num[i]);
+			if ((*col)[j] < 0 || (*col)[j] > 255)
+				error_in_color_range(mapi, map);
 			j++;
 		}
-		i++;
 	}
-	mapi->has_F = true;
+	//printf("*col: %p, c_color: %p, f_color: %p\n\n", *col, mapi->c_color, mapi->f_color);
+	if (*col == mapi->c_color)
+		mapi->has_C = true;
+	else
+		mapi->has_F = true;
+	ft_free_dp(num);
 }
 
-static void	load_color_c(char **num, t_map *mapi, char **map)
+void	get_route(char *line, char** route, bool* flag)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (num[i])
-	{
-		if (ft_strlen(num[i]))
-		{
-			mapi->c_color[j] = ft_atoi(num[i]);
-			if (mapi->c_color[j] < 0 || mapi->c_color[j] > 255)
-			{
-				ft_putstr_fd("Cub3D error: incorrect color\n", 2);
-				free_mapi_and_map(mapi, map);
-				exit (42);
-			}
-			j++;
-		}
-		i++;
-	}
-	mapi->has_F = true;
+	free(*route);
+	*route = ft_strdup(line);
+	*flag = true;
 }
 
 static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
@@ -68,71 +51,78 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	char	*aux;
 	int		i;
 
-	i = 0;
+	i = -1;
 	num = ft_split(c_line, ',');
-	while (num[i])
+	while (num[++i])
 	{
 		aux = ft_strtrim(num[i], " ,CF\t");
 		free(num[i]);
 		num[i] = ft_strdup(aux);
 		free(aux);
-		i++;
 	}
 	if (!ft_strcmp(line[0], "F"))
-		load_color_f(num, mapi, map);
+	{
+		if (mapi->has_F == true)
+			error_repeated_parameter_entry(mapi, map);
+		load_color(num, mapi, map, &mapi->f_color);
+	}
 	if (!ft_strcmp(line[0], "C"))
-		load_color_c(num, mapi, map);
-	ft_free_dp(num);
+	{
+		if (mapi->has_C == true)
+			error_repeated_parameter_entry(mapi, map);
+		load_color(num, mapi, map, &mapi->c_color);
+	}
 }
 
-static void	complement_get_files(char *line, t_map *mapi, int select)
+static void	complement_get_files(char *line, t_map *mapi, int flag, char** map)
 {
-	printf("*%s*\n", line);
-	if (select == 1)
+	if (flag == 1)
 	{
-		free(mapi->NO_rute);
-		mapi->NO_rute = ft_strdup(line);
-		mapi->has_NO = true;
+		if (mapi->has_NO == true)
+			error_repeated_parameter_entry(mapi, map);
+		get_route(line, &mapi->NO_route, &mapi->has_NO);
 	}
-	if (select == 2)
+	if (flag == 2)
 	{
-		free(mapi->SO_rute);
-		mapi->SO_rute = ft_strdup(line);
-		mapi->has_SO = true;
+		if (mapi->has_SO == true)
+			error_repeated_parameter_entry(mapi, map);
+		get_route(line, &mapi->SO_route, &mapi->has_SO);
 	}
-	if (select == 3)
+	if (flag == 3)
 	{
-		free(mapi->WE_rute);
-		mapi->WE_rute = ft_strdup(line);
-		mapi->has_WE = true;
+		if (mapi->has_WE == true)
+			error_repeated_parameter_entry(mapi, map);
+		get_route(line, &mapi->WE_route, &mapi->has_WE);
 	}
-	if (select == 4)
+	if (flag == 4)
 	{
-		free(mapi->EA_rute);
-		mapi->EA_rute = ft_strdup(line);
-		mapi->has_EA = true;
+		if (mapi->has_EA == true)
+			error_repeated_parameter_entry(mapi, map);
+		get_route(line, &mapi->EA_route, &mapi->has_EA);
 	}
 }
 
-//This function get texture files and line colors and distributed
+/* Checks for a line start corresponding to information that is needed to start
+ * loading the game. One thing it does is it does not rewrite a parameter that
+ * has already been parsed. This means, if you include two lines saying NO*/
 void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	char	*aux;
 
-    aux = ft_strdup(line[0]);
+	aux = ft_strdup(line[0]);
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
-		if (!ft_strcmp(aux, "NO") && mapi->has_NO == false)
-			complement_get_files(line[1], mapi, 1);
-		else if (!ft_strcmp(aux, "SO") && mapi->has_SO == false)
-			complement_get_files(line[1], mapi, 2);
-		else if (!ft_strcmp(aux, "WE") && mapi->has_WE == false)
-			complement_get_files(line[1], mapi, 3);
-		else if (!ft_strcmp(aux, "EA") && mapi->has_EA == false)
-			complement_get_files(line[1], mapi, 4);
-		else if (!ft_strcmp(aux, "F") && mapi->has_F == false)
+		if (!ft_strcmp(aux, "NO"))
+			complement_get_files(line[1], mapi, 1, map);
+		else if (!ft_strcmp(aux, "SO"))
+			complement_get_files(line[1], mapi, 2, map);
+		else if (!ft_strcmp(aux, "WE"))
+			complement_get_files(line[1], mapi, 3, map);
+		else if (!ft_strcmp(aux, "EA"))
+			complement_get_files(line[1], mapi, 4, map);
+		else if (!ft_strcmp(aux, "F"))
 			get_colors(line, mapi, c_line, map);
-		else if (!ft_strcmp(aux, "C") && mapi->has_C == false)
+		else if (!ft_strcmp(aux, "C"))
 			get_colors(line, mapi, c_line, map);
 	}
 	free(aux);

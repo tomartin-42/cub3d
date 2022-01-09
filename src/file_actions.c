@@ -19,7 +19,7 @@ static void	print_incorrect_extension_error(void)
 	exit(1);
 }
 
-/* Checks wether the file has a .cub extension. */
+/* Checks wether the file has a *.cub extension. */
 static void	check_cub(char *argv)
 {
 	char	*point;
@@ -41,6 +41,10 @@ static void	check_cub(char *argv)
 		print_incorrect_extension_error();
 }
 
+/** Function that checks:
+ * 1: If the number of arguments with which the program was
+ * called is correct.
+ * 2: If the argument is in the correct format (*.cub) */
 int	open_map(int argc, char **argv)
 {
 	int	fd;
@@ -84,6 +88,8 @@ static char	**save_map(char *argv, int line_number)
 	return (map);
 }
 
+/* Counts all lines in the map and allocates the memory needed.
+ * Raises an error when the number of lines is zero (empty map).*/
 char	**read_map(int fd_map, char *argv)
 {
 	int		line_counter;

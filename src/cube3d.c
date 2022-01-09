@@ -12,16 +12,18 @@
 
 #include "cube.h"
 
+/* Auxiliar function to the initialization of the struct because norminette */
 static t_map	*init_textures(t_map *aux_map)
 {
-	aux_map->NO_rute = ft_strdup("");
-	aux_map->SO_rute = ft_strdup("");
-	aux_map->WE_rute = ft_strdup("");
-	aux_map->EA_rute = ft_strdup("");
+	aux_map->NO_route = ft_strdup("");
+	aux_map->SO_route = ft_strdup("");
+	aux_map->WE_route = ft_strdup("");
+	aux_map->EA_route = ft_strdup("");
 	aux_map->map = NULL;
 	return (aux_map);
 }
 
+/* Initializes the struct used to parse the map content. */
 static t_map	*init_mapi(void)
 {
 	t_map	*aux_map;

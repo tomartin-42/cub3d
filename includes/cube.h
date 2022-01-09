@@ -28,13 +28,13 @@ struct	s_ray;
 struct	s_line;
 
 typedef struct s_map{
-	char		*NO_rute;
+	char		*NO_route;
 	bool		has_NO;
-	char		*SO_rute;
+	char		*SO_route;
 	bool		has_SO;
-	char		*WE_rute;
+	char		*WE_route;
 	bool		has_WE;
-	char		*EA_rute;
+	char		*EA_route;
 	bool		has_EA;
 
 	long int	f_color[3];

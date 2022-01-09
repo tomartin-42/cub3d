@@ -63,6 +63,12 @@ void	get_map(int i, t_map *mapi, char **map)
 	generate_map_dp(i, j, mapi, map);
 }
 
+/* - Parses every line of the map looking for the information needed
+ * to run the cub3d program. It does not need any order in the parameters
+ * (textures dont have to come in an specific order).
+ * - Splits every line in tabs/spaces, and then checks for every keyword
+ * defining the information on each line, for example, NO, SO, etc. 
+ * - Extracts this information to be then propperly used.*/
 void	load_map(t_map *mapi, char **map)
 {
 	int		i;
@@ -88,9 +94,9 @@ void	load_map(t_map *mapi, char **map)
 		get_map(i, mapi, map);
 }
 
-// check if all the parameters has been loaded into the mapi structure
-// otherwise it continues to loop. It is necessary to
-// know when start map matrix
+/* Checks if all the parameters have been loaded into the mapi struct,
+ * otherwise it continues. This is in order to start parsing the map
+ * only when we have the information we need. */
 int	check_param_map(t_map *mapi)
 {
 	int	ret;

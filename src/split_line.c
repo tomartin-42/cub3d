@@ -48,6 +48,8 @@ static void	create_string_array(char **table, char const *s, int words)
 	table[w] = NULL;
 }
 
+/* Imagine ft_split(string, " "), but instead it splits when it 
+ * finds a space OR a tab (\t). This is what this function does. */
 char	**split_line(char const *s)
 {
 	char			**table;

@@ -31,13 +31,13 @@ void	get_texture_addr(t_win *win)
 
 void	get_textures(t_win *win, t_map *mapi, char **map)
 {
-	win->text[0].img = mlx_xpm_file_to_image(win->mlx, mapi->NO_rute,
+	win->text[0].img = mlx_xpm_file_to_image(win->mlx, mapi->NO_route,
 			&(win->text[0].width), &(win->text[0].height));
-	win->text[1].img = mlx_xpm_file_to_image(win->mlx, mapi->EA_rute,
+	win->text[1].img = mlx_xpm_file_to_image(win->mlx, mapi->EA_route,
 			&(win->text[1].width), &(win->text[1].height));
-	win->text[2].img = mlx_xpm_file_to_image(win->mlx, mapi->SO_rute,
+	win->text[2].img = mlx_xpm_file_to_image(win->mlx, mapi->SO_route,
 			&(win->text[2].width), &(win->text[2].height));
-	win->text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_rute,
+	win->text[3].img = mlx_xpm_file_to_image(win->mlx, mapi->WE_route,
 			&(win->text[3].width), &(win->text[3].height));
 	if (!win->text[0].img || !win->text[1].img 
 		|| !win->text[2].img || !win->text[3].img)

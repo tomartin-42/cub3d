@@ -14,10 +14,10 @@
 
 void	free_mapi(t_map *mapi)
 {
-	free(mapi->NO_rute);
-	free(mapi->SO_rute);
-	free(mapi->WE_rute);
-	free(mapi->EA_rute);
+	free(mapi->NO_route);
+	free(mapi->SO_route);
+	free(mapi->WE_route);
+	free(mapi->EA_route);
 	ft_free_dp(mapi->map);
 	free(mapi);
 }
