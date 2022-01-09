@@ -13,6 +13,7 @@
 #include "cube.h"
 #include "check.h"
 
+/* Loads the line corresponding to the colors F or C into the mapi struct. */
 static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 {
 	int	i;
@@ -30,7 +31,6 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 			j++;
 		}
 	}
-	//printf("*col: %p, c_color: %p, f_color: %p\n\n", *col, mapi->c_color, mapi->f_color);
 	if (*col == mapi->c_color)
 		mapi->has_C = true;
 	else
@@ -38,13 +38,9 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 	ft_free_dp(num);
 }
 
-void	get_route(char *line, char** route, bool* flag)
-{
-	free(*route);
-	*route = ft_strdup(line);
-	*flag = true;
-}
-
+/* Gets a line (which we already know start by F/C, then parses the numbers
+ * following. Raises error if a line starting by F or C was already found
+ * before. */
 static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	char	**num;
@@ -74,6 +70,17 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	}
 }
 
+/* Norminette moment*/
+void	get_route(char *line, char** route, bool* flag)
+{
+	free(*route);
+	*route = ft_strdup(line);
+	*flag = true;
+}
+
+/* Depending on the variable flag, loads the texture paths to the corresponing
+ * entry inside the mapi struct. In case a texture path title (NO,SO,WE,EA) is
+ * is repeated, raises an error. */
 static void	complement_get_files(char *line, t_map *mapi, int flag, char** map)
 {
 	if (flag == 1)
