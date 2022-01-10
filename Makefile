@@ -6,7 +6,7 @@
 #    By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 19:11:19 by tomartin          #+#    #+#              #
-#    Updated: 2021/12/27 14:54:35 by tommy            ###   ########.fr        #
+#    Updated: 2022/01/10 08:54:52 by tomartin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ $(NAME): $(OBJ)
 	@echo "██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║"
 	@echo "╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝"
 	@echo " ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ "
+	@echo "By Carce-bo & Tomartin in 42Madrid"
 	@gcc $(OBJ) $(FLAGS) $(LNK) -lm -o $(NAME)
 	@echo "Compilation OK!!"
 	@echo "$(NAME) ready!".
