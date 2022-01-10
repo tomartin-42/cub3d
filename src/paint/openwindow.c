@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:39:38 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 10:21:18 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 09:59:12 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ void	init_window(t_map *mapi, char *argv, char **map)
 	mlx_hook(win.mlx_win, 2, 1L << 0, ft_key_press, &win);
 	mlx_loop_hook(win.mlx, ray_loop, &win);
 	mlx_hook(win.mlx_win, 3, 1L << 1, ft_key_release, &win);
-	mlx_put_image_to_window(win.mlx, win.mlx_win, img.img, 0, 0);
 	mlx_loop(win.mlx);
 }
