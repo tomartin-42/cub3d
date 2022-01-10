@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:56:02 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 18:07:21 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:43:36 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,25 @@ void	calculate_step_and_side(t_player *ply, t_ray *ray, int x)
 	{
 		ray[x].step_x = -1;
 		ray[x].side_x = (double)(ply->p_ply.o.x
-				- ray[x].ray_scuare_x) *ray[x].delta_x;
+				- ray[x].ray_scuare_x) * ray[x].delta_x;
 	}
 	else
 	{
 		ray[x].step_x = 1;
 		ray[x].side_x = (double)(ray[x].ray_scuare_x + 1.0
-				- ply->p_ply.o.x) *ray[x].delta_x;
+				- ply->p_ply.o.x) * ray[x].delta_x;
 	}
 	if (ray[x].ray_d_y < 0)
 	{
 		ray[x].step_y = -1;
 		ray[x].side_y = (double)(ply->p_ply.o.y
-				- ray[x].ray_scuare_y) *ray[x].delta_y;
+				- ray[x].ray_scuare_y) * ray[x].delta_y;
 	}
 	else
 	{
 		ray[x].step_y = 1;
 		ray[x].side_y = (double)(ray[x].ray_scuare_y + 1.0
-				- ply->p_ply.o.y) *ray[x].delta_y;
+				- ply->p_ply.o.y) * ray[x].delta_y;
 	}
 }
 

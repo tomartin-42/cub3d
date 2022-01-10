@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:36:54 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/26 15:31:23 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:49:25 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	print_struc_mapi(t_map *mapi)
 	int	i;
 
 	i = 0;
-	printf("NO route: %s\n", mapi->NO_route);
-	printf("SO route: %s\n", mapi->SO_route);
-	printf("WE route: %s\n", mapi->WE_route);
-	printf("EA route: %s\n", mapi->EA_route);
+	printf("NO route: %s\n", mapi->no_route);
+	printf("SO route: %s\n", mapi->so_route);
+	printf("WE route: %s\n", mapi->we_route);
+	printf("EA route: %s\n", mapi->ea_route);
 	printf("F: %ld, %ld, %ld\n", mapi->f_color[0],
 		mapi->f_color[1], mapi->f_color[2]);
 	printf("C: %ld, %ld, %ld\n", mapi->c_color[0],

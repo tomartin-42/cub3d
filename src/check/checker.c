@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tommy <tommy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 11:30:05 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 19:14:45 by tommy            ###   ########.fr       */
+/*   Updated: 2022/01/10 08:46:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	checking_color_line(char *color_line, char **map, t_map *mapi)
 			commas++;
 		i++;
 	}
-	if (commas != 2)	
+	if (commas != 2)
 		error_in_color_line(map, mapi);
 	check_chars_in_color_line(color_line, map, mapi);
 }

@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:46:01 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 10:20:57 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:50:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /* Auxiliar function to the initialization of the struct because norminette */
 static t_map	*init_textures(t_map *aux_map)
 {
-	aux_map->NO_route = ft_strdup("");
-	aux_map->SO_route = ft_strdup("");
-	aux_map->WE_route = ft_strdup("");
-	aux_map->EA_route = ft_strdup("");
+	aux_map->no_route = ft_strdup("");
+	aux_map->so_route = ft_strdup("");
+	aux_map->we_route = ft_strdup("");
+	aux_map->ea_route = ft_strdup("");
 	aux_map->map = NULL;
 	return (aux_map);
 }
@@ -29,12 +29,12 @@ static t_map	*init_mapi(void)
 	t_map	*aux_map;
 
 	aux_map = (t_map *) malloc(sizeof(t_map));
-	aux_map->has_NO = false;
-	aux_map->has_SO = false;
-	aux_map->has_WE = false;
-	aux_map->has_EA = false;
-	aux_map->has_F = false;
-	aux_map->has_C = false;
+	aux_map->has_no = false;
+	aux_map->has_so = false;
+	aux_map->has_we = false;
+	aux_map->has_ea = false;
+	aux_map->has_f = false;
+	aux_map->has_c = false;
 	aux_map->f_color[0] = EMPTY;
 	aux_map->f_color[1] = EMPTY;
 	aux_map->f_color[2] = EMPTY;

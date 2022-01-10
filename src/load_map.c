@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:52:45 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 10:19:50 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:50:22 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ void	generate_map_dp(int i, int j, t_map *mapi, char **map)
 	}
 }
 
+static void	get_map_continue(int *i, char **map)
+{
+	char	*aux;
+
+	while (map[*i])
+	{
+		aux = ft_strtrim(map[*i], " /t");
+		if (!ft_strlen(aux))
+		{
+			free(aux);
+			break ;
+		}
+		free(aux);
+		(*i)++;
+	}
+}
+
 void	get_map(int i, t_map *mapi, char **map)
 {
 	char	*aux;
@@ -47,19 +64,8 @@ void	get_map(int i, t_map *mapi, char **map)
 		free(aux);
 		i++;
 	}
-	//free(aux);
 	j = i;
-	while (map[i])
-	{
-		aux = ft_strtrim(map[i], " /t");
-		if (!ft_strlen(aux))
-		{
-			free(aux);
-			break ;
-		}
-		free(aux);
-		i++;
-	}
+	get_map_continue(&i, map);
 	generate_map_dp(i, j, mapi, map);
 }
 
@@ -102,13 +108,13 @@ int	check_param_map(t_map *mapi)
 	int	ret;
 
 	ret = 0;
-	if (mapi->has_NO == false)
+	if (mapi->has_no == false)
 		ret = 1;
-	if (mapi->has_SO == false)
+	if (mapi->has_so == false)
 		ret = 1;
-	if (mapi->has_WE == false)
+	if (mapi->has_we == false)
 		ret = 1;
-	if (mapi->has_EA == false)
+	if (mapi->has_ea == false)
 		ret = 1;
 	if (mapi->f_color[0] == EMPTY || mapi->f_color[1] == EMPTY
 		|| mapi->f_color[2] == EMPTY)

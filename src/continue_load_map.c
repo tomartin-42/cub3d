@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 09:44:42 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:50:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 		}
 	}
 	if (*col == mapi->c_color)
-		mapi->has_C = true;
+		mapi->has_c = true;
 	else
-		mapi->has_F = true;
+		mapi->has_f = true;
 	ft_free_dp(num);
 }
 
@@ -58,20 +58,20 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	}
 	if (!ft_strcmp(line[0], "F"))
 	{
-		if (mapi->has_F == true)
+		if (mapi->has_f == true)
 			error_repeated_parameter_entry(mapi, map);
 		load_color(num, mapi, map, &mapi->f_color);
 	}
 	if (!ft_strcmp(line[0], "C"))
 	{
-		if (mapi->has_C == true)
+		if (mapi->has_c == true)
 			error_repeated_parameter_entry(mapi, map);
 		load_color(num, mapi, map, &mapi->c_color);
 	}
 }
 
 /* Norminette moment*/
-void	get_route(char *line, char** route, bool* flag)
+void	get_route(char *line, char **route, bool *flag)
 {
 	free(*route);
 	*route = ft_strdup(line);
@@ -81,31 +81,31 @@ void	get_route(char *line, char** route, bool* flag)
 /* Depending on the variable flag, loads the texture paths to the corresponing
  * entry inside the mapi struct. In case a texture path title (NO,SO,WE,EA) is
  * is repeated, raises an error. */
-static void	complement_get_files(char *line, t_map *mapi, int flag, char** map)
+static void	complement_get_files(char *line, t_map *mapi, int flag, char **map)
 {
 	if (flag == 1)
 	{
-		if (mapi->has_NO == true)
+		if (mapi->has_no == true)
 			error_repeated_parameter_entry(mapi, map);
-		get_route(line, &mapi->NO_route, &mapi->has_NO);
+		get_route(line, &mapi->no_route, &mapi->has_no);
 	}
 	if (flag == 2)
 	{
-		if (mapi->has_SO == true)
+		if (mapi->has_so == true)
 			error_repeated_parameter_entry(mapi, map);
-		get_route(line, &mapi->SO_route, &mapi->has_SO);
+		get_route(line, &mapi->so_route, &mapi->has_so);
 	}
 	if (flag == 3)
 	{
-		if (mapi->has_WE == true)
+		if (mapi->has_we == true)
 			error_repeated_parameter_entry(mapi, map);
-		get_route(line, &mapi->WE_route, &mapi->has_WE);
+		get_route(line, &mapi->we_route, &mapi->has_we);
 	}
 	if (flag == 4)
 	{
-		if (mapi->has_EA == true)
+		if (mapi->has_ea == true)
 			error_repeated_parameter_entry(mapi, map);
-		get_route(line, &mapi->EA_route, &mapi->has_EA);
+		get_route(line, &mapi->ea_route, &mapi->has_ea);
 	}
 }
 

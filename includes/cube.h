@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:45:50 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 10:22:39 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/10 08:50:43 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ struct	s_ray;
 struct	s_line;
 
 typedef struct s_map{
-	char		*NO_route;
-	bool		has_NO;
-	char		*SO_route;
-	bool		has_SO;
-	char		*WE_route;
-	bool		has_WE;
-	char		*EA_route;
-	bool		has_EA;
+	char		*no_route;
+	bool		has_no;
+	char		*so_route;
+	bool		has_so;
+	char		*we_route;
+	bool		has_we;
+	char		*ea_route;
+	bool		has_ea;
 
 	long int	f_color[3];
-	bool		has_F;
+	bool		has_f;
 	long int	c_color[3];
-	bool		has_C;
+	bool		has_c;
 
 	char		init_point;
 	int			xy_init_point[2];
@@ -65,7 +65,5 @@ void	free_mapi(t_map *mapi);
 void	free_mapi_and_map(t_map *mapi, char **map);
 
 void	init_window(t_map *mapi, char *argv, char **map);
-
-
 
 #endif
