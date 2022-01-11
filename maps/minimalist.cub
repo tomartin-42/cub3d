@@ -5,12 +5,12 @@ WE     ./textures/tommy.xpm
 EA   ./textures/carce.xpm
 
 
-C    255  ,  248 , 200  
+F    255  ,  248 , 200  
 
 
 
 
-		F 125   ,206,250
+		C 125   ,206,250
 
 
 
