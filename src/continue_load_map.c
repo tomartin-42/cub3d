@@ -13,6 +13,12 @@
 #include "cube.h"
 #include "check.h"
 
+int     inspect_color_line(char *line);
+void    trim_and_dup(char **num);
+void    get_route(char *line, char **route, bool *flag);
+int     ft_matrixlen(char **mat);
+void    position_after_F_or_C(char **line);
+
 /* Loads the line corresponding to the colors F or C into the mapi struct. */
 static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 {
@@ -21,6 +27,10 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 
 	i = -1;
 	j = 0;
+    if (ft_matrixlen(num) != 3)
+    {
+        error_in_config_line(mapi, map);
+    }
 	while (num[++i])
 	{
 		if (ft_strlen(num[i]))
@@ -40,22 +50,23 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 
 /* Gets a line (which we already know start by F/C, then parses the numbers
  * following. Raises error if a line starting by F or C was already found
- * before. */
+ * before. 
+ * */
 static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 {
 	char	**num;
-	char	*aux;
 	int		i;
 
 	i = -1;
-	num = ft_split(c_line, ',');
+    if (inspect_color_line(c_line) != 1)
+    {
+        error_in_config_line(mapi, map);
+    }
+    position_after_F_or_C(&c_line);
+    /* Esto es para curar el parseo de colores */
+	num = ft_split(c_line , ',');
 	while (num[++i])
-	{
-		aux = ft_strtrim(num[i], " ,CF\t");
-		free(num[i]);
-		num[i] = ft_strdup(aux);
-		free(aux);
-	}
+        trim_and_dup(&num[i]);
 	if (!ft_strcmp(line[0], "F"))
 	{
 		if (mapi->has_f == true)
@@ -70,13 +81,6 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	}
 }
 
-/* Norminette moment*/
-void	get_route(char *line, char **route, bool *flag)
-{
-	free(*route);
-	*route = ft_strdup(line);
-	*flag = true;
-}
 
 /* Depending on the variable flag, loads the texture paths to the corresponing
  * entry inside the mapi struct. In case a texture path title (NO,SO,WE,EA) is
@@ -119,18 +123,22 @@ void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 	aux = ft_strdup(line[0]);
 	if (line != NULL && line[0] != NULL && line[1] != NULL)
 	{
-		if (!ft_strcmp(aux, "NO"))
+		if (!ft_strcmp(aux, "NO") && line[2] == NULL)
 			complement_get_files(line[1], mapi, 1, map);
-		else if (!ft_strcmp(aux, "SO"))
+		else if (!ft_strcmp(aux, "SO") && line[2] == NULL)
 			complement_get_files(line[1], mapi, 2, map);
-		else if (!ft_strcmp(aux, "WE"))
+		else if (!ft_strcmp(aux, "WE") && line[2] == NULL)
 			complement_get_files(line[1], mapi, 3, map);
-		else if (!ft_strcmp(aux, "EA"))
+		else if (!ft_strcmp(aux, "EA") && line[2] == NULL)
 			complement_get_files(line[1], mapi, 4, map);
 		else if (!ft_strcmp(aux, "F"))
 			get_colors(line, mapi, c_line, map);
 		else if (!ft_strcmp(aux, "C"))
 			get_colors(line, mapi, c_line, map);
+        else
+        {
+            error_in_config_line(mapi, map);
+        }
 	}
 	free(aux);
 }

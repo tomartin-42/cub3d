@@ -39,3 +39,10 @@ void	error_read_texture(t_map *mapi, char **map)
 	free_mapi_and_map(mapi, map);
 	exit (42);
 }
+
+void    error_in_config_line(t_map *mapi, char **map)
+{
+    ft_putstr_fd("Cub3D error: missing or extra param in path.\n", 2);
+	free_mapi_and_map(mapi, map);
+	exit (42);
+}

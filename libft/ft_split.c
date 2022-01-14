@@ -61,7 +61,7 @@ char	**ft_split(char const *s, char c)
 	char			**table;
 	unsigned int	words;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
 	words = ft_tableword(s, c);
 	table = (char **)malloc(sizeof(char *) * (words + 1));
