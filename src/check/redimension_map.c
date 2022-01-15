@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 19:36:07 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/25 19:06:20 by tommy            ###   ########.fr       */
+/*   Updated: 2022/01/15 14:26:46 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	copy_old_in_new_map(char **new_map, t_map *mapi)
 	}
 	ft_free_dp(mapi->map);
 	mapi->map = new_map;
-	print_struc_mapi(mapi);
 }
 
 void	redimension_map(t_map *mapi, int i, int size_line)

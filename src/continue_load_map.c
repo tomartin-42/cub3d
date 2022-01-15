@@ -6,18 +6,18 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 08:53:28 by tomartin          #+#    #+#             */
-/*   Updated: 2022/01/10 08:50:43 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:23:39 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include "check.h"
 
-int     inspect_color_line(char *line);
-void    trim_and_dup(char **num);
-void    get_route(char *line, char **route, bool *flag);
-int     ft_matrixlen(char **mat);
-void    position_after_F_or_C(char **line);
+int		inspect_color_line(char *line);
+void	trim_and_dup(char **num);
+void	get_route(char *line, char **route, bool *flag);
+int		ft_matrixlen(char **mat);
+void	position_after_f_or_c(char **line);
 
 /* Loads the line corresponding to the colors F or C into the mapi struct. */
 static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
@@ -27,10 +27,8 @@ static void	load_color(char **num, t_map *mapi, char **map, long int (*col)[3])
 
 	i = -1;
 	j = 0;
-    if (ft_matrixlen(num) != 3)
-    {
-        error_in_config_line(mapi, map);
-    }
+	if (ft_matrixlen(num) != 3)
+		error_in_config_line(mapi, map);
 	while (num[++i])
 	{
 		if (ft_strlen(num[i]))
@@ -58,15 +56,12 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 	int		i;
 
 	i = -1;
-    if (inspect_color_line(c_line) != 1)
-    {
-        error_in_config_line(mapi, map);
-    }
-    position_after_F_or_C(&c_line);
-    /* Esto es para curar el parseo de colores */
-	num = ft_split(c_line , ',');
+	if (inspect_color_line(c_line) != 1)
+		error_in_config_line(mapi, map);
+	position_after_f_or_c(&c_line);
+	num = ft_split(c_line, ',');
 	while (num[++i])
-        trim_and_dup(&num[i]);
+		trim_and_dup(&num[i]);
 	if (!ft_strcmp(line[0], "F"))
 	{
 		if (mapi->has_f == true)
@@ -80,7 +75,6 @@ static void	get_colors(char **line, t_map *mapi, char *c_line, char **map)
 		load_color(num, mapi, map, &mapi->c_color);
 	}
 }
-
 
 /* Depending on the variable flag, loads the texture paths to the corresponing
  * entry inside the mapi struct. In case a texture path title (NO,SO,WE,EA) is
@@ -135,10 +129,8 @@ void	get_files_colors(char **line, t_map *mapi, char *c_line, char **map)
 			get_colors(line, mapi, c_line, map);
 		else if (!ft_strcmp(aux, "C"))
 			get_colors(line, mapi, c_line, map);
-        else
-        {
-            error_in_config_line(mapi, map);
-        }
+		else
+			error_in_config_line(mapi, map);
 	}
 	free(aux);
 }

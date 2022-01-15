@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 15:51:55 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/27 08:11:48 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:25:23 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	**read_map(int fd_map, char *argv)
 	}
 	free(line);
 	++line_counter;
-	printf("numero lineas mapa %i\n", line_counter);
 	close(fd_map);
 	if (line_counter == 0)
 		error_empty_map();

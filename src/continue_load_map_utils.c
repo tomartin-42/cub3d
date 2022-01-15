@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   continue_load_map_utils.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/15 14:07:51 by tomartin          #+#    #+#             */
+/*   Updated: 2022/01/15 14:22:43 by tomartin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 /* Norminette moment */
@@ -9,15 +21,15 @@ void	get_route(char *line, char **route, bool *flag)
 }
 
 /* Norminette moment */
-void trim_and_dup(char **num)
+void	trim_and_dup(char **num)
 {
-    char*   aux;
+	char	*aux;
 
-    aux = NULL;
-    aux = ft_strtrim(*num, " ,CF\t");
-    free(*num);
-    *num = ft_strdup(aux);
-    free(aux);
+	aux = NULL;
+	aux = ft_strtrim(*num, " ,\t");
+	free(*num);
+	*num = ft_strdup(aux);
+	free(aux);
 }
 
 /* We split the line in commas, after splitting it with
@@ -26,60 +38,60 @@ void trim_and_dup(char **num)
  * essentially just counts how many commas are in the line. In
  * case its different from 2, we know its wrong, and in case it is
  * 2 and they are consecutive further controls will raise error.*/
-int inspect_color_line(char *line)
+int	inspect_color_line(char *line)
 {
-    int     n_commas;
+	int	n_commas;
 
-    n_commas = 0;
-    while (*line)
-    {
-        if (*line == ',')
-            ++n_commas;
-        ++line;
-    }
-    if (n_commas != 2)
-        return 0;
-    else
-        return 1;
+	n_commas = 0;
+	while (*line)
+	{
+		if (*line == ',')
+			++n_commas;
+		++line;
+	}
+	if (n_commas != 2)
+		return (0);
+	else
+		return (1);
 }
 
-int ft_matrixlen(char **mat)
+int	ft_matrixlen(char **mat)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    j = 0;
-    while (mat[i])
-    {
-        while (mat[i][j] <= '9' && mat[i][j] >= '0')
-            j++;
-        if (mat[i][j] != '\0')
-            return -1;
-        j = 0;
-        i++;
-    }
-    return i;
+	i = 0;
+	j = 0;
+	while (mat[i])
+	{
+		while (mat[i][j] <= '9' && mat[i][j] >= '0')
+			j++;
+		if (mat[i][j] != '\0')
+			return (-1);
+		j = 0;
+		i++;
+	}
+	return (i);
 }
 
-void    position_after_F_or_C(char **line)
+void	position_after_f_or_c(char **line)
 {
-    char*   aux;
+	char	*aux;
 
-    aux = ft_strchr(*line, 'F');
-    if (aux != NULL)
-    {
-        *line = aux;
-        *line = *line + 1;
-        return ;
-    }
-    aux = ft_strchr(*line, 'C');
-    if (aux != NULL)
-    {
-        *line = aux;
-        *line = *line + 1;
-        return;
-    }
-    else
-        return ;
+	aux = ft_strchr(*line, 'F');
+	if (aux != NULL)
+	{
+		*line = aux;
+		*line = *line + 1;
+		return ;
+	}
+	aux = ft_strchr(*line, 'C');
+	if (aux != NULL)
+	{
+		*line = aux;
+		*line = *line + 1;
+		return ;
+	}
+	else
+		return ;
 }

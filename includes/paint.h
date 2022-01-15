@@ -6,7 +6,7 @@
 /*   By: tomartin <tomartin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 15:51:49 by tomartin          #+#    #+#             */
-/*   Updated: 2021/12/28 10:22:09 by tomartin         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:17:05 by tomartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define SCL 100
 # define TEXT_W 64
 # define TEXT_H 64
-# define STEP 0.02
-# define ALFA 0.02
+# define STEP 0.06
+# define ALFA 0.04
 # define N_W 0
 # define S_W 1
 # define E_W 2
